@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content="yijic, yijinchun, Jace, JaceYi, Jace Yi, 易进春, 易进春的博客, yi个程序猿, 前端, 前端开发, 前端博客">
+  <meta name="description" content="易进春的个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
+  <title>使用 Jekyll 搭建一个自己的博客 - 屋顶上的小猫的博客【Web前端开发】</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <link rel="stylesheet" href="/css/prism.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/post.css">
+  <script src="/js/util.js"></script>
+</head>
+
+<body>
+  <div id="header" style="background-image: url(/images/bg-banner.jpg)">
+    <div class="top">
+  <div class="title" style="margin-top: 10px;">
+    <img src="/images/001.jpg" alt="" style="width: 40px;height: 40px; border-radius: 50%; ">
+    <a href="/">ヾviviHuang</a>
+  </div>
+  <nav class="nav">
+    <div class="item">
+      <a href="/">Home</a>
+    </div>
+    <div class="item">
+      <a href="/about">About</a>
+    </div>
+    <div class="item">
+      <a href="/tags">Tags</a>
+    </div>
+  </nav>
+  <div class="mobile-nav">
+    <div class="mobile-nav-menu icon">
+      <i class="iconfont">&#xe633;</i>
+    </div>
+    <div class="mobile-nav-box">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/tags">Tags</a>
+    </div>
+  </div>
+  
+</div>
+
+
+<script>
+  (function (d, w) {
+    w.onload = function () {
+      var $menuIcon = d.querySelector('.mobile-nav-menu');
+      var $navBox = d.querySelector('.mobile-nav-box');
+      var animationEndCallback = null;
+      function hideNavBox() {
+        addClass($navBox, 'zoomOut');
+        animationEndCallback = function () {
+          removeClass($navBox, 'zoomOut');
+          $navBox.style.display = 'none';
+        }
+      }
+
+      $menuIcon.onclick = function (e) {
+        e.stopPropagation();
+        if ($navBox.style.display === 'block') return hideNavBox();
+        $navBox.style.display = 'block';
+        addClass($navBox, 'zoomIn');
+        animationEndCallback = function () {
+          removeClass($navBox, 'zoomIn');
+        }
+      };
+
+      $navBox.onclick = function (e) {
+        e.stopPropagation();
+      };
+
+      $navBox.addEventListener('animationend', function (e) {
+        animationEndCallback && animationEndCallback();
+      }, false);
+
+      d.body.addEventListener('click', function () {
+        if ($navBox.style.display === 'block') hideNavBox();
+      }, false);
+
+      var $header = d.querySelector('#header');
+      var $top = d.querySelector('.top');
+      var topHeight = $top.offsetHeight;
+      w.addEventListener('scroll', function () {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        var step = $header.className.indexOf('visible') >= 0 ? topHeight : 0;
+        if (scrollTop > $header.offsetHeight - step) {
+          addClass($header, 'active');
+        } else {
+          removeClass($header, 'active');
+        }
+      }, false);
+
+      d.addEventListener('mousewheel', function(e) {
+        console.log(e.wheelDeltaY);
+        if (e.wheelDeltaY >= 0) {
+          addClass($header, 'visible');
+        } else {
+          removeClass($header, 'visible');
+        }
+      })
+    }
+  })(document, window);
+</script>
+
+    <div class="content">
+      <h1 class="post-title">使用 Jekyll 搭建一个自己的博客</h1>
+      <div class="post-description">如何利用 Github Pages 加 Jekyll 搭建一个自己的博客</div>
+      <div class="post-date">2019-08-31</div>
+      <div class="tags">
+        
+        <a class="tag" href="/tags/#Jekyll" title="Jekyll">Jekyll</a>
+        
+        <a class="tag" href="/tags/#生活" title="生活">生活</a>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="main">
+      <h2>前言</h2>
+<p>使用 Github Pages 可以让在 Github 托管的 html 代码以网页的形式展示</p>
+<p><a href="https://jekyllrb.com/">Jekyll</a> 是 Github 官方推荐的工具，可以将 Markdown、Liquid、HTML和CSS打包部署成为一个静态网页。</p>
+<!--more-->
+<h2>安装 Jekyll</h2>
+<h2>macOS</h2>
+<h3>安装命令行工具</h3>
+<p>首先安装命令行工具，用于编译本机扩展。<code>xcode-select --install</code></p>
+<p>这个如果总是安装失败这里可以到
+  <a href="https://developer.apple.com/download/more/">Developer Apple</a>
+  主动下载一个<code>Command Line Tools for Xcode</code>安装。
+</p>
+<h3>安装 Ruby</h3>
+<h4>使用 Homebrew</h4>
+<pre>
+  <code class="language-shell">
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+brew install ruby
+  </code>
+</pre>
+<p>将brew ruby​​路径添加到shell配置：</p>
+<pre>
+  <code class="language-shell">
+export PATH=/usr/local/opt/ruby/bin:$PATH
+  </code>
+</pre>
+<p>重新启动终端并检查更新的Ruby设置：</p>
+<pre>
+  <code class="language-shell">
+which ruby
+# /usr/local/opt/ruby/bin/ruby
+  </code>
+</pre>
+<h3>安装Jekyll</h3>
+<pre>
+  <code class="language-shell">
+sudo gem install bundler
+sudo gem install jekyll
+  </code>
+</pre>
+<p>安装完成，以上内容参考 <a href="">Jekyll on macOS</a></p>
+<h2>Windows</h2>
+<p>我这里给 Windows 装了一个 Ubuntu 的子系统，所以就直接在 Ubuntu 上安装了。参考 <a href="https://jekyllrb.com/docs/installation/ubuntu/">Jekyll on Ubuntu</a> 三步搞定</p>
+<h2>搭建博客</h2>
+<p>这里可以 Fork 我的项目 <a href="https://github.com/jaceyi/jaceyi.github.io">jaceyi.github.io</a> 直接改 <code>_posts</code> 文件夹里面的内就可以。也可以参考 <a href="https://jekyllrb.com/docs/">Jekyll</a> 自己从头搭建。</p>
+<p>这里重点讲我这个项目的结构。</p>
+<ul>
+  <li><code>_includes</code> 文件夹内的东西可以理解为公共组件，哪里需要在哪引入。</li>
+  <li><code>_layouts</code> 文件夹内包含的是模板文件，可以依据不同的场景来拆分模板文件。
+  <li><code>_plugins</code> 文件夹包含的是博客依赖的插件，我这里使用了 <code>simple-jekyll-search</code> 做了一个站内博客的搜索功能。</li>
+  <li><code>_posts</code> 文件夹内包含的就是每篇博客，根据时间来命名会自动拆解。</li>
+  <li><code>_sass</code> 文件夹内包含的是 SASS 文件，我项目中的 style 是使用 sass 来编写的。</li>
+  <li><code>_site</code> 文件夹内是打包后的文件，可以忽略。</li>
+  <li><code>index.html</code> 是博客的入口文件。</li>
+</ul>
+<h3>留言板</h3>
+<p>留言板我是使用 <a href="https://gitalk.github.io/">Gitalk</a> 搭建的，它将 Github Issues 变相的转为留言板功能，所有的服务都基于 Github Issues 服务，包括登陆、回复、评论、邮件通知等功能，具体用法可参考
+  <a href="https://github.com/gitalk/gitalk#install">Gitalk</a> 。</p>
+<h3>代码语法高亮</h3>
+<p>作为一个技术类型的博客，代码片段肯定是必不能少的，我在博客中使用的是 <a href="https://prismjs.com">PrismJS</a> ，在 <a href="https://prismjs.com/download.html">这里</a> 自定义主题与需要的代码高亮，我的博客里面引用了 <code>markup+css+clike+javascript+bash+typescript+scss+jsx+tsx</code>这些规则，如果需要变更则可以下载对应的规则替换我的 <code>js</code> 和 <code>css</code> 文件即可。</p>
+
+      <div class="date">发布时间：2019-08-31</div>
+      <div id="gitalk-container"></div>
+    </div>
+    <div class="nav-container">
+      <div class="main-nav">
+        <div class="title">目录</div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+  <a href="https://github.com/jaceyi">
+    <i class="iconfont">&#xe600;</i>
+  </a>
+  <a href="https://www.zhihu.com/people/hui-bu-qu-de-shi-guang-20/activities">
+    <i class="iconfont">&#xe634;</i>
+  </a>
+  <a href="https://www.weibo.com/yijic">
+    <i class="iconfont">&#xe61c;</i>
+  </a>
+  <a href="https://www.facebook.com/jace.yi.0123">
+    <i class="iconfont">&#xe635;</i>
+  </a>
+</footer>
+
+  <div class="back-top">
+  <i class="iconfont">&#xe6d9;</i>
+</div>
+<script>
+  (function (d, w) {
+    function scrollTo(targetY) {
+      var currentY =
+        d.documentElement.scrollTop || d.body.scrollTop;
+      var distance = targetY - currentY;
+      var num = 0;
+
+      function animate() {
+        var currentY =
+          d.documentElement.scrollTop || d.body.scrollTop;
+        w.scrollTo(0, currentY + distance / 10);
+        num++;
+        if (num === 10) return;
+        w.requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+    var $upTop = d.querySelector('.back-top');
+
+    $upTop.onclick = function () {
+      scrollTo(0);
+    };
+
+    function bindEvent() {
+      var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+      if (scrollTop > 100) {
+        $upTop.style.display = 'block';
+      } else {
+        $upTop.style.display = 'none';
+      }
+    }
+
+    w.addEventListener('scroll', bindEvent);
+    w.addEventListener('load', bindEvent);
+  })(document, window);
+</script>
+
+  <script src="/js/prism.js"></script>
+  <script>
+    (function (w, d) {
+      var $nav = document.querySelector('.main-nav');
+      var $main = document.querySelector('.main');
+      var titleNodeNames = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+      var contentItems = [];
+      var navItems = [];
+      for (var i = 0; i < $main.children.length; i++) {
+        var element = $main.children[i];
+        if (titleNodeNames.includes(element.nodeName)) {
+          var link = document.createElement('a');
+          link.href = '#' + element.innerText;
+          link.innerText = element.innerText;
+
+          $nav.appendChild(link);
+          navItems.push(link);
+          element.id = element.innerText;
+          contentItems.push(element);
+        }
+      }
+
+      function bindEvent() {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        if (scrollTop >= $nav.parentNode.offsetTop) {
+          addClass($nav, 'active');
+        } else {
+          removeClass($nav, 'active');
+        }
+        for (var i = 0; i < navItems.length; i++) {
+          removeClass(navItems[i], 'active');
+        }
+        for (var i = contentItems.length - 1; i >= 0; i--) {
+          if (scrollTop >= getElementTop(contentItems[i])) {
+            addClass(navItems[i], 'active');
+            return;
+          }
+        }
+        addClass(navItems[0], 'active');
+      }
+      w.addEventListener('scroll', bindEvent);
+      w.addEventListener('load', bindEvent);
+    })(window, document)
+  </script>
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/md5.min.js"></script>
+  <script>
+    const gitalk = new Gitalk({
+      clientID: '0f8a52875fe9bbe1f36a',
+      clientSecret: '89d33c21a76dd5e6368eb450f91c0d4c64c7d298',
+      repo: 'jaceyi.github.io',
+      owner: 'jaceyi',
+      admin: ['jaceyi'],
+      id: md5(location.pathname),
+      distractionFreeMode: false,
+      createIssueManually: true
+    })
+
+    gitalk.render('gitalk-container')
+  </script>
+</body>
+
+</html>

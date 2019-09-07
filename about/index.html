@@ -1,0 +1,31 @@
+---
+layout: default
+title: 关于我 - 屋顶上的小猫【Web前端开发】
+css: /css/about.css
+---
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div class="container">
+  <p>总归还是会有人</p>
+  <p>用最质朴的方式喜欢你</p>
+  <p>不是套路 也不是撩你</p>
+  <p>是那种好喜欢你啊</p>
+  <p>想对你越来越好</p>
+  <h2 class="write-title">留言板</h2>
+  <div id="gitalk-container"></div>
+</div>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '0f8a52875fe9bbe1f36a',
+    clientSecret: '89d33c21a76dd5e6368eb450f91c0d4c64c7d298',
+    repo: 'jaceyi.github.io',
+    owner: 'jaceyi',
+    admin: ['jaceyi'],
+    id: location.pathname,
+    distractionFreeMode: false,
+    createIssueManually: true
+  })
+
+  gitalk.render('gitalk-container')
+</script>

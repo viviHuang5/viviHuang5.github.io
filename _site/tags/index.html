@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content="vivi, viviHuang, vivihuang, Vivi, Vivi Huang, Vivi huang, ヾ屋顶上的小猫的博客">
+  <meta name="description" content="ヾ屋顶上的小猫的个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
+  <title>标签 - 易进春的博客【Web前端开发】</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="stylesheet" href="/css/base.css">
+  
+  <link rel="stylesheet" href="/css/tags.css">
+  
+  <script src="/js/util.js"></script>
+</head>
+
+<body>
+  <div id="header">
+  <div class="wrap">
+    <div class="top">
+  <div class="title" style="margin-top: 10px;">
+    <img src="/images/001.jpg" alt="" style="width: 40px;height: 40px; border-radius: 50%; ">
+    <a href="/">ヾviviHuang</a>
+  </div>
+  <nav class="nav">
+    <div class="item">
+      <a href="/">Home</a>
+    </div>
+    <div class="item">
+      <a href="/about">About</a>
+    </div>
+    <div class="item">
+      <a href="/tags">Tags</a>
+    </div>
+  </nav>
+  <div class="mobile-nav">
+    <div class="mobile-nav-menu icon">
+      <i class="iconfont">&#xe633;</i>
+    </div>
+    <div class="mobile-nav-box">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/tags">Tags</a>
+    </div>
+  </div>
+  
+</div>
+
+
+<script>
+  (function (d, w) {
+    w.onload = function () {
+      var $menuIcon = d.querySelector('.mobile-nav-menu');
+      var $navBox = d.querySelector('.mobile-nav-box');
+      var animationEndCallback = null;
+      function hideNavBox() {
+        addClass($navBox, 'zoomOut');
+        animationEndCallback = function () {
+          removeClass($navBox, 'zoomOut');
+          $navBox.style.display = 'none';
+        }
+      }
+
+      $menuIcon.onclick = function (e) {
+        e.stopPropagation();
+        if ($navBox.style.display === 'block') return hideNavBox();
+        $navBox.style.display = 'block';
+        addClass($navBox, 'zoomIn');
+        animationEndCallback = function () {
+          removeClass($navBox, 'zoomIn');
+        }
+      };
+
+      $navBox.onclick = function (e) {
+        e.stopPropagation();
+      };
+
+      $navBox.addEventListener('animationend', function (e) {
+        animationEndCallback && animationEndCallback();
+      }, false);
+
+      d.body.addEventListener('click', function () {
+        if ($navBox.style.display === 'block') hideNavBox();
+      }, false);
+
+      var $header = d.querySelector('#header');
+      var $top = d.querySelector('.top');
+      var topHeight = $top.offsetHeight;
+      w.addEventListener('scroll', function () {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        var step = $header.className.indexOf('visible') >= 0 ? topHeight : 0;
+        if (scrollTop > $header.offsetHeight - step) {
+          addClass($header, 'active');
+        } else {
+          removeClass($header, 'active');
+        }
+      }, false);
+
+      d.addEventListener('mousewheel', function(e) {
+        console.log(e.wheelDeltaY);
+        if (e.wheelDeltaY >= 0) {
+          addClass($header, 'visible');
+        } else {
+          removeClass($header, 'visible');
+        }
+      })
+    }
+  })(document, window);
+</script>
+
+    <div class="banner">
+      <div class="center">
+        <div class="text">记录学习笔记、日常生活。</div>
+        <div class="search-box">
+          <input type="text" placeholder="搜索文章" id="search-input">
+          <div class="icon">
+            <i class="iconfont">&#xe601;</i>
+          </div>
+          <div id="results-container"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<script>
+  (function (d, w) {
+    var $searchInput = d.getElementById('search-input');
+    var $resultsContainer = d.getElementById('results-container');
+
+    SimpleJekyllSearch({
+      searchInput: $searchInput,
+      resultsContainer: $resultsContainer,
+      json: '/search.json',
+      searchResultTemplate:
+        '<li class="search-results-item">' +
+        '<a href="{url}" title="{title}">' +
+        '<div class="title">' +
+        '<h4>{title}</h4><span>{date}</span>' +
+        '</div>' +
+        '<p class="description">{description}</p>' +
+        '<p class="search-tags">{tags}</p>' +
+        '</a>' +
+        '</li>',
+      noResultsText: '<div class="not-data">哎呀，没有找到！</div>',
+      limit: 20,
+      fuzzy: false
+    })
+  })(document, window);
+</script>
+
+
+  <div class="container">
+  <div class="tags">
+    
+    <a class="tag" href="/tags/#CSS">CSS</a>
+    
+    <a class="tag" href="/tags/#JavaScript">JavaScript</a>
+    
+    <a class="tag" href="/tags/#Jekyll">Jekyll</a>
+    
+    <a class="tag" href="/tags/#生活">生活</a>
+    
+  </div>
+
+  <div class="tag-list">
+    
+    <div class="tag-item">
+      <div class="tag-title" id="CSS">
+        <i class="iconfont">&#xe62b;</i>
+        <span class="tag-text">CSS</span>
+        </span>
+        
+        <div class="post-preview">
+          <a href="/2019/04/27/CSS-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91.html">
+            <h2 class="post-title">
+              CSS 在线编辑
+            </h2>
+            
+            <p class="post-description">
+              使用 Contenteditable 属性实现 CSS 在线编辑
+            </p>
+            
+          </a>
+        </div>
+        
+      </div>
+      
+    <div class="tag-item">
+      <div class="tag-title" id="JavaScript">
+        <i class="iconfont">&#xe62b;</i>
+        <span class="tag-text">JavaScript</span>
+        </span>
+        
+        <div class="post-preview">
+          <a href="/2019/05/30/JS-%E5%AE%9E%E7%8E%B0%E5%A4%8D%E5%88%B6%E4%B8%8E%E7%B2%98%E8%B4%B4.html">
+            <h2 class="post-title">
+              JS 实现复制与粘贴
+            </h2>
+            
+            <p class="post-description">
+              如何使用 JS 获取剪贴板的内容与添加内容到剪贴板
+            </p>
+            
+          </a>
+        </div>
+        
+      </div>
+      
+    <div class="tag-item">
+      <div class="tag-title" id="Jekyll">
+        <i class="iconfont">&#xe62b;</i>
+        <span class="tag-text">Jekyll</span>
+        </span>
+        
+        <div class="post-preview">
+          <a href="/2019/08/31/%E4%BD%BF%E7%94%A8-Jekyll-%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2.html">
+            <h2 class="post-title">
+              使用 Jekyll 搭建一个自己的博客
+            </h2>
+            
+            <p class="post-description">
+              如何利用 Github Pages 加 Jekyll 搭建一个自己的博客
+            </p>
+            
+          </a>
+        </div>
+        
+      </div>
+      
+    <div class="tag-item">
+      <div class="tag-title" id="生活">
+        <i class="iconfont">&#xe62b;</i>
+        <span class="tag-text">生活</span>
+        </span>
+        
+        <div class="post-preview">
+          <a href="/2019/08/31/%E4%BD%BF%E7%94%A8-Jekyll-%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2.html">
+            <h2 class="post-title">
+              使用 Jekyll 搭建一个自己的博客
+            </h2>
+            
+            <p class="post-description">
+              如何利用 Github Pages 加 Jekyll 搭建一个自己的博客
+            </p>
+            
+          </a>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+
+
+  <footer id="footer">
+  <a href="https://github.com/jaceyi">
+    <i class="iconfont">&#xe600;</i>
+  </a>
+  <a href="https://www.zhihu.com/people/hui-bu-qu-de-shi-guang-20/activities">
+    <i class="iconfont">&#xe634;</i>
+  </a>
+  <a href="https://www.weibo.com/yijic">
+    <i class="iconfont">&#xe61c;</i>
+  </a>
+  <a href="https://www.facebook.com/jace.yi.0123">
+    <i class="iconfont">&#xe635;</i>
+  </a>
+</footer>
+
+
+  <div class="back-top">
+  <i class="iconfont">&#xe6d9;</i>
+</div>
+<script>
+  (function (d, w) {
+    function scrollTo(targetY) {
+      var currentY =
+        d.documentElement.scrollTop || d.body.scrollTop;
+      var distance = targetY - currentY;
+      var num = 0;
+
+      function animate() {
+        var currentY =
+          d.documentElement.scrollTop || d.body.scrollTop;
+        w.scrollTo(0, currentY + distance / 10);
+        num++;
+        if (num === 10) return;
+        w.requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+    var $upTop = d.querySelector('.back-top');
+
+    $upTop.onclick = function () {
+      scrollTo(0);
+    };
+
+    function bindEvent() {
+      var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+      if (scrollTop > 100) {
+        $upTop.style.display = 'block';
+      } else {
+        $upTop.style.display = 'none';
+      }
+    }
+
+    w.addEventListener('scroll', bindEvent);
+    w.addEventListener('load', bindEvent);
+  })(document, window);
+</script>
+
+</body>
+
+</html>
