@@ -5,20 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="keywords" content="vivi, viviHuang, vivihuang, Vivi, Vivi Huang, Vivi huang, ヾヾviviHuang`博客">
-  <meta name="description" content="ヾ屋顶上的小猫的个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
-  <title>ヾviviHuang【Web前端开发】</title>
+  <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
+  <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
+  <title>JQ 写简单模态框 - ヾviviHuang`博客【Web前端开发】</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <link rel="stylesheet" href="/css/prism.css">
   <link rel="stylesheet" href="/css/base.css">
-  
-  <link rel="stylesheet" href="/css/index.css">
-  
+  <link rel="stylesheet" href="/css/post.css">
   <script src="/js/util.js"></script>
 </head>
 
 <body>
-  <div id="header">
-  <div class="wrap">
+  <div id="header" style="background-image: url(/images/bg-banner.jpg)">
     <div class="top">
   <div class="title" style="margin-top: 10px;">
     <img src="/images/001.jpg" alt="" style="width: 40px;height: 40px; border-radius: 50%; ">
@@ -109,62 +108,25 @@
   })(document, window);
 </script>
 
-    <div class="banner">
-      <div class="center">
-        <div class="text">记录学习笔记、日常生活。</div>
-        <div class="search-box">
-          <input type="text" placeholder="搜索文章" id="search-input">
-          <div class="icon">
-            <i class="iconfont">&#xe601;</i>
-          </div>
-          <div id="results-container"></div>
-        </div>
+    <div class="content">
+      <h1 class="post-title">JQ 写简单模态框</h1>
+      <div class="post-description">如何使用 JQ 实现简单的弹窗提示框</div>
+      <div class="post-date">2019-09-08</div>
+      <div class="tags">
+        
+        <a class="tag" href="/tags/#jQuery" title="jQuery">jQuery</a>
+        
       </div>
     </div>
   </div>
-</div>
-
-<script src="/js/simple-jekyll-search.min.js"></script>
-
-<script>
-  (function (d, w) {
-    var $searchInput = d.getElementById('search-input');
-    var $resultsContainer = d.getElementById('results-container');
-
-    SimpleJekyllSearch({
-      searchInput: $searchInput,
-      resultsContainer: $resultsContainer,
-      json: '/search.json',
-      searchResultTemplate:
-        '<li class="search-results-item">' +
-        '<a href="{url}" title="{title}">' +
-        '<div class="title">' +
-        '<h4>{title}</h4><span>{date}</span>' +
-        '</div>' +
-        '<p class="description">{description}</p>' +
-        '<p class="search-tags">{tags}</p>' +
-        '</a>' +
-        '</li>',
-      noResultsText: '<div class="not-data">哎呀，没有找到！</div>',
-      limit: 20,
-      fuzzy: false
-    })
-  })(document, window);
-</script>
-
 
   <div class="container">
-  <ul class="posts">
-    
-    <li class="post">
-      <a href="/2019/09/08/jQuery%E5%86%99%E7%AE%80%E5%8D%95%E6%A8%A1%E6%80%81%E6%A1%86.html">
-        <h2 class="title">JQ 写简单模态框</h2>
-        <div class="excerpt">如何使用 JQ 实现简单的弹窗提示框</div>
-        <div class="excerpt">JQ 写简单模态框
-如何使用 JQ 实现简单的弹窗提示框
+    <div class="main">
+      <h2>JQ 写简单模态框</h2>
+<h3>如何使用 JQ 实现简单的弹窗提示框</h3>
 
-
-    
+<pre>
+    <code class="language-html">
             &ltdiv class="mask"&gt&lt/div&gt
             &ltdiv class="modelBox"&gt
                &ltp class="title"&gt2019年9月8日 晴天☀️&ltspan&gt&times;&lt/span&gt&lt/p&gt
@@ -172,10 +134,10 @@
                &ltp class="cont"&gtby 糖糖戒了糖&lt/p&gt
             &lt/div&gt
             &lta href="#"&gt登录&lt/a&gt
-    
-
-
-        
+    </code>
+</pre>
+<pre>
+        <code class="language-js">
                 &lt; style type="text/css"&gt; 
                     body,
                     div,
@@ -222,11 +184,11 @@
                         text-align: center;
                     }
                     &lt;/style&gt; 
-        
-    
+        </code>
+    </pre>
 
-    
-        
+    <pre>
+        <code class="language-js">
             $(function () {
                 //浏览器大小发生改变
                 $(window).resize(function () {
@@ -266,53 +228,17 @@
                 })
     
             })
-        
+        </code>
+    </pre>
+      <div class="date">发布时间：2019-09-08</div>
+      <div id="gitalk-container"></div>
     </div>
-        <div class="time">2019-09-08 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/05/30/JS-%E5%AE%9E%E7%8E%B0%E5%A4%8D%E5%88%B6%E4%B8%8E%E7%B2%98%E8%B4%B4.html">
-        <h2 class="title">JS 实现复制与粘贴</h2>
-        <div class="excerpt">如何使用 JS 获取剪贴板的内容与添加内容到剪贴板</div>
-        <div class="excerpt">复制
-拦截复制
-应用场景：拦截用户复制事件，或者改变用户复制的内容。
-</div>
-        <div class="time">2019-05-30 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/04/27/CSS-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91.html">
-        <h2 class="title">CSS 在线编辑</h2>
-        <div class="excerpt">使用 Contenteditable 属性实现 CSS 在线编辑</div>
-        <div class="excerpt">前言
-先了解一下 Contenteditable 属性的作用：规定元素内容是否可编辑。
-案例
-给页面加上 style 标签，设置 style 属性为 display: block，contenteditable 属性为 true。
-</div>
-        <div class="time">2019-04-27 </div>
-      </a>
-    </li>
-    
-  </ul>
-  <div class="tags">
-    <h3 class="title">All TAGS</h3>
-    <div class="box">
-      
-      <a class="tag" href="/tags/#CSS">CSS</a>
-      
-      <a class="tag" href="/tags/#JavaScript">JavaScript</a>
-      
-      <a class="tag" href="/tags/#jQuery">jQuery</a>
-      
+    <div class="nav-container">
+      <div class="main-nav">
+        <div class="title">目录</div>
+      </div>
     </div>
   </div>
-</div>
-
-
   <footer id="footer">
   <a href="https://github.com/viviHuang5">
     <i class="iconfont">&#xe600;</i>
@@ -327,7 +253,6 @@
     <i class="iconfont">&#xe635;</i>
   </a>
 </footer>
-
 
   <div class="back-top">
   <i class="iconfont">&#xe6d9;</i>
@@ -371,6 +296,66 @@
   })(document, window);
 </script>
 
+  <script src="/js/prism.js"></script>
+  <script>
+    (function (w, d) {
+      var $nav = document.querySelector('.main-nav');
+      var $main = document.querySelector('.main');
+      var titleNodeNames = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+      var contentItems = [];
+      var navItems = [];
+      for (var i = 0; i < $main.children.length; i++) {
+        var element = $main.children[i];
+        if (titleNodeNames.includes(element.nodeName)) {
+          var link = document.createElement('a');
+          link.href = '#' + element.innerText;
+          link.innerText = element.innerText;
+
+          $nav.appendChild(link);
+          navItems.push(link);
+          element.id = element.innerText;
+          contentItems.push(element);
+        }
+      }
+
+      function bindEvent() {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        if (scrollTop >= $nav.parentNode.offsetTop) {
+          addClass($nav, 'active');
+        } else {
+          removeClass($nav, 'active');
+        }
+        for (var i = 0; i < navItems.length; i++) {
+          removeClass(navItems[i], 'active');
+        }
+        for (var i = contentItems.length - 1; i >= 0; i--) {
+          if (scrollTop >= getElementTop(contentItems[i])) {
+            addClass(navItems[i], 'active');
+            return;
+          }
+        }
+        addClass(navItems[0], 'active');
+      }
+      w.addEventListener('scroll', bindEvent);
+      w.addEventListener('load', bindEvent);
+    })(window, document)
+  </script>
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/md5.min.js"></script>
+  <script>
+    const gitalk = new Gitalk({
+      clientID: '0b153d2e389989779003',
+      clientSecret: 'e5f2c768454a6e3aeafbc5d88f109059d7b5a60a',
+      repo: 'viviHuang5.github.io',
+      owner: 'viviHuang5',
+      admin: ['viviHuang5'],
+      id: md5(location.pathname),
+      distractionFreeMode: false,
+      createIssueManually: true
+    })
+
+    gitalk.render('gitalk-container')
+  </script>
 </body>
 
 </html>

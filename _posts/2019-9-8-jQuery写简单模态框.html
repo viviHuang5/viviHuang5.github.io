@@ -1,0 +1,115 @@
+---
+layout: post
+title: JQ 写简单模态框
+description: 如何使用 JQ 实现简单的弹窗提示框
+tags: jQuery
+bannerImg: /images/bg-banner.jpg
+---
+<h2>JQ 写简单模态框</h2>
+<h3>如何使用 JQ 实现简单的弹窗提示框</h3>
+
+<pre>
+    <code class="language-html">
+            &ltdiv class="mask"&gt&lt/div&gt
+            &ltdiv class="modelBox"&gt
+               &ltp class="title"&gt2019年9月8日 晴天☀️&ltspan&gt&times;&lt/span&gt&lt/p&gt
+               &ltp class="cont" style="font-size:18px;color:red;"&gt对世界温柔以待，你也将被温柔待之&lt/p&gt
+               &ltp class="cont"&gtby 糖糖戒了糖&lt/p&gt
+            &lt/div&gt
+            &lta href="#"&gt登录&lt/a&gt
+    </code>
+</pre>
+<pre>
+        <code class="language-js">
+                &lt; style type="text/css"&gt; 
+                    body,
+                    div,
+                    a,
+                    p,
+                    span {
+                        margin: 0;
+                        padding: 0;
+                    }
+            
+                    .mask {
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, .5);
+                        position: absolute;
+                        z-index: 1;
+                        display: none;
+                    }
+            
+                    .modelBox {
+                        padding: 20px;
+                        border-radius: 10px;
+                        width: 300px;
+                        height: 200px;
+                        background: #fff;
+                        position: absolute;
+                        z-index: 2;
+                        display: none;
+                    }
+            
+                    span {
+                        float: right;
+                        cursor: pointer;
+                    }
+            
+                    .title {
+                        border-bottom: 1px #ccc solid;
+                        text-align: center;
+                        font-weight: bold;
+                        padding: 5px 0 10px 0;
+                    }
+                    .cont{
+                        padding-top:40px;
+                        text-align: center;
+                    }
+                    &lt;/style&gt; 
+        </code>
+    </pre>
+
+    <pre>
+        <code class="language-js">
+            $(function () {
+                //浏览器大小发生改变
+                $(window).resize(function () {
+                    showCenter();
+                });
+    
+                //模态框出现
+                $("a").bind("click", function () {
+                    $(".mask").fadeIn(1000);
+                    $(".modelBox").fadeIn(1000);
+                    $(this).css("display", "none");
+                    showCenter();
+                });
+                //点击span关闭
+                $("span").bind("click", function () {
+                    $(".mask").fadeOut(1000);
+                    $(".modelBox").fadeOut(1000);
+                });
+    
+                //居中显示
+                function showCenter() {
+                    var $vW = $(window).width();
+                    var $w = $(".modelBox").outerWidth();
+                    var $vH = $(window).height();
+                    var $h = $(".modelBox").outerHeight();
+                    $(".modelBox").css({ "left": ($vW - $w) / 2 + "px", "top": ($vH - $h) / 2 + "px" });
+                };
+    
+                //绑定键盘事件  按下esc键退出
+                $(document).keyup(function (ev) {
+                    //alert(ev.keyCode);  获取esc的键码27
+                    if (ev.keyCode == 27) {
+                        // $("span").click();
+                        //模拟事件
+                        $("span").trigger("click");
+                    }
+                })
+    
+            })
+        </code>
+    </pre>
