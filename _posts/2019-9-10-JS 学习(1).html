@@ -1,0 +1,84 @@
+---
+layout: post
+title: JS 学习(1)--类和对象
+description: 面向对象编程介绍
+tags: JS
+bannerImg: /images/bg-banner.jpg
+---
+<h3>目标:</h3>
+<p>什么是面向对象</p>
+<p>类和对象的关系</p>
+<p>使用class创建自定义类</p>
+<!--more-->
+<p>能够说出什么是继承</p>
+<h3>面向对象的编程介绍</h3>
+<pre>
+<code class="language-html">
+<p style="color: blue;font-weight: 700;">面向过程POP: <span style="font-size: 14px;color: rgb(94, 91, 91);">就是分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候再一个一个的依次调用就可以了;</span></p>
+<p style="color: blue;font-weight: 700;">面向对象OOP: <span style="font-size: 14px;color: rgb(90, 87, 87);">把事物分解成一个一个对象，然后由对象之间分工与合作;</span></p>
+<p style="text-indent: 1em;">1.面向对象程序开发思想中，每一个对象都是功能中心，具有明确分工;</p>
+<p style="text-indent: 1em;">2.面向对象编程具有灵活，代码可复用，容易维护和开发的优点，更适合多人合作的大型软件项目;</p>
+<p style="text-indent: 1em;">3.面向对象的特性:<span style="color: red;">封装性，继承性，多态性</span></p>
+</code>
+</pre>
+<h3>ES6中的类和对象</h3>
+<h4>类 class</h4>
+<pre>
+<code class="language-html">
+<p>class 关键字声明一个类，之后以这个类来实例化对象;</p>
+<p>1.类抽象了对象的公共部分，它泛指某一个大类（class）;</p>
+<p>2.对象特指某一个，通过类实例化一个具体的对象;</p>
+</code>
+</pre>
+<h4>创建类和生成实例</h4>
+
+<pre>
+    <code class="language-js">
+            &ltscript&gt
+            // 1.用class创建一个明星类
+            class Star{
+                constructor(uname,age){
+                    this.uname=uname;
+                    this.age=age;
+                }
+            }
+            // 2.利用类创建对象 new
+            let ldh = new Star('刘德华',18)
+            let syz = new Star('孙燕姿',16)
+            console.log(ldh.uname)
+            console.log(syz.age)
+            &lt/script&gt
+    </code>
+    (1)通过class 关键字创建类，类名我们还是习惯性定义首字母大写;
+    (2)类里面有哥constructor 函数，可以接受传递过来的参数，同时返回实例对象
+    (3)constructor 函数，只要 new 生成实例时，就会自动调用这个函数，如果我们不写这个函数，类也会自动生成这个函数
+    (4)生成实例new 不能省略
+    (5)注意语法规范，创建类，类名后面不要加小括号，生成实例，类名后面加小括号，构造函数不需要加function
+</pre>
+
+<h4>类中添加方法</h4>
+<pre>
+    <code class="language-js">
+        &ltscript&gt
+            // 1.用class创建一个明星类
+            class Star{
+                constructor(uname,age){
+                    this.uname=uname;
+                    this.age=age;
+                }
+                sing(song){
+                    console.log(this.uname+'唱'+song)
+                }
+            }
+            // 2.利用类创建对象 new
+            let ldh = new Star('刘德华',18)
+            let syz = new Star('孙燕姿',16)
+            ldh.sing('冰雨')
+            syz.sing('天黑黑')
+        &lt/script&gt
+    </code>
+    (1)类里面所有的函数不需要写function
+    (2)多个函数方法之间不需要添加逗号分隔
+</pre>
+
+<h4>类继承extends和super关键字</h4>
