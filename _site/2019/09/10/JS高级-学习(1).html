@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
   <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
-  <title>JS 学习(1)--类和对象 - ヾviviHuang`博客【Web前端开发】</title>
+  <title>JS高级 学习(1)--类和对象 - ヾviviHuang`博客【Web前端开发】</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
   <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
   <link rel="stylesheet" href="/css/prism.css">
@@ -109,7 +109,7 @@
 </script>
 
     <div class="content">
-      <h1 class="post-title">JS 学习(1)--类和对象</h1>
+      <h1 class="post-title">JS高级 学习(1)--类和对象</h1>
       <div class="post-description">面向对象编程介绍</div>
       <div class="post-date">2019-09-10</div>
       <div class="tags">
@@ -199,6 +199,130 @@
 </pre>
 
 <h4>类继承extends和super关键字</h4>
+<pre>
+        <code class="language-js">
+            &ltscript&gt
+                // 1.类的继承
+                class Father{
+                    constructor(x,y){
+                       this.x = x;
+                       this.y=y;
+                    }
+                    money(){
+                        console.log(100)
+                    }
+                    sum(){
+                        console.log(this.x+this.y)
+                    }
+                }
+                class Son extends Father{
+                    constructor(x,y){
+                        super(x,y);//调用了父类中的构造函数
+                    }
+                }
+               let son=new Son(1,2);
+               son.money()
+               son.sum()
+            &lt/script&gt
+        </code>
+        (1)extends可以继承父类的属性和方法；
+        (2)super关键字 用于访问和调用对象父类上的函数，可以调用父类的构造函数，也可以调用父类的普通函数；
+    </pre>
+    <h4>super调用父类普通函数以及继承中属性方法查找原则</h4>
+<pre>
+    <code class="language-js">
+            &ltscript&gt
+            //super 关键字调用父类普通函数
+            class Father{
+                say(){
+                    return '我是爸爸'
+                }
+            }
+            class Son extends Father{
+                say(){
+                    console.log(super.say()+'的儿子');
+                    //super.say() 就是调用父类中的普通函数say()
+                }
+            }
+            let son = new Son();
+            son.say();
+            // 继承中的查找原则：就近原则 
+            //1.继承中，如果实例化子类输出一个方法，先看子类有没有这个方法，如果有就先执行子类的
+            //2.继承中，如果子类里面没有，就去查找父类有没有这个方法，如果有，就执行父类的这个方法(就近原则)
+          &lt/script&gt
+    </code>
+</pre>
+<h4>super必须放到子类this之前</h4>
+<pre>
+    <code class="language-js">
+            &ltscript&gt
+            class Father{
+                constructor(x,y){
+                    this.x=x;
+                    this.y=y;
+                }
+                sum(){
+                    console.log(this.x+this.y)
+                }
+            }
+            // 子类继承父类加法方法 同时扩展 减法方法
+            class Son extends Father{
+                constructor(x,y){
+                    // 利用super 调用父类的构造函数
+                    // super 必须在子类this之前调用(父亲永远在第一位)
+                    super(x,y)
+                    this.x=x;
+                    this.y=y;
+                }
+                substract(){
+                    console.log(this.x-this.y)
+                }
+            }
+            let son =new Son(5,3);
+            son.substract();
+            son.sum();
+            &lt/script&gt
+    </code>
+</pre>
+<h4>使用类3个注意点</h4>
+<pre>
+    <code class="language-js">
+            &ltbutton&gt点击&lt/button&gt
+            &ltscript&gt
+            let that;
+            let _that;
+            class Star{
+                constructor(uname,age){
+                    // constructor 里面的this 指向的是 创建的实例对象
+                    that=this
+                    console.log(this)//实例对象
+                    this.uname=uname;
+                    this.age=age;
+                    this.btn=document.querySelector('button');
+                    this.btn.onclick=this.sing;
+                }
+                sing(){
+                    // 这个sing()方法里面的this，指向的是 btn 这个按钮，因为这个按钮调用了这个函数
+                    console.log(this)
+                    console.log(that.uname)//that里面存储的是constructor里面的this
+                }
+                dance(){
+                    //这个dance里面的this 指向的是实例对象 ldh 因为 ldh 调用了这个函数
+                    _that=this
+                    console.log(this)
+                    
+                }
+            }
+            let ldh =new Star('刘德华');
+            ldh.dance();
+            //1.在es6中 类没有变量提升，所以必须先定义类，才能通过类实例化对象 
+            //2.类里面的共有的属性和方法一定要加this使用 
+            //3.类里面的this指向问题
+             //constructor里面的this指向的是实例对象，方法里面的this指向这个方法的调用者
+            &lt/script&gt
+    </code>
+</pre>
+
       <div class="date">发布时间：2019-09-10</div>
       <div id="gitalk-container"></div>
     </div>
