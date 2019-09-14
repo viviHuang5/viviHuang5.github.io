@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
   <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
-  <title>JS 实现复制与粘贴 - ヾviviHuang`博客【Web前端开发】</title>
+  <title>微信小程序实例 01.二维码制作 - ヾviviHuang`博客【Web前端开发】</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
   <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
   <link rel="stylesheet" href="/css/prism.css">
@@ -109,9 +109,9 @@
 </script>
 
     <div class="content">
-      <h1 class="post-title">JS 实现复制与粘贴</h1>
+      <h1 class="post-title">微信小程序实例 01.二维码制作</h1>
       <div class="post-description">如何使用 JS 获取剪贴板的内容与添加内容到剪贴板</div>
-      <div class="post-date">2019-05-30</div>
+      <div class="post-date">2019-09-13</div>
       <div class="tags">
         
         <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
@@ -122,82 +122,10 @@
 
   <div class="container">
     <div class="main">
-      <h2>复制</h2>
-<h3>拦截复制</h3>
-<p>应用场景：拦截用户复制事件，或者改变用户复制的内容。</p>
+      <h2>JQ 写简单模态框</h2>
+<h3>如何使用 JQ 实现简单的弹窗提示框</h3>
 <!--more-->
-<pre>
-  <code class="language-js">
-// 监听复制事件
-document.addEventListener('copy', e => {
-    // selection 是当前选中的内容
-    const selection = window.getSelection();
-    // 给选中的内容添加多余的内容
-    e.clipboardData.setData('text', `${selection} Jace Blog`);
-    // 阻止默认的复制事件
-    e.preventDefault();
-})
-  </code>
-</pre>
-
-<h3>自动复制</h3>
-<p>应用场景：快捷复制内容到用户剪贴板。</p>
-<pre>
-  <code class="language-js">
-const sel = window.getSelection();
-// 选择元素的内容
-sel.selectAllChildren(document.body);
-// 执行复制
-document.execCommand('Copy');
-// 取消选择
-sel.removeAllRanges();
-  </code>
-</pre>
-
-<h2>粘贴</h2>
-<h3>粘贴文字</h3>
-<p>应用场景：拦截用户粘贴事件，快速获取粘贴内容。</p>
-<pre>
-  <code class="language-js">
-// 监听粘贴事件
-document.addEventListener('paste', e => {
-    // 获取用户粘贴的内容
-    const paste = e.clipboardData.getData('text');
-    console.log(paste.trim())
-})
-  </code>
-</pre>
-
-<h3>粘贴文件</h3>
-<p>应用场景：实现粘贴上传文件。</p>
-<pre>
-  <code class="language-js">
-document.addEventListener('paste', e => {
-    const { items } = e.clipboardData;
-    for (let i = 0; i < items.length; i++) {
-        if (item.kind === 'file') {
-            let file = item.getAsFile() // 获取文件
-        }
-    }
-})
-  </code>
-</pre>
-<p>
-  <code>items</code>
-  中都是
-  <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem">
-    DataTransferItem
-  </a>
-  类型的数据。
-</p>
-<p>
-  备注：剪贴板的API还属于草案阶段
-  <a href="https://w3c.github.io/clipboard-apis/#clipboard-event-paste">
-    Clipboard event paste
-  </a>。
-</p>
-
-      <div class="date">发布时间：2019-05-30</div>
+      <div class="date">发布时间：2019-09-13</div>
       <div id="gitalk-container"></div>
     </div>
     <div class="nav-container">
