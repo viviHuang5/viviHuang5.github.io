@@ -1,6 +1,15 @@
 [
   
     {
+      "title": "Node 01.fs模块的基本使用",
+      "category": "",
+      "description": "fs模块是一个与文件系统进行交互的一个node模块",
+      "tags": "Node",
+      "url": "/2019/09/24/Node-01.fs%E6%A8%A1%E5%9D%97.html",
+      "date": "2019-09-24"
+    } ,
+  
+    {
       "title": "快捷键",
       "category": "",
       "description": "让操作更快更简洁",
