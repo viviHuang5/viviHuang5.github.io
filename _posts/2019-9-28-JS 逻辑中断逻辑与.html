@@ -1,0 +1,50 @@
+---
+layout: post
+title: JS 逻辑中断逻辑与
+description: 逻辑与短路运算
+tags: JS
+bannerImg: /images/bg-banner.jpg
+---
+<!--more-->
+<h3>短路运算(逻辑中断）</h3>
+<p style="font-weight: 700">短路运算的原理：当有多个表达式（值）时，左边的表达式值可以确定结果时，就不再继续运算右边的表达式的值；</p>
+<p style="font-weight: 700">1.逻辑与</p>
+<ul>
+    <li>语法：<span style="color: red">表达式1 && 表达式2</span></li>
+    <li>如果第一个表达式的值为真，则返回表达式2</li>
+    <li>如果第一个表达式的值为假，则返回表达式1</li>
+</ul>
+
+<pre>
+    <code class='language-js'>
+        &ltscript&gt
+        console.log(123 && 456);//456
+        console.log(0 && 456);//0
+        console.log(0 && 456 && 1+2);//0
+        console.log('' && 456 && 1+2);//''
+        &lt/script&gt
+        //如果有空的或者是否定的为假 其余是真的 0 ‘’ null undefined NaN
+    </code>
+</pre>
+<p style="font-weight: 700">2.逻辑或</p>
+<ul>
+    <li>语法：<span style="color: red">表达式1 && 表达式2</span></li>
+    <li>如果第一个表达式的值为真，则返回表达式1</li>
+    <li>如果第一个表达式的值为假，则返回表达式2</li>
+</ul>
+
+<pre>
+    <code class='language-js'>
+        &ltscript&gt
+        console.log(123 || 456);//123
+        console.log(0 || 456);//456
+        console.log(0 || 456 || 1+2);//456
+        console.log('' || 456 || 1+2);//456
+        //逻辑中断很重要 它会影响我们的程序的运行结果
+        var num =0;
+        console.log(123 || num++);
+        console.log(num);//0
+        &lt/script&gt
+        //如果有空的或者是否定的为假 其余是真的 0 ‘’ null undefined NaN
+    </code>
+</pre>

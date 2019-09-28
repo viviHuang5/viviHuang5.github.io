@@ -5,20 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="keywords" content="vivi, viviHuang, vivihuang, Vivi, Vivi Huang, Vivi huang, ヾヾviviHuang`博客">
-  <meta name="description" content="ヾ屋顶上的小猫的个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
-  <title>关于我 - ヾviviHuang【Web前端开发】</title>
+  <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
+  <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
+  <title>英语口语 （每日一句就好） - ヾviviHuang`博客【Web前端开发】</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <link rel="stylesheet" href="/css/prism.css">
   <link rel="stylesheet" href="/css/base.css">
-  
-  <link rel="stylesheet" href="/css/about.css">
-  
+  <link rel="stylesheet" href="/css/post.css">
   <script src="/js/util.js"></script>
 </head>
 
 <body>
-  <div id="header">
-  <div class="wrap">
+  <div id="header" style="background-image: url(/images/bg-banner.jpg)">
     <div class="top">
   <div class="title" style="margin-top: 10px;">
     <img src="/images/001.jpg" alt="" style="width: 40px;height: 40px; border-radius: 50%; ">
@@ -109,76 +108,33 @@
   })(document, window);
 </script>
 
-    <div class="banner">
-      <div class="center">
-        <div class="text">记录学习笔记、日常生活。</div>
-        <div class="search-box">
-          <input type="text" placeholder="搜索文章" id="search-input">
-          <div class="icon">
-            <i class="iconfont">&#xe601;</i>
-          </div>
-          <div id="results-container"></div>
-        </div>
+    <div class="content">
+      <h1 class="post-title">英语口语 （每日一句就好）</h1>
+      <div class="post-description">实用英语口学习</div>
+      <div class="post-date">2019-09-29</div>
+      <div class="tags">
+        
+        <a class="tag" href="/tags/#英语口语" title="英语口语">英语口语</a>
+        
       </div>
     </div>
   </div>
-</div>
 
-<script src="/js/simple-jekyll-search.min.js"></script>
-
-<script>
-  (function (d, w) {
-    var $searchInput = d.getElementById('search-input');
-    var $resultsContainer = d.getElementById('results-container');
-
-    SimpleJekyllSearch({
-      searchInput: $searchInput,
-      resultsContainer: $resultsContainer,
-      json: '/search.json',
-      searchResultTemplate:
-        '<li class="search-results-item">' +
-        '<a href="{url}" title="{title}">' +
-        '<div class="title">' +
-        '<h4>{title}</h4><span>{date}</span>' +
-        '</div>' +
-        '<p class="description">{description}</p>' +
-        '<p class="search-tags">{tags}</p>' +
-        '</a>' +
-        '</li>',
-      noResultsText: '<div class="not-data">哎呀，没有找到！</div>',
-      limit: 20,
-      fuzzy: false
-    })
-  })(document, window);
-</script>
-
-
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<div class="container" >
-<h4>“对世界温柔以待，你也将被温柔待之” <text style="display:inline-block;font-size:12px;color:#ccc">--更新于2019年9月21日</text></h4>
-<h4>“为什么要努力？因为我喜欢的东西都很贵” <text style="display:inline-block;line-height:50px; font-size:12px;color:#ccc">--更新于2019年9月24日</text></h4>
-<h4>“不要太乖，不想做的事情可以拒绝，做不到的事不用勉强，不喜欢的话假装没听见，人生不是用来讨好别人的，而是要善待自己” <text style="display:inline-block;line-height:50px; font-size:12px;color:#ccc">--更新于2019年9月29日</text></h4>
-  
-  <!-- <h2 class="write-title">留言板</h2>
-  <div id="gitalk-container"></div> -->
-</div>
-<!-- <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script> -->
-<!-- <script>
-  const gitalk = new Gitalk({
-    clientID: '0b153d2e389989779003',
-    clientSecret: 'e5f2c768454a6e3aeafbc5d88f109059d7b5a60a',
-    repo: 'viviHuang5.github.io',
-    owner: 'viviHuang5',
-    admin: ['viviHuang5'],
-    id: 'about',
-    distractionFreeMode: false,
-    createIssueManually: true
-  })
-
-  gitalk.render('gitalk-container')
-</script> -->
-
-
+  <div class="container">
+    <div class="main">
+      <!--more-->
+<h4>I envy you  我羡慕你<text style="display:inline-block;line-height:50px; font-size:12px;color:#ccc"> --更新于2019年9月27日</text></h4>
+<h4>How can i get in touch with you ?  我怎么联系你呢？<text style="display:inline-block;line-height:50px; font-size:12px;color:#ccc"> --更新于2019年9月28日</text></h4>
+<h4>Where are you heading ?  你要去哪里啊？<text style="display:inline-block;line-height:50px; font-size:12px;color:#ccc"> --更新于2019年9月29日</text></h4>
+      <div class="date">发布时间：2019-09-29</div>
+      <div id="gitalk-container"></div>
+    </div>
+    <div class="nav-container">
+      <div class="main-nav">
+        <div class="title">目录</div>
+      </div>
+    </div>
+  </div>
   <footer id="footer">
   <a href="https://github.com/viviHuang5">
     <i class="iconfont">&#xe600;</i>
@@ -193,7 +149,6 @@
     <i class="iconfont">&#xe635;</i>
   </a>
 </footer>
-
 
   <div class="back-top">
   <i class="iconfont">&#xe6d9;</i>
@@ -237,6 +192,66 @@
   })(document, window);
 </script>
 
+  <script src="/js/prism.js"></script>
+  <script>
+    (function (w, d) {
+      var $nav = document.querySelector('.main-nav');
+      var $main = document.querySelector('.main');
+      var titleNodeNames = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+      var contentItems = [];
+      var navItems = [];
+      for (var i = 0; i < $main.children.length; i++) {
+        var element = $main.children[i];
+        if (titleNodeNames.includes(element.nodeName)) {
+          var link = document.createElement('a');
+          link.href = '#' + element.innerText;
+          link.innerText = element.innerText;
+
+          $nav.appendChild(link);
+          navItems.push(link);
+          element.id = element.innerText;
+          contentItems.push(element);
+        }
+      }
+
+      function bindEvent() {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        if (scrollTop >= $nav.parentNode.offsetTop) {
+          addClass($nav, 'active');
+        } else {
+          removeClass($nav, 'active');
+        }
+        for (var i = 0; i < navItems.length; i++) {
+          removeClass(navItems[i], 'active');
+        }
+        for (var i = contentItems.length - 1; i >= 0; i--) {
+          if (scrollTop >= getElementTop(contentItems[i])) {
+            addClass(navItems[i], 'active');
+            return;
+          }
+        }
+        addClass(navItems[0], 'active');
+      }
+      w.addEventListener('scroll', bindEvent);
+      w.addEventListener('load', bindEvent);
+    })(window, document)
+  </script>
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/md5.min.js"></script>
+  <!-- <script>
+    const gitalk = new Gitalk({
+      clientID: '0b153d2e389989779003',
+      clientSecret: 'e5f2c768454a6e3aeafbc5d88f109059d7b5a60a',
+      repo: 'viviHuang5.github.io',
+      owner: 'viviHuang5',
+      admin: ['viviHuang5'],
+      id: md5(location.pathname),
+      distractionFreeMode: false,
+      createIssueManually: true
+    })
+
+    gitalk.render('gitalk-container')
+  </script> -->
 </body>
 
 </html>
