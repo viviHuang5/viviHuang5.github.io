@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
+  <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
+  <title>微信小程序 01.后台请求接口封装 - ヾviviHuang`博客【Web前端开发】</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <link rel="stylesheet" href="/css/prism.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/post.css">
+  <script src="/js/util.js"></script>
+</head>
+
+<body>
+  <div id="header" style="background-image: url(/images/bg-banner.jpg)">
+    <div class="top">
+  <div class="title" style="margin-top: 10px;">
+    <img src="/images/001.jpg" alt="" style="width: 40px;height: 40px; border-radius: 50%; ">
+    <a href="/">ヾviviHuang</a>
+  </div>
+  <nav class="nav">
+    <div class="item">
+      <a href="/">Home</a>
+    </div>
+    <div class="item">
+      <a href="/about">About</a>
+    </div>
+    <div class="item">
+      <a href="/tags">Tags</a>
+    </div>
+  </nav>
+  <div class="mobile-nav">
+    <div class="mobile-nav-menu icon">
+      <i class="iconfont">&#xe633;</i>
+    </div>
+    <div class="mobile-nav-box">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/tags">Tags</a>
+    </div>
+  </div>
+  
+</div>
+
+
+<script>
+  (function (d, w) {
+    w.onload = function () {
+      var $menuIcon = d.querySelector('.mobile-nav-menu');
+      var $navBox = d.querySelector('.mobile-nav-box');
+      var animationEndCallback = null;
+      function hideNavBox() {
+        addClass($navBox, 'zoomOut');
+        animationEndCallback = function () {
+          removeClass($navBox, 'zoomOut');
+          $navBox.style.display = 'none';
+        }
+      }
+
+      $menuIcon.onclick = function (e) {
+        e.stopPropagation();
+        if ($navBox.style.display === 'block') return hideNavBox();
+        $navBox.style.display = 'block';
+        addClass($navBox, 'zoomIn');
+        animationEndCallback = function () {
+          removeClass($navBox, 'zoomIn');
+        }
+      };
+
+      $navBox.onclick = function (e) {
+        e.stopPropagation();
+      };
+
+      $navBox.addEventListener('animationend', function (e) {
+        animationEndCallback && animationEndCallback();
+      }, false);
+
+      d.body.addEventListener('click', function () {
+        if ($navBox.style.display === 'block') hideNavBox();
+      }, false);
+
+      var $header = d.querySelector('#header');
+      var $top = d.querySelector('.top');
+      var topHeight = $top.offsetHeight;
+      w.addEventListener('scroll', function () {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        var step = $header.className.indexOf('visible') >= 0 ? topHeight : 0;
+        if (scrollTop > $header.offsetHeight - step) {
+          addClass($header, 'active');
+        } else {
+          removeClass($header, 'active');
+        }
+      }, false);
+
+      d.addEventListener('mousewheel', function(e) {
+        if (e.wheelDeltaY >= 0) {
+          addClass($header, 'visible');
+        } else {
+          removeClass($header, 'visible');
+        }
+      })
+    }
+  })(document, window);
+</script>
+
+    <div class="content">
+      <h1 class="post-title">微信小程序 01.后台请求接口封装</h1>
+      <div class="post-description">为下一个次开发做准备</div>
+      <div class="post-date">2019-09-29</div>
+      <div class="tags">
+        
+        <a class="tag" href="/tags/#微信小程序" title="微信小程序">微信小程序</a>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="main">
+      <!--more-->
+<h3>export,export default 和import的区别和用法</h3>
+<ul style="background: #000;color:#fff;" >
+    <li>1. export 和export default 是用来导出文件的</li>
+    <li>2. import 是用来引入export 和export default 导出的文件</li>
+    <p style="color:red;">一个文件能有多个export 但只能有一个export default</p>
+    <li>3. 用export导出的文件必须加{}引入 用export default导出的不用加{}</li>
+</ul>
+
+<h3>关于return</h3>
+<ul style="background: #000;color: #fff">
+<li>1. 函数内计算的值，外面需要用到，就需要return出来；return 就是能让 函数里面计算或者其他方式 得出来的值 返回出去用</li>
+<li>2. return 后就不会执行后面的代码了;例如计算两个数字相加的和，前面加个判断 判断传进来的参数是不是数字 如果不是数字就return，不然 再往下执行的话肯定会报错</li>
+</ul>
+<h3>后台请求接口封装</h3>
+<pre>
+    <code class='language-js'>
+        &ltscript&gt
+        export const host = 'https://xxx.com'; // 域名
+        let lock =true
+        export default function request(opt){ 
+        return new Promise((resolve,reject)=>{
+        if (opt.isLock) {
+          if (!lock) return;
+          lock = false;
+        }
+        // 默认开启loading
+        if (!opt.isLocking) {
+          wx.showLoading({
+            title: '加载中...'
+          });
+        }
+        wx.request({
+          url: `${host}${opt.url}`,
+          method:opt.method||'post',
+          data:opt.data||{},
+          header:{
+            'content-type': opt.hedaer || 'application/json', // 默认值
+            'token': wx.getStorageSync('token')
+          },
+          success:function(res){
+            resolve(res)
+          },
+          fail:function(res){
+            reject(res)
+          },
+          complete:function(res){
+            if (!opt.isLocking) {
+              wx.hideLoading();
+            }  
+            if (opt.isLock) {
+                lock=true
+            }    
+           }
+          })
+         })
+        }
+        &lt/script&gt
+       
+    </code>
+</pre>
+<h3>按钮锁的使用</h3>
+ <pre>
+     <code class='language-js'>
+        &ltscript&gt
+        // 保存地址
+        savaData() {
+          if(isPhone(this.data.tel)==false){
+            Notify('请输入正确的手机号');
+            return    
+          }else{
+            request({
+              url: '/api/Address/AddAddress',
+              isLock: true,//默认按钮是不受控制的，通过进行判断，如果数据还没有请求到就不给点击，避免按钮点击过快造成的重复提交;
+              //就好比地铁站的闸机吧？就没控制好，还没关好又可以刷下一个了，意思就是你才把锁打开了，但是还没执行关锁，又开始执行开
+              //锁了，现在加这个变量就是为了解决这个问题，现在就是请求完毕之后，所有代码执行完毕，你可以理解为已关锁，然后关锁之后
+              //把变量改成true，然后再点击才能执行开锁，isLock只是控制需不需要解决这个问题，而达到这个目的的变量是lock
+              data: {
+                name: this.data.name,
+                tel: this.data.tel,
+                provice: this.data.provice,
+                city: this.data.city,
+                county: this.data.county,
+                detail_address: this.data.address,
+                is_default: this.data.isDefault
+              }
+            }).then(res => {
+              if (res.data.code == 200) {
+                wx.showToast({
+                  title: '保存成功',
+                })
+                wx.navigateTo({
+                  url: '../../../personalCenter/pages/addressManagement/addressManagement',
+                })
+              } else {
+                Notify(res.data.msg);
+              }
+      
+            })  
+          }
+         
+        }
+        &lt/script&gt
+     </code>
+ </pre>
+ <image class="" src="/images/w01.png"  style="width: 800px;" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
+   
+      <div class="date">发布时间：2019-09-29</div>
+      <div id="gitalk-container"></div>
+    </div>
+    <div class="nav-container">
+      <div class="main-nav">
+        <div class="title">目录</div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+  <a href="https://github.com/viviHuang5">
+    <i class="iconfont">&#xe600;</i>
+  </a>
+  <a href="javascript:;">
+    <i class="iconfont">&#xe634;</i>
+  </a>
+  <a href="javascript:;">
+    <i class="iconfont">&#xe61c;</i>
+  </a>
+  <a href="javascript:;">
+    <i class="iconfont">&#xe635;</i>
+  </a>
+</footer>
+
+  <div class="back-top">
+  <i class="iconfont">&#xe6d9;</i>
+</div>
+<script>
+  (function (d, w) {
+    function scrollTo(targetY) {
+      var currentY =
+        d.documentElement.scrollTop || d.body.scrollTop;
+      var distance = targetY - currentY;
+      var num = 0;
+
+      function animate() {
+        var currentY =
+          d.documentElement.scrollTop || d.body.scrollTop;
+        w.scrollTo(0, currentY + distance / 10);
+        num++;
+        if (num === 10) return;
+        w.requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+    var $upTop = d.querySelector('.back-top');
+
+    $upTop.onclick = function () {
+      scrollTo(0);
+    };
+
+    function bindEvent() {
+      var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+      if (scrollTop > 100) {
+        $upTop.style.display = 'block';
+      } else {
+        $upTop.style.display = 'none';
+      }
+    }
+
+    w.addEventListener('scroll', bindEvent);
+    w.addEventListener('load', bindEvent);
+  })(document, window);
+</script>
+
+  <script src="/js/prism.js"></script>
+  <script>
+    (function (w, d) {
+      var $nav = document.querySelector('.main-nav');
+      var $main = document.querySelector('.main');
+      var titleNodeNames = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+      var contentItems = [];
+      var navItems = [];
+      for (var i = 0; i < $main.children.length; i++) {
+        var element = $main.children[i];
+        if (titleNodeNames.includes(element.nodeName)) {
+          var link = document.createElement('a');
+          link.href = '#' + element.innerText;
+          link.innerText = element.innerText;
+
+          $nav.appendChild(link);
+          navItems.push(link);
+          element.id = element.innerText;
+          contentItems.push(element);
+        }
+      }
+
+      function bindEvent() {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        if (scrollTop >= $nav.parentNode.offsetTop) {
+          addClass($nav, 'active');
+        } else {
+          removeClass($nav, 'active');
+        }
+        for (var i = 0; i < navItems.length; i++) {
+          removeClass(navItems[i], 'active');
+        }
+        for (var i = contentItems.length - 1; i >= 0; i--) {
+          if (scrollTop >= getElementTop(contentItems[i])) {
+            addClass(navItems[i], 'active');
+            return;
+          }
+        }
+        addClass(navItems[0], 'active');
+      }
+      w.addEventListener('scroll', bindEvent);
+      w.addEventListener('load', bindEvent);
+    })(window, document)
+  </script>
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/md5.min.js"></script>
+  <!-- <script>
+    const gitalk = new Gitalk({
+      clientID: '0b153d2e389989779003',
+      clientSecret: 'e5f2c768454a6e3aeafbc5d88f109059d7b5a60a',
+      repo: 'viviHuang5.github.io',
+      owner: 'viviHuang5',
+      admin: ['viviHuang5'],
+      id: md5(location.pathname),
+      distractionFreeMode: false,
+      createIssueManually: true
+    })
+
+    gitalk.render('gitalk-container')
+  </script> -->
+</body>
+
+</html>
