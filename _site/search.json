@@ -1,6 +1,15 @@
 [
   
     {
+      "title": "Vue 01.常用指令",
+      "category": "",
+      "description": "Vue:渐进式JavaScript框架，声明式渲染->组件系统->客户端路由->集中式状态管理->项目构建,易用，灵活，高效（20kb运行大小，超快虚拟DOM）",
+      "tags": "Vue",
+      "url": "/2019/10/01/Vue-01.%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html",
+      "date": "2019-10-01"
+    } ,
+  
+    {
       "title": "英语口语 （每日一句就好）",
       "category": "",
       "description": "实用英语口学习",
@@ -46,7 +55,7 @@
     } ,
   
     {
-      "title": "EnglishWords 01",
+      "title": "EnglishWords",
       "category": "",
       "description": "每天积累一丢丢,每天进步一点点",
       "tags": "words",

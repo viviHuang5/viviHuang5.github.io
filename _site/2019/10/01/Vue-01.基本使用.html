@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
+  <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
+  <title>Vue 01.常用指令 - ヾviviHuang`博客【Web前端开发】</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <link rel="stylesheet" href="/css/prism.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/post.css">
+  <script src="/js/util.js"></script>
+</head>
+
+<body>
+  <div id="header" style="background-image: url(/images/bg-banner.jpg)">
+    <div class="top">
+  <div class="title" style="margin-top: 10px;">
+    <img src="/images/001.jpg" alt="" style="width: 40px;height: 40px; border-radius: 50%; ">
+    <a href="/">ヾviviHuang</a>
+  </div>
+  <nav class="nav">
+    <div class="item">
+      <a href="/">Home</a>
+    </div>
+    <div class="item">
+      <a href="/about">About</a>
+    </div>
+    <div class="item">
+      <a href="/tags">Tags</a>
+    </div>
+  </nav>
+  <div class="mobile-nav">
+    <div class="mobile-nav-menu icon">
+      <i class="iconfont">&#xe633;</i>
+    </div>
+    <div class="mobile-nav-box">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/tags">Tags</a>
+    </div>
+  </div>
+  
+</div>
+
+
+<script>
+  (function (d, w) {
+    w.onload = function () {
+      var $menuIcon = d.querySelector('.mobile-nav-menu');
+      var $navBox = d.querySelector('.mobile-nav-box');
+      var animationEndCallback = null;
+      function hideNavBox() {
+        addClass($navBox, 'zoomOut');
+        animationEndCallback = function () {
+          removeClass($navBox, 'zoomOut');
+          $navBox.style.display = 'none';
+        }
+      }
+
+      $menuIcon.onclick = function (e) {
+        e.stopPropagation();
+        if ($navBox.style.display === 'block') return hideNavBox();
+        $navBox.style.display = 'block';
+        addClass($navBox, 'zoomIn');
+        animationEndCallback = function () {
+          removeClass($navBox, 'zoomIn');
+        }
+      };
+
+      $navBox.onclick = function (e) {
+        e.stopPropagation();
+      };
+
+      $navBox.addEventListener('animationend', function (e) {
+        animationEndCallback && animationEndCallback();
+      }, false);
+
+      d.body.addEventListener('click', function () {
+        if ($navBox.style.display === 'block') hideNavBox();
+      }, false);
+
+      var $header = d.querySelector('#header');
+      var $top = d.querySelector('.top');
+      var topHeight = $top.offsetHeight;
+      w.addEventListener('scroll', function () {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        var step = $header.className.indexOf('visible') >= 0 ? topHeight : 0;
+        if (scrollTop > $header.offsetHeight - step) {
+          addClass($header, 'active');
+        } else {
+          removeClass($header, 'active');
+        }
+      }, false);
+
+      d.addEventListener('mousewheel', function(e) {
+        if (e.wheelDeltaY >= 0) {
+          addClass($header, 'visible');
+        } else {
+          removeClass($header, 'visible');
+        }
+      })
+    }
+  })(document, window);
+</script>
+
+    <div class="content">
+      <h1 class="post-title">Vue 01.常用指令</h1>
+      <div class="post-description">Vue:渐进式JavaScript框架，声明式渲染->组件系统->客户端路由->集中式状态管理->项目构建,易用，灵活，高效（20kb运行大小，超快虚拟DOM）</div>
+      <div class="post-date">2019-10-01</div>
+      <div class="tags">
+        
+        <a class="tag" href="/tags/#Vue" title="Vue">Vue</a>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="main">
+      <!--more-->
+
+<h2>Vue 的基本使用步骤</h2>
+<div style="background:#eee;padding: 10px;">
+    <p>1.需要提供标签用于填充数据</p>
+    <p>2.引入vue.js文件</p>
+    <p>3.可以使用vue的语法做功能了</p>
+    <p>4.把vue提供的数据填充到标签里面</p>
+</div>
+<pre>
+    <code class="language-js">
+    &lt!DOCTYPE html&gt
+    &lthtml lang="en"&gt
+    &lthead&gt
+    &ltmeta charset="UTF-8"&gt
+    &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+    &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+    &lttitle&gtvue学习&lt/title&gt
+    &lt/head&gt
+    &ltbody&gt
+        &ltdiv id='app'&gt
+        &ltp&gt{ { msg } }&lt/p&gt
+    &lt/div&gt
+    &ltscript src="./vue.js"&gt&lt/script&gt
+    &ltscript&gt
+        var vm = new Vue({
+        el:'#app',//元素的挂载位置(值可以是css选择器或者DOM元素)
+        data:{//模型数据(值是一个对象)
+        msg:'hello world'
+     }
+     })
+    &lt/script&gt
+    &lt/body&gt
+    &lt/html&gt
+    
+    </code>
+</pre>
+<h2>Vue.js之hello world细节分析</h2>
+<div style="background:#eee;padding: 10px;">
+    <h4 style="color: red;">1.实例参数分析</h4>
+    <p>el:元素的挂载位置(值可以是css选择器或者DOM元素)</p>
+    <p>data:模型数据(值是一个对象)</p>
+    <h4 style="color: red;">2.差值表达式用法</h4>
+    <p>将数据填充到html标签中</p>
+    <p>差值表达式支持基本的计算操作</p>
+    <h2 style="color: red;">3.vue代码运行原理分析</h2>
+    <p>概述编译过程的概念(Vue语法->原生语法)</p>
+    <p>差值表达式支持基本的计算操作</p>
+</div>
+<h2>Vue 模板语法</h2>
+<div style="background:#eee;padding: 10px;">
+    <p>差值表达式</p>
+    <p>指令</p>
+    <p>事件绑定</p>
+    <p>属性绑定</p>
+    <p>样式绑定</p>
+    <p>分支循环结构</p>
+</div>
+<h2>Vue 指令</h2>
+<div style="background:#eee;padding: 10px;">
+    <p>1.什么是指令？</p>
+    <ul>
+        <li>指令的本质就是自定义属性</li>
+        <li>指令的格式：以v-开始(比如v-cloak)</li>
+    </ul>
+</div>
+<h2><span style="color:skyblue;">v-cloak</span> 指令用法</h2>
+<div style="background:#eee;padding: 10px;">
+    <p>1.提供样式</p>
+    <ul>
+        <li>1.[v-cloak]{
+            display:none;
+            }</li>
+        <li>2.在插值表达式所在的标签中添加v-cloak指令；\n &ltdiv v-cloak &gt{ { msg } }&ltdiv&gt</li>
+        <li>背后的原理：先通过样式隐藏内容，然后在内存中进行值的替换，替换好之后再显示最终的结果</li>
+    </ul>
+</div>
+<h2><span style="color:skyblue;">数据绑定指令</span> 用法</h2>
+<div style="background:#eee;padding: 10px;">
+    <ul>
+        <li><span style="color:red;">1.v-text</span><span> 填充纯文本</span></li>
+        <p>1⃣️相比插值表达式更加简洁</p>
+        <li><span style="color:red;">2.v-html</span><span> 填充HTML片段</span></li>
+        <p>1⃣️存在安全问题</p>
+        <p>2⃣️本网站内部数据可以使用，来自第三方的数据不可用</p>
+        <li><span style="color:red;">3.v-pre</span><span> 填充HTML片段</span></li>
+        <p>1⃣️显示原始信息，跳过编译过程(分析编译过程)</p>
+    </ul>
+</div>
+<h2><span style="color:skyblue;">数据响应式</span></h2>
+<div style="background:#eee;padding: 10px;">
+    <ul>
+        <li><span style="color:red;">1.如何理解响应式</span></li>
+        <p>1⃣️h5 中的响应式(屏幕尺寸的变化导致样式的变化)</p>
+        <p>2⃣️数据的响应式(数据的变化导致页面内容的变化)</p>
+        <li><span style="color:red;">2.什么是数据绑定</span></li>
+        <p>1⃣️将数据填充到标签中</p>
+        <li><span style="color:red;">3.v-once</span><span> 只编译一次</span></li>
+        <p>1⃣️显示内容之后不再具有响应式功能</p>
+        <p style="color:#ccc;">应用场景：如果显示的信息后续不需要修改的，可以使用v-once，这样可以提高性能</p>
+    </ul>
+</div>
+<h2><span style="color:skyblue;">v-model</span>双向数据绑定</h2>
+<div style="background:#eee;padding: 10px;">
+    <ul>
+        <li>用来双向数据绑定，就是model和view中的值进行同步变化;</li>
+        <p> 只能运用在表单元素中--(input, select, textearea);</p>
+        <p> &ltinput type="text" v-model='name'&gt
+        </p>
+</div>
+<h2><span style="color:skyblue;">事件绑定</span></h2>
+<p style="font-weight: 700;">1.Vue 如何处理事件？</p>
+<div style="background:#eee;padding: 10px;"> 
+    <ul>
+        <li>v-on 指令用法</li>
+        <p>&ltbutton v-on:click:'click' &gt&lt/button&gt</p>
+        <li>v-on 简写形式</li>
+        <p>&ltbutton @click:'click' &gt&lt/button&gt</p>
+    </ul>
+</div>
+<p style="font-weight: 700;">2.Vue 事件绑定-参数传递？</p>
+<div style="background:#eee;padding: 10px;"> 
+    <ul>
+        <li>如果事件直接绑定函数名称，那么默认回传递事件对象作为事件函数的第一个参数/li>
+        <li>如果事件绑定函数调用，那么事件对象必须作为最后一个参数显示传递，并且事件对象的名称必须是固定的 $event</li>
+    </ul>
+</div>
+<pre>
+    <code class="language-js">
+    &lt!DOCTYPE html&gt
+    &lthtml lang="en"&gt
+    &lthead&gt
+    &ltmeta charset="UTF-8"&gt
+    &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+    &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+    &lttitle&gtvue学习&lt/title&gt
+    &lt/head&gt
+    &ltbody&gt
+    &ltdiv id='app'&gt
+    &ltp&gt{ { num } }&lt/p&gt
+    &ltdiv id='app'&gt
+    &ltbutton @click='click' &gt&lt/button&gt
+    &ltbutton @click='click(123,345,$event)' &gt&lt/button&gt
+    &lt/div&gt
+    &lt/div&gt
+    &ltscript src="./vue.js"&gt&lt/script&gt
+    &ltscript&gt
+        var vm = new Vue({
+        el:'#app',//元素的挂载位置(值可以是css选择器或者DOM元素)
+        data:{//模型数据(值是一个对象)
+        methods:{
+            click(p,p1,event){
+              console.log(p,p1)
+              console.log(event,target.innerHTML)
+              this.mum++
+            }
+          }
+         }
+        })
+    &lt/script&gt
+    &lt/body&gt
+    &lt/html&gt
+                
+    </code>
+ </pre>
+<h2><span style="color:skyblue;">事件修饰符</span></h2>
+<div style="background:#eee;padding: 10px;">
+    <ul>
+        <li><span style="color:red;">.stop</span><span>阻止冒泡</span></li>
+        <p>&ltbutton @click.stop='click' &gt&lt/button&gt</p>
+        <li><span style="color:red;">.prevent</span><span> 阻止默认行为</span></li>
+        <p>&ltbutton @click.prevent='click' &gt&lt/button&gt</p>
+    </ul>
+</div>
+<h2><span style="color:skyblue;">按键修饰符</span></h2>
+<div style="background:#eee;padding: 10px;">
+    <ul>
+        <li><span style="color:red;">.enter</span><span>回车键</span></li>
+        <p>&ltbutton @keyup.enter='click' &gt&lt/button&gt</p>
+        <li><span style="color:red;">.delete</span><span> 删除键</span></li>
+        <p>&ltbutton @keyup.delete='clear' &gt&lt/button&gt</p>
+    </ul>
+</div>
+<h2><span style="color:skyblue;">自定义按键修饰符</span></h2>
+<div style="background:#eee;padding: 10px;">
+    <ul>
+        <li><span style="color:red;">全局config.keyCodes对象</span></li>
+        <p>Vue.config.keyCodes.f1=112</p>
+        <li><span style="color:red;">规则</span><span> 自定义按键修饰符名字是自定义的，但是对应的值必须是按键对应event.keyCode值</span></li>
+        
+    </ul>
+</div>
+      <div class="date">发布时间：2019-10-01</div>
+      <div id="gitalk-container"></div>
+    </div>
+    <div class="nav-container">
+      <div class="main-nav">
+        <div class="title">目录</div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+  <a href="https://github.com/viviHuang5">
+    <i class="iconfont">&#xe600;</i>
+  </a>
+  <a href="javascript:;">
+    <i class="iconfont">&#xe634;</i>
+  </a>
+  <a href="javascript:;">
+    <i class="iconfont">&#xe61c;</i>
+  </a>
+  <a href="javascript:;">
+    <i class="iconfont">&#xe635;</i>
+  </a>
+</footer>
+
+  <div class="back-top">
+  <i class="iconfont">&#xe6d9;</i>
+</div>
+<script>
+  (function (d, w) {
+    function scrollTo(targetY) {
+      var currentY =
+        d.documentElement.scrollTop || d.body.scrollTop;
+      var distance = targetY - currentY;
+      var num = 0;
+
+      function animate() {
+        var currentY =
+          d.documentElement.scrollTop || d.body.scrollTop;
+        w.scrollTo(0, currentY + distance / 10);
+        num++;
+        if (num === 10) return;
+        w.requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+    var $upTop = d.querySelector('.back-top');
+
+    $upTop.onclick = function () {
+      scrollTo(0);
+    };
+
+    function bindEvent() {
+      var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+      if (scrollTop > 100) {
+        $upTop.style.display = 'block';
+      } else {
+        $upTop.style.display = 'none';
+      }
+    }
+
+    w.addEventListener('scroll', bindEvent);
+    w.addEventListener('load', bindEvent);
+  })(document, window);
+</script>
+
+  <script src="/js/prism.js"></script>
+  <script>
+    (function (w, d) {
+      var $nav = document.querySelector('.main-nav');
+      var $main = document.querySelector('.main');
+      var titleNodeNames = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+      var contentItems = [];
+      var navItems = [];
+      for (var i = 0; i < $main.children.length; i++) {
+        var element = $main.children[i];
+        if (titleNodeNames.includes(element.nodeName)) {
+          var link = document.createElement('a');
+          link.href = '#' + element.innerText;
+          link.innerText = element.innerText;
+
+          $nav.appendChild(link);
+          navItems.push(link);
+          element.id = element.innerText;
+          contentItems.push(element);
+        }
+      }
+
+      function bindEvent() {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        if (scrollTop >= $nav.parentNode.offsetTop) {
+          addClass($nav, 'active');
+        } else {
+          removeClass($nav, 'active');
+        }
+        for (var i = 0; i < navItems.length; i++) {
+          removeClass(navItems[i], 'active');
+        }
+        for (var i = contentItems.length - 1; i >= 0; i--) {
+          if (scrollTop >= getElementTop(contentItems[i])) {
+            addClass(navItems[i], 'active');
+            return;
+          }
+        }
+        addClass(navItems[0], 'active');
+      }
+      w.addEventListener('scroll', bindEvent);
+      w.addEventListener('load', bindEvent);
+    })(window, document)
+  </script>
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/md5.min.js"></script>
+  <!-- <script>
+    const gitalk = new Gitalk({
+      clientID: '0b153d2e389989779003',
+      clientSecret: 'e5f2c768454a6e3aeafbc5d88f109059d7b5a60a',
+      repo: 'viviHuang5.github.io',
+      owner: 'viviHuang5',
+      admin: ['viviHuang5'],
+      id: md5(location.pathname),
+      distractionFreeMode: false,
+      createIssueManually: true
+    })
+
+    gitalk.render('gitalk-container')
+  </script> -->
+</body>
+
+</html>
