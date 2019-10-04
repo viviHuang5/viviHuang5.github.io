@@ -1,6 +1,15 @@
 [
   
     {
+      "title": "Vue 02.常用特性",
+      "category": "",
+      "description": "Vue:渐进式JavaScript框架，声明式渲染->组件系统->客户端路由->集中式状态管理->项目构建,易用，灵活，高效（20kb运行大小，超快虚拟DOM）",
+      "tags": "Vue",
+      "url": "/2019/10/04/Vue-02.%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7.html",
+      "date": "2019-10-04"
+    } ,
+  
+    {
       "title": "Vue 01.常用指令",
       "category": "",
       "description": "Vue:渐进式JavaScript框架，声明式渲染->组件系统->客户端路由->集中式状态管理->项目构建,易用，灵活，高效（20kb运行大小，超快虚拟DOM）",

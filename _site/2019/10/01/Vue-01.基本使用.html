@@ -221,7 +221,7 @@
         <p>1⃣️将数据填充到标签中</p>
         <li><span style="color:red;">3.v-once</span><span> 只编译一次</span></li>
         <p>1⃣️显示内容之后不再具有响应式功能</p>
-        <p style="color:#ccc;">应用场景：如果显示的信息后续不需要修改的，可以使用v-once，这样可以提高性能</p>
+        <p style="color:#999;">应用场景：如果显示的信息后续不需要修改的，可以使用v-once，这样可以提高性能</p>
     </ul>
 </div>
 <h2><span style="color:skyblue;">v-model</span>双向数据绑定</h2>
@@ -234,7 +234,7 @@
 </div>
 <h2><span style="color:skyblue;">事件绑定</span></h2>
 <p style="font-weight: 700;">1.Vue 如何处理事件？</p>
-<div style="background:#eee;padding: 10px;"> 
+<div style="background:#eee;padding: 10px;">
     <ul>
         <li>v-on 指令用法</li>
         <p>&ltbutton v-on:click:'click' &gt&lt/button&gt</p>
@@ -243,7 +243,7 @@
     </ul>
 </div>
 <p style="font-weight: 700;">2.Vue 事件绑定-参数传递？</p>
-<div style="background:#eee;padding: 10px;"> 
+<div style="background:#eee;padding: 10px;">
     <ul>
         <li>如果事件直接绑定函数名称，那么默认回传递事件对象作为事件函数的第一个参数/li>
         <li>如果事件绑定函数调用，那么事件对象必须作为最后一个参数显示传递，并且事件对象的名称必须是固定的 $event</li>
@@ -311,9 +311,246 @@
         <li><span style="color:red;">全局config.keyCodes对象</span></li>
         <p>Vue.config.keyCodes.f1=112</p>
         <li><span style="color:red;">规则</span><span> 自定义按键修饰符名字是自定义的，但是对应的值必须是按键对应event.keyCode值</span></li>
-        
     </ul>
 </div>
+<h3>小Demo-简易计算器</h3>
+<pre>
+    <code class="language-js">
+            &lt!DOCTYPE html&gt
+            &lthtml lang="en"&gt
+            
+            &lthead&gt
+                &ltmeta charset="UTF-8"&gt
+                &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+                &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+                &lttitle&gt简易计算器&lt/title&gt
+            &lt/head&gt
+            &ltbody&gt
+                &ltdiv id='app'&gt
+                    &lth3&gt简易计算器&lt/h3&gt
+                    &ltdiv&gt
+                        &ltspan&gt数值A&lt/span&gt
+                        &ltinput type="text" v-model='num1' @keyup.delete='clear'&gt
+                    &lt/div&gt
+                    &ltdiv&gt
+                        &ltspan&gt数值B&lt/span&gt
+                        &ltinput type="text" @keyup.enter="handel" v-model='num2' @keyup.delete='clear'&gt
+                    &lt/div&gt
+                
+                    &ltbutton @click="handel"&gt计算&lt/button&gt
+                    &ltdiv&gt
+                        &ltspan&gt计算结果：&lt/span&gt
+                        &ltspan v-text='result'&gt&lt/span&gt
+                    &lt/div&gt
+                &lt/div&gt
+                &ltscript src="./vue.js"&gt&lt/script&gt
+                &ltscript&gt
+                    var vm = new Vue({
+                        el: '#app',
+                        data: {
+                            num1: '',
+                            num2: '',
+                            result:''
+                        },
+                        methods:{
+                            handel(){
+                                this.result=parseInt(this.num1)+parseInt(this.num2)
+                            },
+                            clear(){
+                                this.num1='',
+                                this.num2=''
+                            }       
+                        }
+                    })
+                &lt/script&gt
+            &lt/body&gt
+            
+            &lt/html&gt
+    </code>
+</pre>
+<image class="" src="/images/demo1.png" style="width:300px;height:200px;" lazy-load="false" binderror="" bindload="" />
+<h2><span style="color:skyblue;">属性绑定</span></h2>
+<div style="background:#eee;padding: 10px;">
+    <ul>
+        <p>Vue动态处理属性</p>
+        <li><span style="color:red;">v-bind</span><span>指令用法</span></li>
+        <p>&lta :bind:href='url' &gt跳转&lt/a&gt</p>
+    </ul>
+</div>
+<h2><span style="color:skyblue;">样式绑定</span></h2>
+<div style="background:#eee;padding: 10px;">
+    <ul>
+        <h4 style="background: #fff;padding:10px;">1.class样式处理</h4>
+        <li><span style="color:red;">对象语法</span></li>
+        <p>&ltdiv :bind:class='{active:isActive}' &gt&lt/div&gt</p>
+        <li><span style="color:red;">数组语法</span></li>
+        <p>&ltdiv :bind:class='[activeClass,errorClass]' &gt&lt/div&gt</p>
+        <p style="color:green;">样式绑定相关语法细节</p>
+        <p><span style="color:red;">1⃣️对象绑定和数组绑定可以结合使用</span></p>
+        <p>&ltdiv :bind:class='[ activeClasses, errorClass, {test:isTest} ]' &gt&lt/div&gt</p>
+        <p><span style="color:red;">2⃣️class绑定的值可以简化操作</span></p>
+        <p>&ltdiv :bind:class=' arrClasses ' &gt&lt/div&gt</p>
+        <p>&ltdiv :bind:class=' objClasses ' &gt&lt/div&gt</p>
+        <p><span style="color:red;">3⃣️默认的class如何处理？默认的class会保留</span></p>
+        <p>&ltdiv class=' base ' :bind:class=' objClasses ' &gt&lt/div&gt</p>
+        <h4 style="background: #fff;padding:10px;">2.style样式处理</h4>
+        <li><span style="color:red;">对象语法</span></li>
+        <p>&ltdiv :bind:style='{ color:activeColor, fontSize:fontSize }' &gt&lt/div&gt</p>
+        <p>&ltdiv :bind:style='{ objStyles }' &gt&lt/div&gt</p>
+        <li><span style="color:red;">数组语法</span></li>
+        <p>&ltdiv :bind:style='[ baseStyles, overridingStyles ]' &gt&lt/div&gt</p>
+    </ul>
+</div>
+<h2><span style="color:skyblue;">分支循环结构用法</span></h2>
+<div style="background:#eee;padding: 10px;">
+    <ul>
+        <p style="background: #fff;padding:10px;font-weight: 700;">1.分支结构</p>
+        <li><span style="color:red;">v-if</span><span> 控制元素是否渲染到页面</span></li>
+        <li><span style="color:red;">v-else</span><span></span></li>
+        <li><span style="color:red;">v-else-if</span><span></span></li>
+        <li><span style="color:red;">v-show</span><span> 原理：控制元素样式是否显示，相当于设置display:none</span></li>
+        <p style="background: #fff;padding:10px; font-weight: 700;">2.v-if 与 v-show 的区别</p>
+        <li>从性能方面考虑：如果一个元素渲染出来，变化很少的话，推荐用v-if；如果经过修改样式能够达到业务需求，推荐v-show</li>
+        <p style="background: #fff;padding:10px; font-weight: 700;">3.循环结构 </p>
+        <li><span style="color:red;">v-for</span><span>遍历数组</span></li>
+        <p>&ltli v-for='item in list' &gt{ {item} }&lt/li&gt</p>
+        <p>&ltli v-for='(item,index) in list' &gt{ {item} }+'----' { {index} }&lt/li&gt</p>
+
+        <li><span style="color:red;">key</span><span>的作用：帮助Vue区分不同的元素，从而提高性能</span></li>
+        <p>&ltli :key='item.id' v-for='(item,index) in list' &gt{ {item} }+'----' { {index} }&lt/li&gt</p>
+
+        <li><span style="color:red;">v-for</span><span>遍历对象</span></li>
+        <p>&ltdiv v-for='（value,key,index）in object' &gt&lt/div&gt</p>
+
+        <li><span style="color:red;">v-if 和 v-for</span><span>结合使用</span></li>
+        <p>&ltdiv v-if ='value=12' v-for='（value,key,index）in object' &gt&lt/div&gt</p>
+</div>
+
+<h2><span style="color:skyblue;">基础案例 Tab选项卡</span></h2>
+<div style="background:#eee;padding: 10px;">
+    <ul>
+        <p>1.实现静态UI效果</p>
+        <li><span style="color:red;">用传统的方式实现标签结构和样式</span></li>
+        <p>2.基于数据重构UI效果</p>
+        <li><span style="color:red;">将静态的结构和样式重构为基于Vue模版语法的形式</span></li>
+        <li><span style="color:red;">处理事件绑定和js控制逻辑</span></li>
+        <p>3.声明式编程</p>
+        <li><span style="color:red;">模板的结构和最终显示的效果基本一致</span></li>
+    </ul>
+</div>
+<pre>
+    <code class="language-js">
+            &lt!DOCTYPE html&gt
+            &lthtml lang="en"&gt
+            
+            &lthead&gt
+                &ltmeta charset="UTF-8"&gt
+                &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+                &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+                &lttitle&gt基础案例 Tab选项卡&lt/title&gt
+            &lt/head&gt
+            &ltstyle&gt
+                .tab ul {
+                    overflow: hidden;
+                    padding: 0;
+                    margin: 0;
+                }
+            
+                .tab ul li {
+                    box-sizing: border-box;
+                    padding: 0;
+                    float: left;
+                    width: 100px;
+                    height: 45px;
+                    line-height: 45px;
+                    list-style: none;
+                    text-align: center;
+                    border-top: 1px solid blue;
+                    border-right: 1px solid blue;
+                    cursor: pointer;
+                }
+            
+                .tab ul li:nth-child(1) {
+                    border-left: 1px solid blue;
+                }
+            
+                .tab ul li.active {
+                    background-color: orange;
+                }
+            
+                .tab div {
+                    width: 500px;
+                    height: 300px;
+                    display: none;
+                    text-align: center;
+                    font-size: 30px;
+                    line-height: 300px;
+                    border: 1px solid blue;
+                    border-top: 0px;
+                }
+            
+                .tab div.current {
+                    display: block;
+                }
+            
+                .tab div img {
+                    width: 100%;
+                    height: 100%;
+                }
+            &lt/style&gt
+            
+            &ltbody&gt
+                &ltdiv id='app'&gt
+                    &ltdiv class="tab"&gt
+                        &ltul class="uu"&gt
+                            &ltli :class="currentIndex==index?'active':''" :key="item.id" 
+                            v-for='(item,index) in tabList' @click='change(index)'&gt&lt/li&gt
+                        &lt/ul&gt
+                        &ltdiv :class="currentIndex==index?'current':''" :key="item.id" 
+                        v-for='(item,index) in tabList'&gt
+                            &ltimg :src="item.path" alt=""&gt
+                        &lt/div&gt
+                    &lt/div&gt
+            
+                &lt/div&gt
+                &ltscript src="./vue.js"&gt&lt/script&gt
+                &ltscript&gt
+                    var vm = new Vue({
+                        el: '#app',
+                        data: {
+                            currentIndex:0,//选项卡当前的索引
+                            tabList: [{
+                                id: 1,
+                                title: '青春',
+                                path: './images/01.jpeg'
+                            },
+                            {
+                                id: 2,
+                                title: '阳光',
+                                path: './images/02.jpeg'
+                            },
+                            {
+                                id: 3,
+                                title: '忧郁',
+                                path: './images/03.jpeg'
+                            }]
+                        },
+                        methods: {
+                             change(index){
+                                //  实现选项卡切换的操作：本质就是操作类名
+                                //  如何操作类名？就是通过currentIndex
+                                this.currentIndex =index;
+                             }   
+                        }
+                    })
+                &lt/script&gt
+            &lt/body&gt
+            
+            &lt/html&gt
+    </code>
+</pre>
+<image class="" src="/images/demo2.png" style="width:400px;" lazy-load="false" binderror="" bindload="" />
+  
       <div class="date">发布时间：2019-10-01</div>
       <div id="gitalk-container"></div>
     </div>
