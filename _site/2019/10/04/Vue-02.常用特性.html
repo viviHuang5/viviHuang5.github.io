@@ -125,7 +125,7 @@
       <!--more-->
 <h2>常用特性概览</h2>
 <div style="background: #eee; padding:10px;">
-     <ul>
+     <ul style="color: red">
          <li>表单操作</li>
          <li>自定义指令</li>
          <li>计算属性</li>
@@ -134,7 +134,7 @@
          <li>生命周期</li>
      </ul>
 </div>
-<h3>1.表单操作</h3>
+<h3 style="color: skyblue">1.表单操作</h3>
 <div style="background: #eee; padding:10px;">
      <ul>
          <p>基于Vue的表单操作</p>
@@ -143,6 +143,192 @@
          <li>select 下拉多选</li>
          <li>radio 单选框</li>
          <li>checkbox 多选框</li>
+     </ul>
+</div>
+<pre>
+    <code class="language-js">
+            &lt!DOCTYPE html&gt
+            &lthtml lang="en"&gt
+            
+            &lthead&gt
+                &ltmeta charset="UTF-8"&gt
+                &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+                &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+                &lttitle&gtDocument&lt/title&gt
+            &lt/head&gt
+            
+            &ltbody&gt
+                &ltstyle&gt
+                    form {
+                        padding: 20px;
+                        line-height: 50px;
+                    }
+                    form textarea{
+                        vertical-align:text-top;
+                    }
+                &lt/style&gt
+            
+                &ltbody&gt
+                    &ltdiv id="app"&gt
+                        &ltform action=""&gt
+                            &ltdiv&gt
+                                &ltspan&gt姓名:&lt/span&gt
+                                &ltinput type="text" v-model='uname'&gt
+                            &lt/div&gt
+                            &ltdiv&gt
+                                &ltspan&gt性别:&lt/span&gt
+                                &ltinput type="radio" id='male' value="1" v-model='gender'&gt
+                                &ltlabel for=""&gt男&lt/label&gt
+                                &ltinput type="radio" id='female' value="2" v-model='gender'&gt
+                                &ltlabel for=""&gt女&lt/label&gt
+                            &lt/div&gt
+                            &ltdiv&gt
+                                &ltspan&gt爱好:&lt/span&gt
+                                &ltinput type="checkbox" value="1" v-model='hobby'&gt
+                                &ltlabel for=""&gt画画&lt/label&gt
+                                &ltinput type="checkbox" value="2" v-model='hobby'&gt
+                                &ltlabel for=""&gt下棋&lt/label&gt
+                                &ltinput type="checkbox" value="3" v-model='hobby'&gt
+                                &ltlabel for=""&gt看书&lt/label&gt
+                            &lt/div&gt
+                            &ltdiv&gt
+                                &ltspan&gt职业:&lt/span&gt
+                                &lt!-- &ltselect name="" id="" v-model='occupation' multiple='true'&gt  多选--&gt
+                                &ltselect name="" id="" v-model='occupation'&gt 
+                                    &ltoption  value="0"&gt请选择职业...&lt/option&gt
+                                    &ltoption  value="1"&gt教师&lt/option&gt
+                                    &ltoption  value="2"&gt软件工程师&lt/option&gt
+                                    &ltoption  value="3"&gt律师&lt/option&gt
+                                    &ltoption  value="4"&gt画家&lt/option&gt
+                                &lt/select&gt
+                            &lt/div&gt
+                            &ltdiv&gt
+                                &ltspan&gt个人简介:&lt/span&gt
+                                &lttextarea v-model='desc'&gt&lt/textarea&gt
+                            &lt/div&gt
+                            &ltinput type="submit" @click.prevent='handle' class="btn"&gt
+                        &lt/form&gt
+                    &lt/div&gt
+                &lt/body&gt
+                &ltscript src="./vue.js"&gt&lt/script&gt
+                &ltscript&gt
+                    var vm = new Vue({
+                        el: '#app',
+                        data: {
+                            uname: '',
+                            gender: 1,
+                            hobby: [1, 2],
+                            // occupation:[1,2]
+                            occupation:1,
+                            desc:'tangtang'
+            
+                        },
+                        methods: {
+                            handle() {
+                                console.log(this.uname)
+                                console.log(this.gender)
+                                console.log(this.hobby.toString())
+                                console.log(this.desc)
+                            }
+                        }
+                    })
+                &lt/script&gt
+            &lt/body&gt
+            
+            &lt/html&gt
+    </code>
+</pre>
+<image class="" src="/images/demo3.png" style="width:400px" lazy-load="false" binderror="" bindload="" />
+
+<h3 style="color: skyblue">2.表单域修饰符</h3>
+<div style="background: #eee; padding:10px;">
+     <ul>
+         <li style="font-weight: 700;">number:转化为数值</li>
+         <p>&ltinput v-model.number='age' type='number'&gt</p>
+         <li style="font-weight: 700;">trim:去掉开始和结尾的空格</li>
+         <p>&ltinput v-model.trim='info' &gt</p>
+         <li style="font-weight: 700;">lazy:将input事件切换为change事件<span style="color: red">(失去焦点的时候触发）</span></li>
+         <p>&ltinput v-model.lazy='msg' &gt</p>
+     </ul>
+</div>
+<h3 style="color: skyblue">3.自定义指令基本用法</h3>
+<div style="background: #eee; padding:10px;">
+     <ul>
+         <li style="font-weight: 700;">1.为何需要自定义指令？</li>
+         <p>内置指令不满足需求</p>
+         <li style="font-weight: 700;">2.自定义指令的语法规则（获取元素焦点）</li>
+         <p style="color: indigo">参考下列实例</p>
+         <p>&ltinput type='text' v-focus &gt</p>
+         <li style="font-weight: 700;">3.带参数的自定义指令（改变元素的背景色）</li>
+         <p style="color: indigo">参考下列实例</p>
+         <p>&ltinput type='text' v-focus v-color="{color:'pink'}"&gt</p>
+         <li style="font-weight: 700;">4.局部指令</li>
+         <p style="color: indigo">实例内加入一个 directive属性</p>
+     </ul>
+</div>
+<pre>
+    <code class="language-js">
+            &lt!DOCTYPE html&gt
+            &lthtml lang="en"&gt
+            &lthead&gt
+                &ltmeta charset="UTF-8"&gt
+                &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+                &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+                &lttitle&gt自定义属性-获取焦点&lt/title&gt
+            &lt/head&gt
+            &ltbody&gt
+                &ltdiv id="app"&gt
+                    &ltinput type="text" v-focus v-color="{color:'pink'}" &gt
+                &lt/div&gt
+                &ltscript src="./vue.js"&gt&lt/script&gt
+                &ltscript&gt
+                    // 自定义指令
+                    // 获取元素焦点
+                    Vue.directive('focus',{
+                        inserted(el){
+                            //el表示指令所绑定的元素
+                            el.focus();
+                        }
+                    })
+                    // 改变元素的背景色
+                    Vue.directive('color',{
+                        inserted(el,binding){
+                            //el表示指令所绑定的元素
+                            el.style.backgroundColor=binding.value.color;
+                        }
+                    })
+                    var vm = new Vue({
+                        el:'#app',
+                        data:{
+            
+                        },
+                        methods:{
+            
+                        }
+                    })
+                &lt/script&gt
+            &lt/body&gt
+            &lt/html&gt
+    </code>
+</pre>
+<h3 style="color: skyblue">4.计算属性</h3>
+<div style="background: #eee; padding:10px;">
+     <ul>
+         <li style="font-weight: 700;">1.为何需要计算属性？</li>
+         <p>表达式的计算逻辑可能会比较复杂，使用计算属性可以使用模板内容更加简洁</p>
+         <li style="font-weight: 700;">2.计算属性的用法</li>
+         <pre>
+                <code class="language-js">
+                       computed:{
+                           reversedMessage(){
+                               return this.msg.split('').reverse().join('')
+                           }
+                       }
+                </code>
+         </pre>
+         <li style="font-weight: 700;">3.计算属性与方法的区别</li>
+         <p>1⃣️计算属性是基于它们的依赖进行缓存的</p>
+         <p>2⃣️方法不存在缓存的</p>
      </ul>
 </div>
       <div class="date">发布时间：2019-10-04</div>
