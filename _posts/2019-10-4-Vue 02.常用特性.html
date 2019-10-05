@@ -214,3 +214,252 @@ bannerImg: /images/bg-banner.jpg
          <p>2⃣️方法不存在缓存的</p>
      </ul>
 </div>
+<h3 style="color: skyblue">5.侦听器</h3>
+<div style="background: #eee; padding:10px;">
+     <ul>
+         <li style="font-weight: 700;">1.侦听器的应用场景</li>
+         <p>数据变化时执行异步或开销较大的操作</p>
+         <li style="font-weight: 700;">2.侦听器的用法</li>
+         <pre>
+                <code class="language-js">
+                       watch:{
+                           firstName(val){
+                               //val 表示变化之后的值
+                              this.fullName = val+this.lastName;
+                           },
+                           lastName(val){
+                               this.fullName = this.firstName+val;
+                           }
+
+                       }
+                </code>
+         </pre>
+         <li style="font-weight: 700;">3.侦听器的案例</li>
+         <p>1⃣️.通过v-model实现数据绑定</p>
+         <p>2⃣️.需要提供提示信息</p>
+         <p>3⃣️.需要侦听器监听输入信息的变化</p>
+         <p>4⃣️.需要修改触发的事件</p>
+         <image class="" src="/images/demo4.png" style='width:400px' lazy-load="false" binderror="" bindload="" />
+           
+         <pre>
+             <code class="language-js">
+                    &lt!DOCTYPE html&gt
+                    &lthtml lang="en"&gt
+                    &lthead&gt
+                        &ltmeta charset="UTF-8"&gt
+                        &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+                        &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+                        &lttitle&gt侦听器案例&lt/title&gt
+                    &lt/head&gt
+                    &ltbody&gt
+                        &ltdiv id="app"&gt
+                            &ltdiv&gt
+                                &ltspan&gt用户名：&lt/span&gt
+                                &ltinput type="text" v-model.lazy='uname'&gt
+                                &ltspan&gt{{tip}}&lt/span&gt
+                            &lt/div&gt
+                        &lt/div&gt
+                        &ltscript src="./vue.js"&gt&lt/script&gt
+                        &ltscript&gt
+                           var vm = new Vue({
+                               el:'#app',
+                               data:{
+                                   uname:'',
+                                   tip:''
+                    
+                               },
+                               methods:{
+                                  checkName(uname){
+                                      let that = this
+                                      //调用接口，但是可以使用定时任务的发格式模拟接口调用
+                                      setTimeout(function(){
+                                        //模拟接口调用
+                                        if(uname=='admin'){
+                                            that.tip='用户名已经存在，请更换一个'
+                                        }else{
+                                            that.tip='用户名可以使用'
+                                        }
+                                      },2000)
+                                  }
+                               },
+                               watch:{
+                                   uname(val){
+                                    //调用后台接口验证用户的合法性
+                                    this.checkName(val)
+                                    //修改提示信息
+                                    this.tip='正在验证...'
+                                   }
+                               }
+                           })
+                        &lt/script&gt
+                    &lt/body&gt
+                    &lt/html&gt
+             </code>
+         </pre>
+     </ul>
+</div>
+<h3 style="color: skyblue">6.过滤器</h3>
+<div style="background: #eee; padding:10px;">
+     <ul>
+         <li style="font-weight: 700;">1.过滤器的作用是什么？</li>
+         <p>格式化数据，比如字符串格式化为首字母大写，将日期格式化为指定的格式等</p>
+         <li style="font-weight: 700;">2.自定义过滤器</li>
+         <pre>
+                <code class="language-js">
+                       Vue.filter('过滤器名称',function(val){
+                           //过滤器业务逻辑
+                       })
+                </code>
+         </pre>
+         <li style="font-weight: 700;">3.过滤器的使用</li>
+         <p>&ltdiv&gt{ {msg | upper} }&lt/div&gt</p>
+         <p>&ltdiv&gt{ {msg | upper | lower} }&lt/div&gt</p>
+         <p>&ltdiv&gt v-bind:id="id | formatId "&lt/div&gt</p>
+         <image class="" src="/images/demo5.png" style='width:300px;' lazy-load="false" binderror="" bindload="" />
+         <image class="" src="/images/demo6.png" style='width:300px;    vertical-align: top;
+         margin-top: 15px;' lazy-load="false" binderror="" bindload="" />
+         <pre>
+             <code class="language-js">
+                    &lt!DOCTYPE html&gt
+                    &lthtml lang="en"&gt
+                    &lthead&gt
+                        &ltmeta charset="UTF-8"&gt
+                        &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+                        &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+                        &lttitle&gt过滤器的基本用法&lt/title&gt
+                    &lt/head&gt
+                    &ltbody&gt
+                        &ltdiv id="app"&gt
+                            &ltinput type="text" v-model ='msg'&gt
+                            &ltdiv&gt{{msg | upper}}&lt/div&gt
+                            &ltdiv&gt{{msg | upper | lower}}&lt/div&gt
+                            &ltdiv :abc='msg | upper'&gt测试数据&lt/div&gt
+                        &lt/div&gt
+                        &ltscript src="./vue.js"&gt&lt/script&gt
+                        &ltscript&gt
+                            // 过滤器
+                            Vue.filter('upper',function(val){
+                                //把val的首字母变为大写
+                                return val.charAt(0).toUpperCase()+val.slice(1)
+                            })
+                            Vue.filter('lower',function(val){
+                                return val.charAt(0).toLowerCase()+val.slice(1)
+                            })
+                            var vm = new Vue({
+                                el:'#app',
+                                data:{
+                                   msg:''
+                                }
+                            })
+                        &lt/script&gt
+                    &lt/body&gt
+                    &lt/html&gt
+             </code>
+         </pre>
+         <li style="font-weight: 700;">4.局部过滤器</li>
+         <pre>
+             <code class="language-js">
+                 filters:{
+                     capitalize:funcgtion(){
+
+                     }
+                 }
+             </code>
+         </pre>
+         <li style="font-weight: 700;">5.使用过滤器格式化日期</li>
+         <pre>
+             <code class="language-js">
+                    &lt!DOCTYPE html&gt
+                    &lthtml lang="en"&gt
+                    &lthead&gt
+                        &ltmeta charset="UTF-8"&gt
+                        &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+                        &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+                        &lttitle&gt格式化日期&lt/title&gt
+                    &lt/head&gt
+                    &ltbody&gt
+                        &ltdiv id="app"&gt
+                           &ltdiv&gt{{date | format('yyyy-MM-dd')}}&lt/div&gt
+                        &lt/div&gt
+                        &ltscript src="./vue.js"&gt&lt/script&gt
+                        &ltscript&gt
+                            //过滤器案例 格式化日期
+                            // Vue.filter('format',function(val,arg){
+                            //     console.log(arg)
+                            //     if(arg=='yyyy-MM-dd'){
+                            //         var ret = '';
+                            //         ret+=val.getFullYear()+'-'+(val.getMonth()+1)+'-'+val.getDate()
+                            //         return ret
+                            //     }
+                            // })
+                            Vue.filter('format',function(val,arg){
+                                function dateFormat(date,format){
+                                    if(typeof date=='string'){
+                                        var mts = date.match(/(\/Date\((\d+)\)\/)/);
+                                        if(mts && mts.length&gt=3){
+                                            date=parseInt(mts[2])
+                                        }
+                                    }
+                                    date=new Date(date);
+                                    if(!date || date.toUTCString()=="Invalid Date"){
+                                        return "";
+                                    }
+                                    var map ={
+                                        "M":date.getMonth()+1,//月份
+                                        "d":date.getDate(),//日
+                                        "h":date.getHours(),//小时
+                                        "m":date.getMinutes(),//分
+                                        "s":date.getSeconds(),//秒
+                                        "q":Math.floor((date.getMonth()+3)/3),//季度
+                                        "s":date.getMilliseconds()//毫秒
+                                    };
+                                    format =format.replace(/([yMdhmsqS])+/g,function(all,t){
+                                        var v = map[t];
+                                        if(v !==undefined){
+                                            if(all.length&gt1){
+                                                v='0'+v;
+                                                v=v.substr(v.length-2);
+                                            }
+                                            return v;
+                                        }else if(t==='y'){
+                                            return(date.getFullYear()+'').substr(4-all.length);
+                                        }
+                                        return all;
+                                    });
+                                    return format;
+                                }
+                                return dateFormat(val,arg)
+                            })
+                            var vm = new Vue({
+                                el:'#app',
+                                data:{
+                                    date:new Date()
+                                }
+                            })
+                        &lt/script&gt
+                    &lt/body&gt
+                    &lt/html&gt
+
+             </code>
+        </pre>  
+        </ul>
+        </div>
+        <h3 style="color: skyblue">7.生命周期</h3>
+        <div style="background: #eee; padding:10px;">
+            <ul>
+                <p>1.主要阶段</p>
+                <li style="font-weight: 700;">挂载(初始化相关属性）</li>
+                <p>1⃣️beforeCreate（在实例初始化之后，数据观测和事件配置之前被调用）</p>
+                <p>2⃣️Created（在实例创建完成后被立即调用）</p>
+                <p>3⃣️beforeMount （在挂载开始之前被调用）</p>
+                <p>4⃣️mounted (el 被新创建的vm.$el替换，并挂载到实例上去之后调用的该钩子)</p>
+                <li style="font-weight: 700;">更新(元素或组件的变更操作)</li>
+                <p>1⃣️beforeUpdate（数据更新时调用，发生在虚拟Dom打补丁之前）</p>
+                <p>2⃣️updated（由于数据更改导致的虚拟Dom重新渲染和打补丁，在这之后会调用该钩子）</p>
+                <li style="font-weight: 700;">销毁(销毁相关属性)</li>
+                <p>1⃣️beforeDestroy （实例销毁之前被调用）</p>
+                <p>2⃣️destroyed （实例销毁后调用）</p>
+            </ul>
+        </div>
+
+  
