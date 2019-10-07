@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
   <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
-  <title>EnglishWords - ヾviviHuang`博客【Web前端开发】</title>
+  <title>微信小程序 03 正则验证手机号 - ヾviviHuang`博客【Web前端开发】</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
   <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
   <link rel="stylesheet" href="/css/prism.css">
@@ -109,12 +109,12 @@
 </script>
 
     <div class="content">
-      <h1 class="post-title">EnglishWords</h1>
-      <div class="post-description">每天积累一丢丢,每天进步一点点</div>
-      <div class="post-date">2019-09-20</div>
+      <h1 class="post-title">微信小程序 03 正则验证手机号</h1>
+      <div class="post-description">为下一次开发做准备哈丷</div>
+      <div class="post-date">2019-10-06</div>
       <div class="tags">
         
-        <a class="tag" href="/tags/#words" title="words">words</a>
+        <a class="tag" href="/tags/#微信小程序" title="微信小程序">微信小程序</a>
         
       </div>
     </div>
@@ -123,39 +123,57 @@
   <div class="container">
     <div class="main">
       <!--more-->
-<div style="background: #eee;padding:10px;">
-    <h3>prompt: 温馨提示, 命令提示符</h3>
-    <h3>variable: 变量；可变物，可变因素</h3>
-    <h3>traceback: 回溯, 追踪</h3>
-    <h3>invalid: 无效的；有病的；残疾的</h3>
-    <h3>syntax: 语法；句法；有秩序的排列</h3>
-    <h3>unexpected: 意外的，想不到的</h3>
-    <h3>interactive: 交互式的；相互作用的</h3>
-    <h3>born: 天生的；出生的；天赋的；创造的</h3>
-    <h3>relaxation: 放松；缓和；消遣</h3>
-    <h3>touch: 相互接触；</h3>
-</div>
-<div style="padding:10px;">
-    <h3>occupation:职业</h3>
-    <h3>multipe:多重的；多样的；许多的</h3>
-    <h3>trim:整齐的；身材苗条的;修剪；</h3>
-    <h3>directive:指示；指令;</h3>
-    <h3>inserted:插入的；[生物] 嵌入的；著生的；附着的</h3>
-    <h3>computed:计算的，使用计算机的;</h3>
-    <h3>cloak: 尤指旧时的）披风，斗篷；遮盖物；伪装，幌子；</h3>
-    <h3>male: 男性的；雄性的；有力的；</h3>
-    <h3>female: 女性的；雌性的；柔弱的，柔和的；</h3>
-    <h3>gender: 性；性别;</h3>
-</div>
-<div style="background: #eee;padding:10px;">
-    <h3>reverse:颠倒；撤销；反转；交换；</h3>
-    <h3>split: 劈开；裂缝;分离；使分离；</h3>
-    <h3>capitalize:使资本化；以大写字母写；估计…的价值;</h3>
-</div>
-<!-- <div style="padding:10px;">
+<h3>正则验证手机号</h3>
+ <pre>
+    <code class="language-js">
+       
+        /**
+        * 校验手机号
+        * @param {string} phone 手机号
+        * @return {boolean} 手机号正确返回true，反之则false
+        */
+        export function isPhone(phone) {
+            const rule = /^1\d{10}$/;
+        return rule.test(phone);
+        }
+        ----------------------------------------------------
+        // 实例
+        import {isPhone} from '../../../utils/validate.js'
+        savaData() {
+        if(isPhone(this.data.tel)==false){
+          Notify('请输入正确的手机号');
+          return    
+        }else{
+          request({
+            url: '/api/Address/AddAddress',
+            isLock: true,
+            data: {
+              name: this.data.name,
+              tel: this.data.tel,
+              provice: this.data.provice,
+              city: this.data.city,
+              county: this.data.county,
+              detail_address: this.data.address,
+              is_default: this.data.isDefault
+            }
+          }).then(res => {
+            if (res.data.code == 200) {
+              wx.showToast({
+                title: '保存成功',
+              })
+              wx.navigateTo({
+                url: '../../../personalCenter/pages/addressManagement/addressManagement',
+              })
+            } else {
+              Notify(res.data.msg);
+            }
     
-</div> -->
-      <div class="date">发布时间：2019-09-20</div>
+          })  
+        }
+    
+         </code>
+    </pre>
+      <div class="date">发布时间：2019-10-06</div>
       <div id="gitalk-container"></div>
     </div>
     <div class="nav-container">

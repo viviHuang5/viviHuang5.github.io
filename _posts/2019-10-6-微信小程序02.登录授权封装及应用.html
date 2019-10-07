@@ -1,0 +1,182 @@
+---
+layout: post
+title: 微信小程序 02 登录授权封装及使用
+description: 为下一次开发做准备哈丷
+tags: 微信小程序
+bannerImg: /images/bg-banner.jpg
+---
+<!--more-->
+<h3>实际应用</h3>
+<pre>
+    <code class="language-js">
+        &ltvan-popup show="{{ show5 }}" bind:close="onClose"&gt
+            &ltview class="popop-box"&gt
+              &lttext style="text-align:center;"&gt使用该小程序需要您授权\n否则会影响使用\n&lt/text&gt
+              &ltview class="btnBox" catchtap='changeBtn'&gt
+                &ltbutton class="btn2" bindtap="cancle" data-num='2'&gt
+                拒绝&lt/button&gt
+                &ltbutton class="btn2 { {num2==1?'active8':''} }" open-type="getUserInfo" 
+                bindgetuserinfo="getUserInfo" data-num='1' bindtap="agree"&gt同意&lt/button&gt
+              &lt/view&gt
+            &lt/view&gt
+        &lt/van-popup&gt    
+        -----------------------------------------------------------------------------------------
+        import {authorizeUser} from '../../utils/login.js'
+        import { isSession} from '../../utils/login.js'
+           
+        getUserInfo(ev) {
+            wx.hideTabBar()
+            authorizeUser(ev, res => {
+              if (res == false) {
+                this.setData({
+                  show1: true,
+                })
+              } else {
+                this.setData({
+                  show1: false,
+                })
+              }
+              // wx.showTabBar()
+            }, () => {
+              this.getInforList()
+              this.updata()
+              this.isAdmin()
+            })
+        
+          }, 
+          
+          onLoad: function(options) {
+            wx.hideTabBar();
+            //转发
+            wx.showShareMenu({
+              withShareTicket: true
+            })
+            let that = this;
+            //判断有没有授权成功
+            isSession(res => {
+              if (!res) {
+                that.setData({
+                  show5: !res
+                })
+              }
+            }, () => {
+              this.getInforList()
+              this.updata()
+              this.isAdmin()
+            })
+          },
+
+    </code>
+</pre>
+<h3>封装好哒</h3>
+<pre>
+    <code class="language-js">
+        
+        import request from '/network.js'
+        export function login(callback) {
+        wx.login({
+            success(res) {
+                let code = res.code
+                if (res.code) {
+                    getUserInfo((res) => {
+                        let rawData = JSON.parse(res.rawData)
+                    request({
+                         url: '/api/Auth/Register',
+                         data: {
+                             code: code
+                          }
+                     }).then(res => {
+                        let token = res.data.data.token
+                        wx.setStorageSync('token', token);
+                        request({
+                             url: '/api/Auth/Login',
+                             data: {
+                             rawData: rawData
+                             }
+                        }).then(res => {
+                             callback()
+                          })
+                     }).catch(res=>{
+                        })
+                   })
+                } else {
+                   console.log('登录失败！' + res.errMsg)
+                  }
+                }
+             })
+         }
+        
+
+        // 用户授权
+        //ev 默认值，callback 是授权的回调，logFn 是登录成功的回调
+        export function authorizeUser(ev, callback, logFn) {
+        wx.getSetting({
+        success: function (res) {
+            if (res.authSetting['scope.userInfo']) {
+                // 用户授权之后将用户信息存入缓存
+                const userInfo = ev.detail;
+                wx.setStorageSync('userInfo', JSON.stringify(userInfo));
+                // 已授权
+                callback(true);
+                login(() => {
+                    // 登录成功
+                    if (logFn) {
+                         logFn();
+                    }
+             });
+            } else {
+                callback(false);
+                console.log('用户没有授权')
+            }
+         },
+        fail: function () {
+           console.log('失败');
+        }
+        });
+        }
+        
+        // 获取用户信息
+        export function getUserInfo(callback) {
+        const userInfo = wx.getStorageSync('userInfo');
+        if (userInfo) {
+           callback(JSON.parse(userInfo));
+        } else {
+          wx.getUserInfo({
+          success(res) {
+                wx.setStorageSync('userInfo', JSON.stringify(res));
+                callback(res);
+            }
+          })
+          }
+         }
+        
+        export function isSession(callback, logFn) {
+        wx.getSetting({
+        success(res) {
+        if (res.authSetting['scope.userInfo']) {
+           callback(true);
+           // 已授权
+          const userSession = wx.getStorageSync('token'); // 这里是token
+          // 没有token就登录获取，反之则不需要登录，直接返回回调
+            if (!userSession) {
+                login(() => {
+                if (logFn) {
+                    logFn();
+                 }
+             });
+            } else {
+                if (logFn) {
+                logFn();
+                }
+                 }
+            } else {
+                // 未授权
+                callback(false);
+            }
+        },
+        fail() {}
+          });
+        }
+       
+        </code>
+</pre>

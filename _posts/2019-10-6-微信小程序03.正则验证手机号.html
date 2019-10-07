@@ -1,0 +1,58 @@
+---
+layout: post
+title: 微信小程序 03 正则验证手机号
+description: 为下一次开发做准备哈丷
+tags: 微信小程序
+bannerImg: /images/bg-banner.jpg
+---
+<!--more-->
+<h3>正则验证手机号</h3>
+ <pre>
+    <code class="language-js">
+       
+        /**
+        * 校验手机号
+        * @param {string} phone 手机号
+        * @return {boolean} 手机号正确返回true，反之则false
+        */
+        export function isPhone(phone) {
+            const rule = /^1\d{10}$/;
+        return rule.test(phone);
+        }
+        ----------------------------------------------------
+        // 实例
+        import {isPhone} from '../../../utils/validate.js'
+        savaData() {
+        if(isPhone(this.data.tel)==false){
+          Notify('请输入正确的手机号');
+          return    
+        }else{
+          request({
+            url: '/api/Address/AddAddress',
+            isLock: true,
+            data: {
+              name: this.data.name,
+              tel: this.data.tel,
+              provice: this.data.provice,
+              city: this.data.city,
+              county: this.data.county,
+              detail_address: this.data.address,
+              is_default: this.data.isDefault
+            }
+          }).then(res => {
+            if (res.data.code == 200) {
+              wx.showToast({
+                title: '保存成功',
+              })
+              wx.navigateTo({
+                url: '../../../personalCenter/pages/addressManagement/addressManagement',
+              })
+            } else {
+              Notify(res.data.msg);
+            }
+    
+          })  
+        }
+    
+         </code>
+    </pre>

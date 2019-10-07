@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
+  <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
+  <title>微信小程序 02 登录授权封装及使用 - ヾviviHuang`博客【Web前端开发】</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <link rel="stylesheet" href="/css/prism.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/post.css">
+  <script src="/js/util.js"></script>
+</head>
+
+<body>
+  <div id="header" style="background-image: url(/images/bg-banner.jpg)">
+    <div class="top">
+  <div class="title" style="margin-top: 10px;">
+    <img src="/images/001.jpg" alt="" style="width: 40px;height: 40px; border-radius: 50%; ">
+    <a href="/">ヾviviHuang</a>
+  </div>
+  <nav class="nav">
+    <div class="item">
+      <a href="/">Home</a>
+    </div>
+    <div class="item">
+      <a href="/about">About</a>
+    </div>
+    <div class="item">
+      <a href="/tags">Tags</a>
+    </div>
+  </nav>
+  <div class="mobile-nav">
+    <div class="mobile-nav-menu icon">
+      <i class="iconfont">&#xe633;</i>
+    </div>
+    <div class="mobile-nav-box">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/tags">Tags</a>
+    </div>
+  </div>
+  
+</div>
+
+
+<script>
+  (function (d, w) {
+    w.onload = function () {
+      var $menuIcon = d.querySelector('.mobile-nav-menu');
+      var $navBox = d.querySelector('.mobile-nav-box');
+      var animationEndCallback = null;
+      function hideNavBox() {
+        addClass($navBox, 'zoomOut');
+        animationEndCallback = function () {
+          removeClass($navBox, 'zoomOut');
+          $navBox.style.display = 'none';
+        }
+      }
+
+      $menuIcon.onclick = function (e) {
+        e.stopPropagation();
+        if ($navBox.style.display === 'block') return hideNavBox();
+        $navBox.style.display = 'block';
+        addClass($navBox, 'zoomIn');
+        animationEndCallback = function () {
+          removeClass($navBox, 'zoomIn');
+        }
+      };
+
+      $navBox.onclick = function (e) {
+        e.stopPropagation();
+      };
+
+      $navBox.addEventListener('animationend', function (e) {
+        animationEndCallback && animationEndCallback();
+      }, false);
+
+      d.body.addEventListener('click', function () {
+        if ($navBox.style.display === 'block') hideNavBox();
+      }, false);
+
+      var $header = d.querySelector('#header');
+      var $top = d.querySelector('.top');
+      var topHeight = $top.offsetHeight;
+      w.addEventListener('scroll', function () {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        var step = $header.className.indexOf('visible') >= 0 ? topHeight : 0;
+        if (scrollTop > $header.offsetHeight - step) {
+          addClass($header, 'active');
+        } else {
+          removeClass($header, 'active');
+        }
+      }, false);
+
+      d.addEventListener('mousewheel', function(e) {
+        if (e.wheelDeltaY >= 0) {
+          addClass($header, 'visible');
+        } else {
+          removeClass($header, 'visible');
+        }
+      })
+    }
+  })(document, window);
+</script>
+
+    <div class="content">
+      <h1 class="post-title">微信小程序 02 登录授权封装及使用</h1>
+      <div class="post-description">为下一次开发做准备哈丷</div>
+      <div class="post-date">2019-10-06</div>
+      <div class="tags">
+        
+        <a class="tag" href="/tags/#微信小程序" title="微信小程序">微信小程序</a>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="main">
+      <!--more-->
+<h3>实际应用</h3>
+<pre>
+    <code class="language-js">
+        &ltvan-popup show="" bind:close="onClose"&gt
+            &ltview class="popop-box"&gt
+              &lttext style="text-align:center;"&gt使用该小程序需要您授权\n否则会影响使用\n&lt/text&gt
+              &ltview class="btnBox" catchtap='changeBtn'&gt
+                &ltbutton class="btn2" bindtap="cancle" data-num='2'&gt
+                拒绝&lt/button&gt
+                &ltbutton class="btn2 { {num2==1?'active8':''} }" open-type="getUserInfo" 
+                bindgetuserinfo="getUserInfo" data-num='1' bindtap="agree"&gt同意&lt/button&gt
+              &lt/view&gt
+            &lt/view&gt
+        &lt/van-popup&gt    
+        -----------------------------------------------------------------------------------------
+        import {authorizeUser} from '../../utils/login.js'
+        import { isSession} from '../../utils/login.js'
+           
+        getUserInfo(ev) {
+            wx.hideTabBar()
+            authorizeUser(ev, res => {
+              if (res == false) {
+                this.setData({
+                  show1: true,
+                })
+              } else {
+                this.setData({
+                  show1: false,
+                })
+              }
+              // wx.showTabBar()
+            }, () => {
+              this.getInforList()
+              this.updata()
+              this.isAdmin()
+            })
+        
+          }, 
+          
+          onLoad: function(options) {
+            wx.hideTabBar();
+            //转发
+            wx.showShareMenu({
+              withShareTicket: true
+            })
+            let that = this;
+            //判断有没有授权成功
+            isSession(res => {
+              if (!res) {
+                that.setData({
+                  show5: !res
+                })
+              }
+            }, () => {
+              this.getInforList()
+              this.updata()
+              this.isAdmin()
+            })
+          },
+
+    </code>
+</pre>
+<h3>封装好哒</h3>
+<pre>
+    <code class="language-js">
+        
+        import request from '/network.js'
+        export function login(callback) {
+        wx.login({
+            success(res) {
+                let code = res.code
+                if (res.code) {
+                    getUserInfo((res) => {
+                        let rawData = JSON.parse(res.rawData)
+                    request({
+                         url: '/api/Auth/Register',
+                         data: {
+                             code: code
+                          }
+                     }).then(res => {
+                        let token = res.data.data.token
+                        wx.setStorageSync('token', token);
+                        request({
+                             url: '/api/Auth/Login',
+                             data: {
+                             rawData: rawData
+                             }
+                        }).then(res => {
+                             callback()
+                          })
+                     }).catch(res=>{
+                        })
+                   })
+                } else {
+                   console.log('登录失败！' + res.errMsg)
+                  }
+                }
+             })
+         }
+        
+
+        // 用户授权
+        //ev 默认值，callback 是授权的回调，logFn 是登录成功的回调
+        export function authorizeUser(ev, callback, logFn) {
+        wx.getSetting({
+        success: function (res) {
+            if (res.authSetting['scope.userInfo']) {
+                // 用户授权之后将用户信息存入缓存
+                const userInfo = ev.detail;
+                wx.setStorageSync('userInfo', JSON.stringify(userInfo));
+                // 已授权
+                callback(true);
+                login(() => {
+                    // 登录成功
+                    if (logFn) {
+                         logFn();
+                    }
+             });
+            } else {
+                callback(false);
+                console.log('用户没有授权')
+            }
+         },
+        fail: function () {
+           console.log('失败');
+        }
+        });
+        }
+        
+        // 获取用户信息
+        export function getUserInfo(callback) {
+        const userInfo = wx.getStorageSync('userInfo');
+        if (userInfo) {
+           callback(JSON.parse(userInfo));
+        } else {
+          wx.getUserInfo({
+          success(res) {
+                wx.setStorageSync('userInfo', JSON.stringify(res));
+                callback(res);
+            }
+          })
+          }
+         }
+        
+        export function isSession(callback, logFn) {
+        wx.getSetting({
+        success(res) {
+        if (res.authSetting['scope.userInfo']) {
+           callback(true);
+           // 已授权
+          const userSession = wx.getStorageSync('token'); // 这里是token
+          // 没有token就登录获取，反之则不需要登录，直接返回回调
+            if (!userSession) {
+                login(() => {
+                if (logFn) {
+                    logFn();
+                 }
+             });
+            } else {
+                if (logFn) {
+                logFn();
+                }
+                 }
+            } else {
+                // 未授权
+                callback(false);
+            }
+        },
+        fail() {}
+          });
+        }
+       
+        </code>
+</pre>
+      <div class="date">发布时间：2019-10-06</div>
+      <div id="gitalk-container"></div>
+    </div>
+    <div class="nav-container">
+      <div class="main-nav">
+        <div class="title">目录</div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+  <a href="https://github.com/viviHuang5">
+    <i class="iconfont">&#xe600;</i>
+  </a>
+  <a href="javascript:;">
+    <i class="iconfont">&#xe634;</i>
+  </a>
+  <a href="javascript:;">
+    <i class="iconfont">&#xe61c;</i>
+  </a>
+  <a href="javascript:;">
+    <i class="iconfont">&#xe635;</i>
+  </a>
+</footer>
+
+  <div class="back-top">
+  <i class="iconfont">&#xe6d9;</i>
+</div>
+<script>
+  (function (d, w) {
+    function scrollTo(targetY) {
+      var currentY =
+        d.documentElement.scrollTop || d.body.scrollTop;
+      var distance = targetY - currentY;
+      var num = 0;
+
+      function animate() {
+        var currentY =
+          d.documentElement.scrollTop || d.body.scrollTop;
+        w.scrollTo(0, currentY + distance / 10);
+        num++;
+        if (num === 10) return;
+        w.requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+    var $upTop = d.querySelector('.back-top');
+
+    $upTop.onclick = function () {
+      scrollTo(0);
+    };
+
+    function bindEvent() {
+      var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+      if (scrollTop > 100) {
+        $upTop.style.display = 'block';
+      } else {
+        $upTop.style.display = 'none';
+      }
+    }
+
+    w.addEventListener('scroll', bindEvent);
+    w.addEventListener('load', bindEvent);
+  })(document, window);
+</script>
+
+  <script src="/js/prism.js"></script>
+  <script>
+    (function (w, d) {
+      var $nav = document.querySelector('.main-nav');
+      var $main = document.querySelector('.main');
+      var titleNodeNames = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+      var contentItems = [];
+      var navItems = [];
+      for (var i = 0; i < $main.children.length; i++) {
+        var element = $main.children[i];
+        if (titleNodeNames.includes(element.nodeName)) {
+          var link = document.createElement('a');
+          link.href = '#' + element.innerText;
+          link.innerText = element.innerText;
+
+          $nav.appendChild(link);
+          navItems.push(link);
+          element.id = element.innerText;
+          contentItems.push(element);
+        }
+      }
+
+      function bindEvent() {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        if (scrollTop >= $nav.parentNode.offsetTop) {
+          addClass($nav, 'active');
+        } else {
+          removeClass($nav, 'active');
+        }
+        for (var i = 0; i < navItems.length; i++) {
+          removeClass(navItems[i], 'active');
+        }
+        for (var i = contentItems.length - 1; i >= 0; i--) {
+          if (scrollTop >= getElementTop(contentItems[i])) {
+            addClass(navItems[i], 'active');
+            return;
+          }
+        }
+        addClass(navItems[0], 'active');
+      }
+      w.addEventListener('scroll', bindEvent);
+      w.addEventListener('load', bindEvent);
+    })(window, document)
+  </script>
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/md5.min.js"></script>
+  <!-- <script>
+    const gitalk = new Gitalk({
+      clientID: '0b153d2e389989779003',
+      clientSecret: 'e5f2c768454a6e3aeafbc5d88f109059d7b5a60a',
+      repo: 'viviHuang5.github.io',
+      owner: 'viviHuang5',
+      admin: ['viviHuang5'],
+      id: md5(location.pathname),
+      distractionFreeMode: false,
+      createIssueManually: true
+    })
+
+    gitalk.render('gitalk-container')
+  </script> -->
+</body>
+
+</html>
