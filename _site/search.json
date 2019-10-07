@@ -1,6 +1,15 @@
 [
   
     {
+      "title": "Vue 03 图书管理案例",
+      "category": "",
+      "description": "Vue:渐进式JavaScript框架，声明式渲染->组件系统->客户端路由->集中式状态管理->项目构建,易用，灵活，高效（20kb运行大小，超快虚拟DOM）",
+      "tags": "Vue",
+      "url": "/2019/10/07/Vue-03.%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E6%A1%88%E4%BE%8B.html",
+      "date": "2019-10-07"
+    } ,
+  
+    {
       "title": "English Movie",
       "category": "",
       "description": "Pride and prejudice",
