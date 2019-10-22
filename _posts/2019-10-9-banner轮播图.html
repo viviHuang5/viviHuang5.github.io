@@ -1,0 +1,65 @@
+---
+layout: post
+title: Demo banner轮播图
+description: 结合
+tags: Demo
+bannerImg: /images/bg-banner.jpg
+---
+<!--more-->
+//链接:https://pan.baidu.com/s/1SGFPP4sz0NROp1qvPIDJzg 密码:ikzq
+<pre>
+    <code class="language-js">
+        &lt!DOCTYPE html&gt
+        &lthtml lang="en"&gt
+        
+        &lthead&gt
+        &ltmeta charset="UTF-8"&gt
+        &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+        &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+        &lttitle&gtbanner&lt/title&gt
+        &lt/head&gt
+        //&ltlink href="css/owl.carousel.css" rel="stylesheet"&gt
+        //&ltlink href="css/owl.theme.css" rel="stylesheet"&gt
+        //&ltlink href="css/owl.transitions.css" rel="stylesheet"&gt
+        //&ltscript src="js/jquery.min.js"&gt&lt/script&gt
+        //&ltscript src="js/owl.carousel.js"&gt&lt/script&gt
+        
+        &ltstyle&gt
+        * {
+        margin: 0;
+        padding: 0;
+        }
+        
+        .flash {
+        width: 50%;
+        }
+        
+        .flash img {
+        width: 100%;
+        }
+        &lt/style&gt
+        
+        &ltbody&gt
+        &ltdiv class="flash"&gt
+        &ltdiv id="owl-demo" class="owl-carousel"&gt
+        &lta class="item"&gt&ltimg src="images/flash.jpg" alt=""&gt&lt/a&gt
+        &lta class="item"&gt&ltimg src="images/flash.jpg" alt=""&gt&lt/a&gt
+        &lt/div&gt
+        &lt/div&gt
+        
+        &ltscript&gt
+        $(function () {
+        $('#owl-demo').owlCarousel({
+            items: 1,
+            autoPlay: 3000,
+            autoHeight: true,
+            transitionStyle: 'fade'
+            });
+        });
+        &lt/script&gt
+        
+        &lt/body&gt
+        
+        &lt/html&gt
+    </code>
+</pre>

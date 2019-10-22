@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
   <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
-  <title>Vue 03 图书管理案例 - ヾviviHuang`博客【Web前端开发】</title>
+  <title>Demo banner轮播图 - ヾviviHuang`博客【Web前端开发】</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
   <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
   <link rel="stylesheet" href="/css/prism.css">
@@ -109,12 +109,12 @@
 </script>
 
     <div class="content">
-      <h1 class="post-title">Vue 03 图书管理案例</h1>
-      <div class="post-description">Vue:渐进式JavaScript框架，声明式渲染->组件系统->客户端路由->集中式状态管理->项目构建,易用，灵活，高效（20kb运行大小，超快虚拟DOM）</div>
-      <div class="post-date">2019-10-07</div>
+      <h1 class="post-title">Demo banner轮播图</h1>
+      <div class="post-description">结合</div>
+      <div class="post-date">2019-10-09</div>
       <div class="tags">
         
-        <a class="tag" href="/tags/#Vue" title="Vue">Vue</a>
+        <a class="tag" href="/tags/#Demo" title="Demo">Demo</a>
         
       </div>
     </div>
@@ -123,40 +123,64 @@
   <div class="container">
     <div class="main">
       <!--more-->
-<h3>补充知识(数组相关API)</h3>
-<div style="text-indent: 2em;">
-    <p style="font-weight: 700;">1.变异方法(修改原有数据),它们将会触发视图更新</p>
-    <ul style="background:#eee;padding:3px 10px;">
-        <li><span style="color: red;">push()</span> 从后面添加元素，返回值为添加完后的数组的长度</li>
-        <li><span style="color: red;">pop()</span> 从后面删除元素，只能是一个，返回值是删除的元素</li>
-        <li><span style="color: red;">shift()</span> 从前面删除元素，只能删除一个 返回值是删除的元素</li>
-        <li><span style="color: red;">unshift()</span> 从前面添加元素, 返回值是添加完后的数组的长度</li>
-        <li><span style="color: red;">splice(i,n)</span> 删除从i(索引值)开始之后的那个元素。返回值是删除的元素 i 是索引值 n 是个数</li>
-        <li><span style="color: red;">sort()</span> 将数组进行排序,返回值是排好的数组，默认是按照最左边的数字进行排序，不是按照数字大小排序的</li>
-        <li><span style="color: red;">reverse()</span> 将数组反转,返回值是反转后的数组</li>
-    </ul>
-</div>
-
-<div style="text-indent: 2em;">
-    <p style="font-weight: 700;">2.替换数组(生成新的数组)</p>
-    <ul style="background:#eee;padding:3px 10px;">
-        <li><span style="color: red;">filter()</span> 过滤数组，返回一个满足要求的数组</li>
-        <li><span style="color: red;">concat()</span> 连接两个数组 返回值为连接后的新数组</li>
-        <li><span style="color: red;">slice(start end)</span> 切去索引值start到索引值end的数组，不包含end索引的值，返回值是切出来的数组</li>
-    </ul>
-</div>
-
-<div style="text-indent: 2em;">
-    <p style="font-weight: 700;">3.修改响应式数据</p>
-    <ul style="background:#eee;padding:3px 10px;">
-        <li><span style="color: red;">Vue.set(vm.items,indexOfitem,newValue)</span> </li>
-        <li><span style="color: red;">Vm.$set(vm.items,indexOfitem,newValue</span> </li>
-        <p>1⃣️ 参数一表示要处理的数组名称</p>
-        <p>2⃣️ 参数二表示要处理的数组的索引</p>
-        <p>3⃣️ 参数三表示要处理的数组的值</p>
-    </ul>
-</div>
-      <div class="date">发布时间：2019-10-07</div>
+//链接:https://pan.baidu.com/s/1SGFPP4sz0NROp1qvPIDJzg 密码:ikzq
+<pre>
+    <code class="language-js">
+        &lt!DOCTYPE html&gt
+        &lthtml lang="en"&gt
+        
+        &lthead&gt
+        &ltmeta charset="UTF-8"&gt
+        &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+        &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+        &lttitle&gtbanner&lt/title&gt
+        &lt/head&gt
+        //&ltlink href="css/owl.carousel.css" rel="stylesheet"&gt
+        //&ltlink href="css/owl.theme.css" rel="stylesheet"&gt
+        //&ltlink href="css/owl.transitions.css" rel="stylesheet"&gt
+        //&ltscript src="js/jquery.min.js"&gt&lt/script&gt
+        //&ltscript src="js/owl.carousel.js"&gt&lt/script&gt
+        
+        &ltstyle&gt
+        * {
+        margin: 0;
+        padding: 0;
+        }
+        
+        .flash {
+        width: 50%;
+        }
+        
+        .flash img {
+        width: 100%;
+        }
+        &lt/style&gt
+        
+        &ltbody&gt
+        &ltdiv class="flash"&gt
+        &ltdiv id="owl-demo" class="owl-carousel"&gt
+        &lta class="item"&gt&ltimg src="images/flash.jpg" alt=""&gt&lt/a&gt
+        &lta class="item"&gt&ltimg src="images/flash.jpg" alt=""&gt&lt/a&gt
+        &lt/div&gt
+        &lt/div&gt
+        
+        &ltscript&gt
+        $(function () {
+        $('#owl-demo').owlCarousel({
+            items: 1,
+            autoPlay: 3000,
+            autoHeight: true,
+            transitionStyle: 'fade'
+            });
+        });
+        &lt/script&gt
+        
+        &lt/body&gt
+        
+        &lt/html&gt
+    </code>
+</pre>
+      <div class="date">发布时间：2019-10-09</div>
       <div id="gitalk-container"></div>
     </div>
     <div class="nav-container">

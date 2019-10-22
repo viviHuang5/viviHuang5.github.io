@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
   <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
-  <title>Vue 03 图书管理案例 - ヾviviHuang`博客【Web前端开发】</title>
+  <title>jQuery 实现留言板留言及删除功能 - ヾviviHuang`博客【Web前端开发】</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
   <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
   <link rel="stylesheet" href="/css/prism.css">
@@ -109,12 +109,12 @@
 </script>
 
     <div class="content">
-      <h1 class="post-title">Vue 03 图书管理案例</h1>
-      <div class="post-description">Vue:渐进式JavaScript框架，声明式渲染->组件系统->客户端路由->集中式状态管理->项目构建,易用，灵活，高效（20kb运行大小，超快虚拟DOM）</div>
-      <div class="post-date">2019-10-07</div>
+      <h1 class="post-title">jQuery 实现留言板留言及删除功能</h1>
+      <div class="post-description">用live()方法让后面动态添加的元素也绑定之前对应类绑定的方法</div>
+      <div class="post-date">2019-10-22</div>
       <div class="tags">
         
-        <a class="tag" href="/tags/#Vue" title="Vue">Vue</a>
+        <a class="tag" href="/tags/#jQuery" title="jQuery">jQuery</a>
         
       </div>
     </div>
@@ -122,41 +122,114 @@
 
   <div class="container">
     <div class="main">
-      <!--more-->
-<h3>补充知识(数组相关API)</h3>
-<div style="text-indent: 2em;">
-    <p style="font-weight: 700;">1.变异方法(修改原有数据),它们将会触发视图更新</p>
-    <ul style="background:#eee;padding:3px 10px;">
-        <li><span style="color: red;">push()</span> 从后面添加元素，返回值为添加完后的数组的长度</li>
-        <li><span style="color: red;">pop()</span> 从后面删除元素，只能是一个，返回值是删除的元素</li>
-        <li><span style="color: red;">shift()</span> 从前面删除元素，只能删除一个 返回值是删除的元素</li>
-        <li><span style="color: red;">unshift()</span> 从前面添加元素, 返回值是添加完后的数组的长度</li>
-        <li><span style="color: red;">splice(i,n)</span> 删除从i(索引值)开始之后的那个元素。返回值是删除的元素 i 是索引值 n 是个数</li>
-        <li><span style="color: red;">sort()</span> 将数组进行排序,返回值是排好的数组，默认是按照最左边的数字进行排序，不是按照数字大小排序的</li>
-        <li><span style="color: red;">reverse()</span> 将数组反转,返回值是反转后的数组</li>
-    </ul>
-</div>
-
-<div style="text-indent: 2em;">
-    <p style="font-weight: 700;">2.替换数组(生成新的数组)</p>
-    <ul style="background:#eee;padding:3px 10px;">
-        <li><span style="color: red;">filter()</span> 过滤数组，返回一个满足要求的数组</li>
-        <li><span style="color: red;">concat()</span> 连接两个数组 返回值为连接后的新数组</li>
-        <li><span style="color: red;">slice(start end)</span> 切去索引值start到索引值end的数组，不包含end索引的值，返回值是切出来的数组</li>
-    </ul>
-</div>
-
-<div style="text-indent: 2em;">
-    <p style="font-weight: 700;">3.修改响应式数据</p>
-    <ul style="background:#eee;padding:3px 10px;">
-        <li><span style="color: red;">Vue.set(vm.items,indexOfitem,newValue)</span> </li>
-        <li><span style="color: red;">Vm.$set(vm.items,indexOfitem,newValue</span> </li>
-        <p>1⃣️ 参数一表示要处理的数组名称</p>
-        <p>2⃣️ 参数二表示要处理的数组的索引</p>
-        <p>3⃣️ 参数三表示要处理的数组的值</p>
-    </ul>
-</div>
-      <div class="date">发布时间：2019-10-07</div>
+      <h3>jQuery 实现留言板留言及删除功能</h3>
+<p>用live()方法让后面动态添加的元素也绑定之前对应类绑定的方法</p>
+<!--more-->
+<pre>
+    <code class="language-js">
+        &lt!doctype html&gt
+        &lthtml&gt
+        
+        &lthead&gt
+            &ltmeta charset="utf-8"&gt
+            &lttitle&gtindex&lt/title&gt
+            &ltstyle&gt
+                * {
+                    font-family: 微软雅黑;
+                    margin: 0px;
+                    padding: 0px;
+                }
+        
+                .main {
+                    width: 1300px;
+                    margin: 0 auto;
+                }
+        
+                .mess {
+                    margin-top: 15px;
+                }
+        
+                textarea {
+                    width: 98%;
+                    height: 50px;
+                    resize: none;
+                    border-radius: 20px;
+                    padding: 15px;
+                    font-size: 30px;
+                    font-weight: bold;
+                }
+        
+                textarea:focus {
+                    outline: none;
+                }
+        
+                button {
+                    width: 100px;
+                    height: 30px;
+                    background: #272822;
+                    font-weight: bold;
+                    border: 2px solid #ccc;
+                    border-radius: 10px;
+                    color: #fff;
+                }
+        
+                button:hover {
+                    border-color: #00f;
+                }
+        
+                button:focus {
+                    outline: none;
+                }
+        
+                .show {
+                    margin-top: 20px;
+                    border: 2px solid #272822;
+                    border-radius: 10px;
+                    height: 50px;
+                }
+        
+                .close {
+                    float: right;
+                    margin-right: 10px;
+                    font-size: 30px;
+                    cursor: pointer;
+                }
+            &lt/style&gt
+            &ltscript src="jquery.min.js"&gt&lt/script&gt
+        &lt/head&gt
+        
+        &ltbody&gt
+            &ltdiv class="main"&gt
+                &lth1&gt糖糖留言板:&lt/h1&gt
+                &ltdiv class='mess'&gt
+                    &lttextarea&gt&lt/textarea&gt
+                &lt/div&gt
+                &ltbr&gt
+                &ltbutton&gt我要留言&lt/button&gt
+            &lt/div&gt
+        &lt/body&gt
+        &ltscript&gt
+            $('textarea').focus(function () {
+                this.value = '';
+            });
+            $('button').click(function () {
+                let val = $('textarea').val();
+                let str = "&ltdiv class='show'&gt";
+                str += "&ltdiv class='close'&gt&times;&lt/div&gt";
+                str += val;
+                str += "&lt/div&gt";
+                $('.main').append(str);
+            });
+        
+            $('.close').live('click', function () {
+                $(this).parent().hide(1000);
+            });
+        &lt/script&gt
+        
+        &lt/html&gt
+    </code>
+</pre>
+      <div class="date">发布时间：2019-10-22</div>
       <div id="gitalk-container"></div>
     </div>
     <div class="nav-container">

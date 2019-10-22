@@ -8,23 +8,34 @@ bannerImg: /images/bg-banner.jpg
 <!--more-->
 <h3>补充知识(数组相关API)</h3>
 <div style="text-indent: 2em;">
-<p style="font-weight: 700;">1.变异方法(修改原有数据),它们将会触发视图更新</p>
-<ul style="background:#eee;padding:3px 10px;">
-    <li><span style="color: red;">push()</span> 从后面添加元素，返回值为添加完后的数组的长度</li>
-    <li><span style="color: red;">pop()</span> 从后面删除元素，只能是一个，返回值是删除的元素</li>
-    <li><span style="color: red;">shift()</span> 从前面删除元素，只能删除一个 返回值是删除的元素</li>
-    <li><span style="color: red;">unshift()</span>  从前面添加元素, 返回值是添加完后的数组的长度</li>
-    <li><span style="color: red;">splice(i,n)</span>  删除从i(索引值)开始之后的那个元素。返回值是删除的元素 i 是索引值 n 是个数</li>
-    <li><span style="color: red;">sort()</span>  将数组进行排序,返回值是排好的数组，默认是按照最左边的数字进行排序，不是按照数字大小排序的</li>
-    <li><span style="color: red;">reverse()</span> 将数组反转,返回值是反转后的数组</li>
-</ul>
+    <p style="font-weight: 700;">1.变异方法(修改原有数据),它们将会触发视图更新</p>
+    <ul style="background:#eee;padding:3px 10px;">
+        <li><span style="color: red;">push()</span> 从后面添加元素，返回值为添加完后的数组的长度</li>
+        <li><span style="color: red;">pop()</span> 从后面删除元素，只能是一个，返回值是删除的元素</li>
+        <li><span style="color: red;">shift()</span> 从前面删除元素，只能删除一个 返回值是删除的元素</li>
+        <li><span style="color: red;">unshift()</span> 从前面添加元素, 返回值是添加完后的数组的长度</li>
+        <li><span style="color: red;">splice(i,n)</span> 删除从i(索引值)开始之后的那个元素。返回值是删除的元素 i 是索引值 n 是个数</li>
+        <li><span style="color: red;">sort()</span> 将数组进行排序,返回值是排好的数组，默认是按照最左边的数字进行排序，不是按照数字大小排序的</li>
+        <li><span style="color: red;">reverse()</span> 将数组反转,返回值是反转后的数组</li>
+    </ul>
 </div>
 
 <div style="text-indent: 2em;">
-<p style="font-weight: 700;">2.替换数组(生成新的数组)</p>
-<ul style="background:#eee;padding:3px 10px;">
-    <li><span style="color: red;">filter()</span> 过滤数组，返回一个满足要求的数组</li>
-    <li><span style="color: red;">concat()</span> 连接两个数组 返回值为连接后的新数组</li>
-    <li><span style="color: red;">slice(start end)</span> 切去索引值start到索引值end的数组，不包含end索引的值，返回值是切出来的数组</li>
-</ul>
+    <p style="font-weight: 700;">2.替换数组(生成新的数组)</p>
+    <ul style="background:#eee;padding:3px 10px;">
+        <li><span style="color: red;">filter()</span> 过滤数组，返回一个满足要求的数组</li>
+        <li><span style="color: red;">concat()</span> 连接两个数组 返回值为连接后的新数组</li>
+        <li><span style="color: red;">slice(start end)</span> 切去索引值start到索引值end的数组，不包含end索引的值，返回值是切出来的数组</li>
+    </ul>
+</div>
+
+<div style="text-indent: 2em;">
+    <p style="font-weight: 700;">3.修改响应式数据</p>
+    <ul style="background:#eee;padding:3px 10px;">
+        <li><span style="color: red;">Vue.set(vm.items,indexOfitem,newValue)</span> </li>
+        <li><span style="color: red;">Vm.$set(vm.items,indexOfitem,newValue</span> </li>
+        <p>1⃣️ 参数一表示要处理的数组名称</p>
+        <p>2⃣️ 参数二表示要处理的数组的索引</p>
+        <p>3⃣️ 参数三表示要处理的数组的值</p>
+    </ul>
 </div>
