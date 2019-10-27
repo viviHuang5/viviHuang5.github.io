@@ -1,0 +1,100 @@
+---
+layout: post
+title: jQuery 实现导航过多出现更多点击显示更多
+description: 用定位的方式，添加背景色
+tags: jQuery
+bannerImg: /images/bg-banner.jpg
+---
+<h3>jQuery 实现导航过多出现更多点击显示更多</h3>
+<p>用定位的方式，添加背景色</p>
+<!--more-->
+<pre>
+    <code class="language-js">
+&lt!DOCTYPE html&gt
+&lthtml lang="en"&gt
+
+&lthead&gt
+    &ltmeta charset="UTF-8"&gt
+    &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+    &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+    &lttitle&gt3.jquery实现导航过多出现更多点击显示更多&lt/title&gt
+&lt/head&gt
+&ltstyle&gt
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    div {
+        width: 80%;
+        height: 300px;
+        margin: 100px auto;
+    }
+
+    .uu {
+        overflow: hidden;
+        height: 88px;
+        position: relative;
+    }
+
+    .uu li {
+        list-style: none;
+        float: left;
+        margin-left: 30px;
+        margin-bottom: 20px;
+    }
+
+    .more {
+        position: absolute;
+        bottom: 5px;
+        right: 48px;
+        display: inline-block;
+        width: 71px;
+        background: #fff;
+
+    }
+&lt/style&gt
+
+&ltbody&gt
+    &ltdiv&gt
+        &ltul class="uu"&gt
+            &ltli&gt骑上我心爱的小摩托&lt/li&gt
+            &ltli&gt不在&lt/li&gt
+            &ltli&gt那女孩对我说&lt/li&gt
+            &ltli&gt夜半&lt/li&gt
+            &ltli&gt和你一样&lt/li&gt
+            &ltli&gt嗜好&lt/li&gt
+            &ltli&gt骑上我心爱的小摩托&lt/li&gt
+            &ltli&gt不在&lt/li&gt
+            &ltli&gt那女孩对我说&lt/li&gt
+            &ltli&gt夜半&lt/li&gt
+            &ltli&gt和你一样&lt/li&gt
+            &ltli&gt嗜好&lt/li&gt
+            &ltli&gt骑上我心爱的小摩托&lt/li&gt
+            &ltli&gt不在&lt/li&gt
+            &ltli&gt那女孩对我说&lt/li&gt
+            &ltli&gt夜半&lt/li&gt
+            &ltli&gt和你一样&lt/li&gt
+            &ltli&gt嗜好&lt/li&gt
+            &ltli&gt骑上我心爱的小摩托&lt/li&gt
+            &ltli&gt不在&lt/li&gt
+            &ltli&gt那女孩对我说&lt/li&gt
+            &ltli&gt夜半&lt/li&gt
+            &ltli&gt和你一样&lt/li&gt
+            &ltli&gt嗜好&lt/li&gt
+            &ltli style="color:green;" class="more"&gt更多 &gt&gt&lt/li&gt
+        &lt/ul&gt
+    &lt/div&gt
+    &ltscript src="jquery.min.js"&gt&lt/script&gt
+    &ltscript&gt
+      $('.more').click(function(){
+          $(this).hide();
+          $('.uu').css('height','auto');
+      })
+
+    &lt/script&gt
+&lt/body&gt
+
+&lt/html&gt
+    </code>
+</pre>
