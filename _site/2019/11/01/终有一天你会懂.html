@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
   <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
-  <title>WebAPI 编程 - ヾviviHuang`博客【Web前端开发】</title>
+  <title>Reading a book 《终有一天你会懂》 - ヾviviHuang`博客【Web前端开发】</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
   <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
   <link rel="stylesheet" href="/css/prism.css">
@@ -109,12 +109,16 @@
 </script>
 
     <div class="content">
-      <h1 class="post-title">WebAPI 编程</h1>
-      <div class="post-description">DOM and BOM</div>
-      <div class="post-date">2019-10-12</div>
+      <h1 class="post-title">Reading a book 《终有一天你会懂》</h1>
+      <div class="post-description">世界很大，不要动不动就困住自己；任何你引以为傲的东西，都可能是束缚你前行的枷锁。</div>
+      <div class="post-date">2019-11-01</div>
       <div class="tags">
         
-        <a class="tag" href="/tags/#js" title="js">js</a>
+        <a class="tag" href="/tags/#Reading" title="Reading">Reading</a>
+        
+        <a class="tag" href="/tags/#a" title="a">a</a>
+        
+        <a class="tag" href="/tags/#book" title="book">book</a>
         
       </div>
     </div>
@@ -123,126 +127,53 @@
   <div class="container">
     <div class="main">
       <!--more-->
-<h3>1.API 和 Web API</h3>
-<div style="background: #eee;padding: 10px;border-radius: 8px;line-height: 9px;" class="tt">
-    <p>1⃣️. <span style="font-weight: 700;text-decoration: underline;">API</span> 是为我们程序员提供的一个接口，帮助我们实现某种功能，我们会使用就可以了，不必纠结内部如何实现</p>
-    <p>2⃣️. <span style="font-weight: 700;text-decoration: underline;">WebAPI</span> 是浏览器提供的一套操作<span>浏览器功能</span>和<span>页面元素</span>的API(BOM 和 DOM).主要针对于浏览器做交互效果；</p>
-    <p>3⃣️. <span style="font-weight: 700;text-decoration: underline;">WebAPI</span> 一般都有输入和输出（函数的传参数和返回值），WebAPI 很多都是方法（函数）</p>
+<h3>《终有一天你会懂》</h3>
+<div class="book_img">
+<img src="/images/0011.jpeg" alt="" width="170px!important;" height="116px;">
+</div>
+<p style="font-weight: 700;">1.对生活</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>世界很大，不要动不动就困住自己；任何你引以为傲的东西，都可能是束缚你前行的枷锁。</p>
+    <p>离开一个人，你会发现世界上有几亿人等着你爱；离开一家公司，你会发现无数的机会摆在你面前；离开一座城市，你会发现更多的生活体验；只经历亮点一线，很难说一个人真正活过。勇敢前行，不念过往，不困眼前，温暖向善。</p> 
 </div>
 
-<h3>2.DOM</h3>
-<div style="background: #eee;padding: 10px;border-radius: 8px;line-height: 9px;" class="tt">
-    <p>文档对象模型，是W3C 组织推荐的处理可扩展标记语言（HTML 或者 XML）的标准 编程接口</p>
-</div>
-<h3>2.1.获取元素</h3>
-<p class="p_title">2.11 根据id 获取元素</p>
-<div style="background: #eee;padding: 10px;border-radius: 8px;line-height: 9px;" class="tt">
-    <p>1⃣️.<span>document.getElementById('time')</span> 返回带有Id 的元素对象</p>
+<p style="font-weight: 700;">2.对爱情</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>终有一天你会懂，你需要的不仅是一个异性，更应该是一个可以沟通的灵魂。</p>
 </div>
 
-<p class="p_title">2.12 根据标签名 获取元素</p>
-<div style="background: #eee;padding: 10px;border-radius: 8px;line-height: 9px;" class="tt">
-    <p><span>document.getElementsByTagName('li')</span> </p>
-    <p>1⃣️.返回带有标签名的对象集合，以伪数组的形式存储的</p>
-    <p>2⃣️.可用遍历的方式打印里面的元素（for 循环）</p>
-    <p>3⃣️.<span>element.getElementsByTagName('li')</span> 可以得到这个元素里面的某些标签</p>
+<p style="font-weight: 700;">3.对失意</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>与其想自己拥有什么才快乐，不如去思考自己失去什么就不快乐。</p>
 </div>
 
-<p class="p_title">2.13 H5新增获取元素方式（ie9）</p>
-<div style="background: #eee;padding: 10px;border-radius: 8px;line-height: 9px;" class="tt">
-    <p>1⃣️.<span>getElementsByclassName（类名）</span> 根据类名返回元素对象集合 </p>
-    <p>2⃣️.<span>querySelector（选择器）</span> 返回指定选择器的第一个元素对象，里面的选择器需要加符号 .box #nav </p>
-    <p>3⃣️.<span>querySelectorAll（选择器）</span> 返回指定选择器的所有元素对象集合,里面的选择器需要加符号 .box #nav</p>
+<p style="font-weight: 700;">4.对生活情趣</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>不值得交往的人，别交往了。不值得爱的人，别爱了。不值得付出的工作，别做了。这些断舍离所带来的痛苦，跟人这漫长一辈子比起来，就如白驹过隙。一咬牙，一跺脚，牙就没了，脚就迈过去了。</p>
 </div>
 
-<p class="p_title">2.14 获取body 和 html 元素</p>
-<div style="background: #eee;padding: 10px;border-radius: 8px;line-height: 9px;" class="tt">
-     <p>1⃣️.<span>document.body</span> 返回元素对象</p>
-     <p>2⃣️.<span>document.documentElement</span> 返回元素对象</p>    
-</div>
-<h3>3.事件和样式操作及案例</h3>
-<p class="p_title">3.1 事件概述</p>
-<div style="background: #eee;padding: 10px;border-radius: 8px;line-height: 9px;" class="tt">
-    <p>1⃣️.简单理解：触发--响应机制</p>
-    <p>2⃣️.事件是有三部分组成 事件源 事件类型 事件处理程序 我们也称为事件三要素</p> 
-    <ul class="uu">
-        <li>事件源 事件被触发的对象 谁 按钮</li>
-        <li>事件类型 如何触发 什么事件 比如鼠标点击（onclick）还是鼠标经过 还是键盘按下</li>
-        <li>事件处理程序 通过一个函数赋值的方式 完成</li>
-    </ul>   
+<p style="font-weight: 700;">5.对于交际</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>不合群者，独来独往的人，必有过人之处。整天混在朋友之间的人绝对不可能有多大的能力。受周围人嫉妒，非议的人大多具有能力。</p>
+    <p>人们从来不会去嫉妒弱者。人们也不会去踹死一只死狗。</p>
 </div>
 
-<p class="p_title">3.2 操作元素-修改元素的内容</p>
-<div style="background: #eee;padding: 10px;border-radius: 8px;line-height: 9px;" class="tt">
-    <p>1⃣️.element.innerText 从起始位置到终止位置的内容，但它去除Html标签 同时空格和换行也会去掉</p>
-    <p>2⃣️.element.innerHTML 起始位置到终止位置的全部内容，包括html 标签，同时保留空格和换行</p>  
+<p style="font-weight: 700;">6.对职场</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>这世界上什么都缺，但从来没有缺过人。没有人重要到，需要你总是记恨在新。我们跟这个世界和谐相处，就会发现很多闪光之处。我们放下防御，别人才能靠近我们，才能知道我们的想法。你把自己包裹得那么紧，别人想给你钱都不知道往哪里塞。</p>
 </div>
 
-<p class="p_title">3.3 操作元素-修改元素的属性</p>
-<div style="background: #eee;padding: 10px;border-radius: 8px;line-height: 9px;" class="tt">
-    <p>1⃣️.innerText innerHTML 改变元素内容</p>
-    <p>2⃣️.src, href</p>
-    <p>3⃣️.id, alt, title</p> 
-    <pre>
-        <code class="language-js">
-            &ltbutton id="ldh"&gt刘德华&lt/button&gt
-            &ltbutton id="zxy"&gt张学友&lt/button&gt
-            &ltimg src="imgs/ewm.jpg" alt="" title="我喜欢你"&gt
-            &ltscript&gt
-                let l = document.getElementById('ldh')
-                let z = document.getElementById('zxy')
-                let img =document.querySelector('img')
-                l.onclick=function(){
-                    img.src='imgs/online.png'
-                    img.title='我爱你'
-                }
-                z.onclick=function(){
-                    img.src='imgs/ewm.jpg'
-                    img.title='我喜欢你'
-                }
-            &lt/script&gt
-        </code>
-    </pre>   
+<p style="font-weight: 700;">7.对自由</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>往大处拼搏，往小处生活。</p>
 </div>
 
-<p class="p_title">3.4 操作元素-修改表单的属性</p>
-<div style="background: #eee;padding: 10px;border-radius: 8px;line-height: 9px;" class="tt">
-    <p>1⃣️.type</p>
-    <p>2⃣️.value</p>
-    <p>3⃣️.checked</p> 
-    <p>4⃣️.selected</p> 
-    <p>5⃣️.disabled</p>
+<p style="font-weight: 700;">8.对人性</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>有些东西，你总要看得开点：凡是离开你的，都不是你的，不管是人还是钱。往前看，不用总回头，过去的不必留恋，一个人不要总在回忆里意淫。对很多人，拉黑删除比道理有用，只要不是亲生的，就不必肩负教育的重任。</p>
+    <p>爱不起的不爱，买不起的不买，健健康康比什么都强。没什么人值得羡慕，都是人类，生活中的困扰与爱恨，大家都差不了太多。</p>
 </div>
-
-<p class="p_title">3.5 操作元素-样式属性操作</p>
-<div style="background: #eee;padding: 10px;border-radius: 8px;line-height: 9px;" class="tt">
-    <p>1⃣️.element.style  行内样式操作</p>
-    <p>2⃣️.element.calssName 类名样式操作</p>
-    <p>如果原来有类名的话，避免被覆盖，可以这么写</p>
-    <p style="color: red;">this.className='first change'</p>
-</div>
-
-<h3>4.节点操作</h3>
-<div style="background: #eee;padding: 10px;border-radius: 8px;line-height: 9px;" class="tt">
-    <p>复制节点（克隆节点）</p>
-    <p>node.cloneNode()  该方法返回调用该方法的节点的一个副本，也称为克隆节点/拷贝节点</p>
-    <p>注意：</p>
-    <ul class="uu">
-        <li>1.如果括号参数为空或者为false，则是浅拷贝，即只克隆复制节点本身，不克隆里面的子节点</li>
-        <li>2.如果括号参数为true，则是深度拷贝，会复制节点本身以及里面所有的子节点。</li>
-    </ul>
-</div>
-<h3>5.动态创建表格案例</h3>
-<div style="background: #eee;padding: 10px;border-radius: 8px;line-height: 9px;" class="tt">
-    <p>复制节点（克隆节点）</p>
-    <p>node.cloneNode()  该方法返回调用该方法的节点的一个副本，也称为克隆节点/拷贝节点</p>
-    <p>注意：</p>
-    <ul class="uu">
-        <li>1.如果括号参数为空或者为false，则是浅拷贝，即只克隆复制节点本身，不克隆里面的子节点</li>
-        <li>2.如果括号参数为true，则是深度拷贝，会复制节点本身以及里面所有的子节点。</li>
-    </ul>
-</div>
-      <div class="date">发布时间：2019-10-12</div>
+      <div class="date">发布时间：2019-11-01</div>
       <div id="gitalk-container"></div>
     </div>
     <div class="nav-container">
