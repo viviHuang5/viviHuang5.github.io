@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
+  <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
+  <title>微信小程序 学习笔记 - ヾviviHuang`博客【Web前端开发】</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <link rel="stylesheet" href="/css/prism.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/post.css">
+  <script src="/js/util.js"></script>
+</head>
+
+<body>
+  <div id="header" style="background-image: url(/images/bg-banner.jpg)">
+    <div class="top">
+  <div class="title" style="margin-top: 10px;">
+    <img src="/images/001.jpg" alt="" style="width: 40px;height: 40px; border-radius: 50%; ">
+    <a href="/">ヾviviHuang</a>
+  </div>
+  <nav class="nav">
+    <div class="item">
+      <a href="/">Home</a>
+    </div>
+    <div class="item">
+      <a href="/about">About</a>
+    </div>
+    <div class="item">
+      <a href="/tags">Tags</a>
+    </div>
+  </nav>
+  <div class="mobile-nav">
+    <div class="mobile-nav-menu icon">
+      <i class="iconfont">&#xe633;</i>
+    </div>
+    <div class="mobile-nav-box">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/tags">Tags</a>
+    </div>
+  </div>
+  
+</div>
+
+
+<script>
+  (function (d, w) {
+    w.onload = function () {
+      var $menuIcon = d.querySelector('.mobile-nav-menu');
+      var $navBox = d.querySelector('.mobile-nav-box');
+      var animationEndCallback = null;
+      function hideNavBox() {
+        addClass($navBox, 'zoomOut');
+        animationEndCallback = function () {
+          removeClass($navBox, 'zoomOut');
+          $navBox.style.display = 'none';
+        }
+      }
+
+      $menuIcon.onclick = function (e) {
+        e.stopPropagation();
+        if ($navBox.style.display === 'block') return hideNavBox();
+        $navBox.style.display = 'block';
+        addClass($navBox, 'zoomIn');
+        animationEndCallback = function () {
+          removeClass($navBox, 'zoomIn');
+        }
+      };
+
+      $navBox.onclick = function (e) {
+        e.stopPropagation();
+      };
+
+      $navBox.addEventListener('animationend', function (e) {
+        animationEndCallback && animationEndCallback();
+      }, false);
+
+      d.body.addEventListener('click', function () {
+        if ($navBox.style.display === 'block') hideNavBox();
+      }, false);
+
+      var $header = d.querySelector('#header');
+      var $top = d.querySelector('.top');
+      var topHeight = $top.offsetHeight;
+      w.addEventListener('scroll', function () {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        var step = $header.className.indexOf('visible') >= 0 ? topHeight : 0;
+        if (scrollTop > $header.offsetHeight - step) {
+          addClass($header, 'active');
+        } else {
+          removeClass($header, 'active');
+        }
+      }, false);
+
+      d.addEventListener('mousewheel', function(e) {
+        if (e.wheelDeltaY >= 0) {
+          addClass($header, 'visible');
+        } else {
+          removeClass($header, 'visible');
+        }
+      })
+    }
+  })(document, window);
+</script>
+
+    <div class="content">
+      <h1 class="post-title">微信小程序 学习笔记</h1>
+      <div class="post-description">learning丷</div>
+      <div class="post-date">2019-11-02</div>
+      <div class="tags">
+        
+        <a class="tag" href="/tags/#微信小程序" title="微信小程序">微信小程序</a>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="main">
+      <!--more-->
+<h2>1.text 文本</h2>
+<p style="font-weight: 700;">1⃣️显示连续空格</p>
+<pre>
+    <code class="language-js">
+        &ltp&gt&lttext space='ensp'&gt11&lt/text&gt&lt/p&gt
+        &ltp&gt&lttext space='emsp'&gt11&lt/text&gt&lt/p&gt
+        &ltp&gt&lttext space='nbsp'&gt111&lt/text&gt&lt/p&gt
+    </code>
+</pre>
+
+<p style="font-weight: 700;">2⃣️文本是否可选,其他组建都无法长按选中</p>
+<pre>
+    <code class="language-js">
+        &ltp&gt&lttext selectable &gt11&lt/text&gt&lt/p&gt
+    </code>
+</pre>
+
+<p style="font-weight: 700;">3⃣️是否连续空格，可解析</p>
+<pre>
+    <code class="language-js">
+        &ltp&gt&lttext decode &gt & nbsp;& emsp; & lt;&lt/text&gt&lt/p&gt
+    </code>
+</pre>
+
+
+<h2>2.view 视图容器</h2>
+<p style="font-weight: 700;">1⃣️hover-class:指令按下去的样式类；</p>
+<p style="font-weight: 700;">2⃣️hover-stop-propagation:指定是否阻止本节点的祖先节点出现点击态；</p>
+<p style="font-weight: 700;">3⃣️hover-start-time:按住后多久出现点击态，单位毫秒；</p>
+<p style="font-weight: 700;">4⃣️hover-stay-time:手指松开后点击态保留时间，单位毫秒；</p>
+
+<h2>3.使用全局配置文件app.json</h2>
+<p style="font-weight: 700;">window 节点常用的配置项</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p style="color:red;">设置导航栏标题文字内容</p>
+    <p>app.json->window->navigationBarTitleText </p>
+    <p style="color:red;">设置下拉loading的样式</p>
+    <p>app.json->window->backgroundTextStyle 指定'dark'或者'light'</p>
+    <p style="color:red;">设置上拉触底的距离</p>
+    <p>app.json->window->onReachBottomDistance 设置新的数值（默认为50px）</p>
+</div>
+
+<h2>4.wxs 脚本</h2>
+<p style="font-weight: 700;">1⃣️wxs(weiXin Script) 是小程序的一套脚本语言，结合WXML,可以构建出页面的结构。</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <ul>
+        <p>wxs 的注意点：</p>
+        <li><span style="color:orange;">没有兼容性：</span>不依赖于运行时的基础库版本，可以在所有版本的小程序中运行；</li>
+        <li><span style="color:orange;">与javascript 不同：</span>wxs 与 javascript 是不同的语言，有自己的语法，并不和javascript一致；</li>
+        <li><span style="color:orange;">隔离性：</span>wxs 的运行环境和其他 javascript 代码是隔离的，wxs 中不能调用其他 javascript
+            文件中定义的函数，也不能调用小程序提供的API；</li>
+        <li><span style="color:orange;">不能作为事件回调：</span>wxs 函数不能作为组件的事件回调；</li>
+        <li><span style="color:orange;">ios设备上比javascript 运行快：</span>由于运行环境的差异，在ios设备上小程序内的wxs 会比javascript
+            代码快2～20倍。在android 设备上二者运行效率无差异；</li>
+    </ul>
+</div>
+
+<div style="background: #eee; padding:10px;border-radius: 5px;margin-top: 10px;">
+    <ul>
+        <p>wxs 遵循CommonJS 模块化规范：</p>
+        <li><span style="color:orange;">module 对象：</span>每个wxs 都是独立的模块，每个模块均有一个内置的module 对象，每个模块都有自己独立的作用域；</li>
+        <li><span style="color:orange;">module.exports：</span>由于 wxs 拥有独立作用域，所以在一个模块里面定义的变量与函数，默认为私有的，对其他模块不可见，通过
+            module.exports 属性，可以对外共享本模块的私有变量与函数；</li>
+        <li><span style="color:orange;">require 函数：</span>在wxs 模块中引用其他wxs 文件模块，可以使用 require 函数；</li>
+    </ul>
+</div>
+
+<p style="font-weight: 700;">2⃣️wxs基础语法</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;margin-top: 10px;">
+    <ul>
+        <p>通过module.exports属性，可以对外共享本模块的私有变量与函数：</p>
+        <pre>
+               <code class="language-js">
+                    var foo ='hello moto';//定义私有变量 foo
+                    var bar = function(d){//定义私有函数 bar
+                         return d
+                    }
+                    module.exports ={// 通过 module.exports 向外共享私有成员
+                        Foo:foo,//向外共享私有变量 foo
+                        bar:bar//向外共享私有函数 bar
+
+                    };
+                    module.exports.msg='vivi';//额外向module.exports 中挂载msg 变量
+
+               </code>
+           </pre>
+
+    </ul>
+</div>
+<div style="background: #eee; padding:10px;border-radius: 5px;margin-top: 10px;">
+        <ul>
+            <p>使用 require 引入其它 wxs 模块：</p>
+            <p>假设有两个wxs 模块，路径分别为 /pages/tools.wxs 和/pages/logic.wxs，如果要在 logic.wxs 中引入 tools.wxs 脚本，则示例代码如下：</p>
+            <pre>
+                   <code class="language-js">
+                       // 使用require 倒入 tools.wxs 脚本
+                        var tools =require('./tools.wxs');
+                      //得到的tools对象，可以直接访问到 tools.wxs 中向外暴露的变量和方法
+                   </code>
+               </pre>
+    
+        </ul>
+    </div>
+
+<p style="font-weight: 700;">3⃣️使用 require 的注意点</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;margin-top: 10px;">
+        <ul>
+            <p>在wxs 模块中引用其他的wxs 文件模块，可以使用 require 函数：</p>
+            <li>
+                a.只能引用 .wxs 文件模块，且必须使用相对路径；
+            </li>
+            <li>
+                b.wxs 模块均为单例：wxs 模块在第一次被引用时，会自动初始化为单例对象，多个页面，多个地方，多次引用，使用的都是同一个wxs 模块对象；
+            </li>
+            <li>
+                c.如果一个wxs 模块在定义之后：一直没有被引用，则该模块不会被解析与运行；
+            </li>
+        </ul>
+    </div>
+
+    <p style="font-weight: 700;">4⃣️支持的数据类型</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;margin-top: 10px;">
+        <ul>
+            <p>wxs 语言目前共有以下8种数据类型：</p>
+            <li>
+                number 数值类型；
+            </li>
+            <li>
+                string 字符串类型；
+            </li>
+            <li>
+                boolean 布尔类型；
+            </li>
+            <li>
+                object 对象类型；
+            </li>
+            <li>
+                function 函数类型；
+            </li>
+            <li>
+                array 数组类型；
+            </li>
+            <li>
+                date 日期类型；
+            </li>
+            <li>
+                regexp 正则；
+            </li>
+            <p style="color:red;">注意，由于和javascript是不同的语言，不一样的语法，使用时请先查阅文档</p>
+        </ul>
+    </div>
+
+    <h3>4.1 内嵌wxs 脚本</h3>
+    <div style="background: #eee; padding:10px;border-radius: 5px;">
+            <ul>
+                <p>a. wxs 代码可以编写在wxml 文件中的&ltwxs&gt&lt/wxs&gt标签内，就像javascript 代码可以编写在 html文件中的&ltscript&gt&lt/script&gt标签内一样；</p>
+                <p>b. wxml 文件中的每个&ltwxs&gt&lt/wxs&gt标签，必须提供一个 module 属性，用来指定当前&ltwxs&gt&lt/wxs&gt标签的模块名。在单个wxml文件内，建议其值唯一；</p>
+                <pre>
+                    <code class="language-js">
+                        //wxml
+                        &ltwxs module='foo'&gt
+                        var some_msg ='hello moto';
+                        module.exports = {
+                            msg: some_msg
+                        }
+                        &lt/wxs&gt
+                        &ltview&gt{ {foo.msg } }&lt/view&gt;
+                    </code>
+                </pre>
+            </ul>
+        </div>
+        <h3>4.2 外联 wxs 脚本</h3>
+    <div style="background: #eee; padding:10px;border-radius: 5px;">
+            <ul>
+                <p>a. wxs 代码还可以编写在以 .wxs 为后缀名的文件内，就像javascript 代码可以编写在 .js 为后缀名的文件中一样；</p>
+                <p>b. 在微信开发者工具里面，右键可以直接创建.wxs 文件，在其中直接编写 WXS 脚本；</p>
+                <pre>
+                    <code class="language-js">
+                           // /pages/tools.wxs
+                            var foo ='hello moto';//定义私有变量 foo
+                            var bar = function(d){//定义私有函数 bar
+                                 return d
+                            }
+                            module.exports ={// 通过 module.exports 向外共享私有成员
+                                Foo:foo,//向外共享私有变量 foo
+                                bar:bar//向外共享私有函数 bar
+        
+                            };
+                            module.exports.msg='vivi';//额外向module.exports 中挂载msg 变量
+                    </code>
+                </pre>
+                <p>c. 在wxml 内引用外联的 wxs 脚本；</p>
+                <pre>
+                        <code class="language-js">
+                               // /pages/index/index.wxml
+                               &ltwxs src='./../tools.wxs' module='tools'/&gt
+                               &ltview&gt { {tools.msg} } &lt/view&gt
+                               &ltview&gt { {tools.bar(tools.FOO)} } &lt/view&gt
+                        </code>
+                    </pre>
+                
+                
+            </ul>
+        </div>
+
+      <div class="date">发布时间：2019-11-02</div>
+      <div id="gitalk-container"></div>
+    </div>
+    <div class="nav-container">
+      <div class="main-nav">
+        <div class="title">目录</div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+  <a href="https://github.com/viviHuang5">
+    <i class="iconfont">&#xe600;</i>
+  </a>
+  <a href="javascript:;">
+    <i class="iconfont">&#xe634;</i>
+  </a>
+  <a href="javascript:;">
+    <i class="iconfont">&#xe61c;</i>
+  </a>
+  <a href="javascript:;">
+    <i class="iconfont">&#xe635;</i>
+  </a>
+</footer>
+
+  <div class="back-top">
+  <i class="iconfont">&#xe6d9;</i>
+</div>
+<script>
+  (function (d, w) {
+    function scrollTo(targetY) {
+      var currentY =
+        d.documentElement.scrollTop || d.body.scrollTop;
+      var distance = targetY - currentY;
+      var num = 0;
+
+      function animate() {
+        var currentY =
+          d.documentElement.scrollTop || d.body.scrollTop;
+        w.scrollTo(0, currentY + distance / 10);
+        num++;
+        if (num === 10) return;
+        w.requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+    var $upTop = d.querySelector('.back-top');
+
+    $upTop.onclick = function () {
+      scrollTo(0);
+    };
+
+    function bindEvent() {
+      var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+      if (scrollTop > 100) {
+        $upTop.style.display = 'block';
+      } else {
+        $upTop.style.display = 'none';
+      }
+    }
+
+    w.addEventListener('scroll', bindEvent);
+    w.addEventListener('load', bindEvent);
+  })(document, window);
+</script>
+
+  <script src="/js/prism.js"></script>
+  <script>
+    (function (w, d) {
+      var $nav = document.querySelector('.main-nav');
+      var $main = document.querySelector('.main');
+      var titleNodeNames = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+      var contentItems = [];
+      var navItems = [];
+      for (var i = 0; i < $main.children.length; i++) {
+        var element = $main.children[i];
+        if (titleNodeNames.includes(element.nodeName)) {
+          var link = document.createElement('a');
+          link.href = '#' + element.innerText;
+          link.innerText = element.innerText;
+
+          $nav.appendChild(link);
+          navItems.push(link);
+          element.id = element.innerText;
+          contentItems.push(element);
+        }
+      }
+
+      function bindEvent() {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        if (scrollTop >= $nav.parentNode.offsetTop) {
+          addClass($nav, 'active');
+        } else {
+          removeClass($nav, 'active');
+        }
+        for (var i = 0; i < navItems.length; i++) {
+          removeClass(navItems[i], 'active');
+        }
+        for (var i = contentItems.length - 1; i >= 0; i--) {
+          if (scrollTop >= getElementTop(contentItems[i])) {
+            addClass(navItems[i], 'active');
+            return;
+          }
+        }
+        addClass(navItems[0], 'active');
+      }
+      w.addEventListener('scroll', bindEvent);
+      w.addEventListener('load', bindEvent);
+    })(window, document)
+  </script>
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/md5.min.js"></script>
+  <!-- <script>
+    const gitalk = new Gitalk({
+      clientID: '0b153d2e389989779003',
+      clientSecret: 'e5f2c768454a6e3aeafbc5d88f109059d7b5a60a',
+      repo: 'viviHuang5.github.io',
+      owner: 'viviHuang5',
+      admin: ['viviHuang5'],
+      id: md5(location.pathname),
+      distractionFreeMode: false,
+      createIssueManually: true
+    })
+
+    gitalk.render('gitalk-container')
+  </script> -->
+</body>
+
+</html>
