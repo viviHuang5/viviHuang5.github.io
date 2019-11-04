@@ -383,6 +383,56 @@
 
     </code>
 </pre>
+<h2>8.转发分享</h2>
+<p style="font-weight: 700;">onShareAppMessage(Object)</p>
+<pre>
+        <code class="language-js">
+            //用户点击右上角分享
+           onShareAppMessage:function(obj){
+               console.log(obj)
+           }
+           
+           //按钮实现转发
+           &ltbutton type="primary" open-type='share' data-info='aaa'&gt转发&lt/button&gt
+           
+           //自定义转发内容
+           Page){
+               onShareAppMessage:function(res){
+                   if(res.from ==='button'){
+                       //来自页面内转发按钮
+                       console.log(res.target)
+                   }
+                   return {
+                       title:'自定义转发标题',
+                       path:'/pages/user?id=123',
+                       imageUrl:''
+                   }
+               }
+           }
+
+        </code>
+</pre>
+<h2>9.页面导航</h2>
+<p style="font-weight: 700;">后退导航</p>
+<p>如果要后退到上一页面或多级页面，需要把open-type 设置为 navigateBack, 同时使用delta 属性指定后退的层数</p>
+<pre>
+        <code class="language-js">
+            //声明式导航
+           &ltnavigator open-type='navigateBack' delta='1'&gt
+               返回上一页
+           &ltnavigator&gt
+
+           //编程式导航
+           &ltbutton type='warn' bindtap='btnHandler2'&gt&ltbutton&gt
+           btnHandler2(){
+               wx.navigateBack({
+                   delta:1
+               })
+           }
+
+        </code>
+</pre>
+<h2>10.导航传参</h2>
       <div class="date">发布时间：2019-11-02</div>
       <div id="gitalk-container"></div>
     </div>
