@@ -433,6 +433,200 @@
         </code>
 </pre>
 <h2>10.导航传参</h2>
+<p style="font-weight: 700;">1⃣️声明式导航传参</p>
+<p>navigator 组件的 url属性用来指定导航的页面路径，同时路径后面还可以携带参数，参数与路径之间使用？分隔，参数键与参数值用= 相连，不同参数用& 分隔</p>
+<pre>
+    <code class='language-js'>
+        &ltnavigator url=`/pages/logs/logs?name=zs&age=20`&gt去logs页面&lt/navigator&gt
+    </code>
+</pre>
+
+<p style="font-weight: 700;">2⃣️编程式导航传参</p>
+<pre>
+    <code class='language-js'>
+        wx.navigateTo({
+            url:'/pages/logs/logs?name=zs&age=20'
+        })
+    </code>
+</pre>
+<h2>11.组件的创建与引用</h2>
+<p style="font-weight: 700;">1⃣️创建组件</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <ul>
+        <li>a.在项目的根目录中，鼠标右键，创建components->test文件夹</li>
+        <li>b.在新建的components->test文件夹上，点击创建'新建component'</li>
+        <li>c.为新建的组件命名之后，会自动生成组件对应的4个文件，后缀分别为.js,.json,.wxml和.wxss'</li>
+        <p><span style="color: red;">注意：</span>尽量将不同的组件，存放到单独的文件夹中，从而保证清晰的目录结构</p>
+    </ul>
+</div>
+<p style="font-weight: 700;">2⃣️引用组件</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <ul>
+        <li>a.在需要引用组件的页面中，找到页面的.json 配置文件，新增 usingComponents节点</li>
+        <li>b.在usingComponents中，通过键值对的形式，注册组件；键为注册的组件名称，值为组件的相对引用路径</li>
+        <li>c.在页面的.wxml文件中，把注册的组件名称，以标签形式在页面上使用，即可把组件展示到页面上</li>
+        <p><span style="color: red;">注意：</span>注册组件名称时，建议把名称注册为短横线连接的形式，例如vant-button或custom-button</p>
+    </ul>
+</div>
+<p style="font-weight: 700;">3⃣️使用样式美化组件</p>
+<h2>12.数据监听器</h2>
+<p>数据监听器可以用于监听和响应任何属性和数据字段的变化，从而执行特定的操作。作用类似于vue 中的wacth。数据监听器从小程序2.6.1开始支持</p>
+<pre>
+    <code class="language-js">
+        Component({
+            observers:{
+                '字段A，字段B':function(字段A的新值，字段B的新值){
+                    //do something
+                }
+            }
+   
+        })
+
+        //监听子数据字段的变化
+        Component({
+            observers:{
+                'some.subfield':function(subfield){
+                    //使用setData 设置 this.data.some.subfield 时触发
+                    //（除此以外，使用setData 设置this.data.some也会触发）
+                },
+                'arr[12]':function(arr12){
+                    //使用setData 设置 this.data.arr[12] 时触发
+                    //（除此以外，使用setData 设置this.data.arr也会触发）
+                },
+                //使用通配符**监听所有子数据字段的变化
+                'some.subfield.**':function(subfield){
+                    //使用setData 设置 this.data.some.subfield 本身或者其下任何子数据字段时触发
+                    //（除此以外，使用setData 设置this.data.some也会触发）field === this.data.some.field
+                    
+                }
+            }
+   
+        })
+    </code>
+</pre>
+<h2>13.WePY框架</h2>
+<p>腾讯官方出品的一个小程序快速开发框架，对原生小程序的开发模式进行了再次封装，更贴进于MVVM架构模式，并支持ES6/7的一些新特性，同时语法风格更接近于Vue.js，使用WePY 框架能够提高小程序的开发效率。</p>
+
+<h2>13.1.安装WePY框架</h2>
+<p>wePY 的安装或更新都通过npm 进行，全局安装或更新 WePY 命令行工具，可以在终端运行以下命令：</p>
+<pre>
+      <code class="language-js">
+          npm install wepy-cli -g
+      </code>
+</pre>
+
+<h2>13.2.初始化WePY项目</h2>
+<p>WePY 命令行工具安装完毕后，可以运行如下命令，初始化项目结构：</p>
+<pre>
+        <code class="language-js">
+            wepy init standard myproject
+            //myproject 为自定义的项目名称
+            //创建项目的时候，要勾选EsLint选项，规范代码的风格
+        </code>
+  </pre>
+
+  <h2>13.3.实时编译WePY项目</h2>
+<p>使用 wepy init 命令初始化项目后，只是得到了一个模板项目，如果想开启实时编译，得到小程序项目，步骤如下：</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+        <ul>
+            <li>a.运行cd myproject 切换至 WePY 项目根目录</li>
+            <li>b.运行npm install 安装 WePY 项目依赖项</li>      
+            <li>c.运行wepy build--watch 开启实时编译</li>
+            <p><span style="color: red;">注意：</span>wepy build --wacth 命令，会循环监听 WePY 项目中源代码的变化，自动编译生成小程序项目，生成的小程序项目默认被存放于dist 目录中。</p>
+        </ul>
+    </div>
+<pre>
+        <code class="language-js">
+            wepy init standard myproject
+            //myproject 为自定义的项目名称
+            //创建项目的时候，要勾选EsLint选项，规范代码的风格
+        </code>
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>20.项目流程</h2>
+<p style="font-weight: 700;">1⃣️app.json配置</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
+            {   //主包
+                "pages": [
+                  "pages/index/index"  
+                ],
+
+                //分包
+                "subpackages": [
+                {
+                  "root": "mall",
+                  "pages": [
+                    "pages/searchResults/searchResults"
+                  ]
+                }
+              ],
+                "window": {
+                  "backgroundTextStyle": "light",
+                  "navigationBarBackgroundColor": "#fff",
+                  //项目名称
+                  "navigationBarTitleText": "糖糖戒了糖",
+                  "navigationBarTextStyle": "black"
+                },
+                
+                //tab栏
+                "tabBar":{
+                  "color": "#646464",
+                  "selectedColor": "#216d8d",
+                  "borderStyle": "black",
+                  "backgroundColor": "#ffffff",
+                  "list": [
+                    {
+                      "pagePath": "pages/index/index",
+                      "text": "登录",
+                      "iconPath": "images/consult.png",
+                      "selectedIconPath": "images/consult1.png"
+               
+                    },
+                    {
+                      "pagePath": "pages/index/index",
+                      "text": "商城",
+                      "iconPath": "images/consult.png",
+                      "selectedIconPath": "images/consult1.png"
+                   
+                    },
+                    {
+                      "pagePath": "pages/index/index",
+                      "text": "预约录单",
+                      "iconPath": "images/consult.png",
+                      "selectedIconPath": "images/consult1.png"
+                  
+                    },
+                    {
+                      "pagePath": "pages/index/index",
+                      "text": "个人中心",
+                      "iconPath": "images/consult.png",
+                      "selectedIconPath": "images/consult1.png"
+                   
+                    }
+                  ]
+                },
+                "sitemapLocation": "sitemap.json"
+              }
+        </code>
+    </pre>
+</div>
+
+
+
       <div class="date">发布时间：2019-11-02</div>
       <div id="gitalk-container"></div>
     </div>
