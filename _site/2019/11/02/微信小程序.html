@@ -507,7 +507,7 @@
 <h2>13.WePY框架</h2>
 <p>腾讯官方出品的一个小程序快速开发框架，对原生小程序的开发模式进行了再次封装，更贴进于MVVM架构模式，并支持ES6/7的一些新特性，同时语法风格更接近于Vue.js，使用WePY 框架能够提高小程序的开发效率。</p>
 
-<h2>13.1.安装WePY框架</h2>
+<h3>13.1.安装WePY框架</h3>
 <p>wePY 的安装或更新都通过npm 进行，全局安装或更新 WePY 命令行工具，可以在终端运行以下命令：</p>
 <pre>
       <code class="language-js">
@@ -515,7 +515,7 @@
       </code>
 </pre>
 
-<h2>13.2.初始化WePY项目</h2>
+<h3>13.2.初始化WePY项目</h3>
 <p>WePY 命令行工具安装完毕后，可以运行如下命令，初始化项目结构：</p>
 <pre>
         <code class="language-js">
@@ -525,7 +525,7 @@
         </code>
   </pre>
 
-  <h2>13.3.实时编译WePY项目</h2>
+  <h3>13.3.实时编译WePY项目</h3>
 <p>使用 wepy init 命令初始化项目后，只是得到了一个模板项目，如果想开启实时编译，得到小程序项目，步骤如下：</p>
 <div style="background: #eee; padding:10px;border-radius: 5px;">
         <ul>
@@ -543,6 +543,16 @@
         </code>
   </pre>
 
+  <h3>13.4.wpy文件的使用说明</h3>
+  <p>1⃣️三大组成部分：</p>
+  <div style="background: #eee; padding:10px;border-radius: 5px;">
+    <ul>
+        <li>a.脚本部分：</li>
+        <li>b.运行npm install 安装 WePY 项目依赖项</li>      
+        <li>c.运行wepy build--watch 开启实时编译</li>
+        <p><span style="color: red;">注意：</span>wepy build --wacth 命令，会循环监听 WePY 项目中源代码的变化，自动编译生成小程序项目，生成的小程序项目默认被存放于dist 目录中。</p>
+    </ul>
+</div>
 
 
 
