@@ -123,8 +123,13 @@
   <div class="container">
     <div class="main">
       <!--more-->
+<h2>a .jQuery介绍及常用API导读</h2>
+<h2>b .jQuery选择器及案例</h2>
+<h2>c .jQuery链式编程及样式操作</h2>
+
+
 <h2>1.jQuery动画</h2>
-<h3>1.1 jQuery显示与隐藏效果</h3>
+<p style="color:blue;">1.1 jQuery显示与隐藏效果</p>
 <p style="font-weight: 700;">1⃣️show([speed,[easing],[fn]])</p>
 <p style="font-weight: 700;">2⃣️hide([speed,[easing],[fn]])</p>
 <p style="font-weight: 700;">3⃣️toggle([speed,[easing],[fn]])</p>
@@ -174,7 +179,7 @@
     
 </div>
 
-<h3>1.2 jQuery滑动效果及切换hover</h3>
+<p style="color:blue;">1.2 jQuery滑动效果及切换hover</p>
 <p style="font-weight: 700;">1⃣️slideDown([speed,[easing],[fn]])</p>
 <p style="font-weight: 700;">2⃣️slideUp([speed,[easing],[fn]])</p>
 <p style="font-weight: 700;">3⃣️slideToggle([speed,[easing],[fn]])</p>
@@ -241,7 +246,7 @@
         })
     </code>
 </pre>
-<h3>1.3 动画队列及其停止排队方法</h3>
+<p style="color:blue;">1.3 动画队列及其停止排队方法</p>
 <p style="font-weight: 700;">1⃣️动画或效果队列</p></pre>
 <p>动画或效果一旦触发就会执行，如果多次触发，就造成多个动画或者效果排队执行。</p>
 <pre>
@@ -252,7 +257,7 @@
         })
     </code>
 </pre>
-<h3>1.4 jQuery淡入淡出</h3>
+<p style="color:blue;">1.4 jQuery淡入淡出</p>
 <p style="font-weight: 700;">1⃣️fadeIn([speed,[easing],[fn]])</p>
 <p style="font-weight: 700;">2⃣️fadeOut([speed,[easing],[fn]])</p>
 <p style="font-weight: 700;">3⃣️fadeToggle([speed,[easing],[fn]])</p>
@@ -312,7 +317,7 @@
     </pre>
     
 </div>
-<h3>1.5 jQuery自定义动画</h3>
+<p style="color:blue;">1.5 jQuery自定义动画</p>
 <p style="font-weight: 700;">1⃣️animate(params,[speed,[easing],[fn]])</p>
 <div style="background: #eee; padding:10px;border-radius: 5px;">
         <ul>
@@ -354,7 +359,7 @@
 </pre>
 
 <h2>2.jQuery实现购物车案例</h2>
-<h3>2.1 jQuery属性操作</h3>
+<p style="color:blue;">2.1 jQuery属性操作</p>
 <p style="font-weight: 700;">1⃣️设置或获取元素固有属性值prop()</p>
 <p>所谓元素固有属性就是元素本身自带的属性，比如&lta&gt元素里面的href，比如&ltinput&gt元素里面的type。</p>
 <pre>
@@ -384,7 +389,7 @@
 
     </code>
 </pre>
-<h3>2.2 购物车模块-全选</h3>
+<p style="color:blue;">2.2 购物车模块-全选</p>
 <p style="font-weight: 700;">全选 全不选功能</p>
 <pre>
         <code class='language-js'>
@@ -409,7 +414,7 @@
         </code>
     </pre>
 
-<h3>2.3 jQuery内容文本值</h3>
+<p style="color:blue;">2.3 jQuery内容文本值</p>
 <p style="font-weight: 700;">1⃣️普通元素内容 html() （相当于原生innerHTML）</p>
 <pre>
         <code class='language-js'>
@@ -437,7 +442,7 @@
         </code>
 </pre>
 
-<h3>2.4 购物车模块-增减商品数量</h3>
+<p style="color:blue;">2.4 购物车模块-增减商品数量</p>
 <pre>
         <code class='language-js'>
            $(function(){
@@ -466,7 +471,7 @@
         </code>
 </pre>
 
-<h3>2.5 购物车模块-修改商品小计(价格）</h3>
+<p style="color:blue;">2.5 购物车模块-修改商品小计(价格）</p>
 <p style="font-weight: 700;color:red;" >toFixed(2) 保留两位小数</p>
 
 <pre>
@@ -512,7 +517,7 @@
         </code>
 </pre>
 
-<h3>2.6 用户修改文本框的值计算 小计模块</h3>
+<p style="color:blue;">2.6 用户修改文本框的值计算 小计模块</p>
 <pre>
         <code class='language-js'>
                 $(function(){
@@ -531,7 +536,7 @@
         </code>
 </pre>
 
-<h3>2.7 购物车模块-计算总件数和总额</h3>
+<p style="color:blue;">2.7 购物车模块-计算总件数和总额</p>
 <pre>
         <code class='language-js'>
                 $(function(){
@@ -552,7 +557,7 @@
     
         </code>
 </pre>
-<h3>2.8 创建，添加，删除元素</h3>
+<p style="color:blue;">2.8 创建，添加，删除元素</p>
 <pre>
         <code class='language-js'>
               //1.创建元素
@@ -574,7 +579,7 @@
         </code>
 </pre>
 
-<h3>2.9 jQuery尺寸方法</h3>
+<p style="color:blue;">2.9 jQuery尺寸方法</p>
 <pre>
         <code class='language-js'>
               //1.取得匹配元素宽度和高度值 只算 width / height
@@ -595,7 +600,7 @@
         </code>
 </pre>
 
-<h3>2.10 jQuery位置方法</h3>
+<p style="color:blue;">2.10 jQuery位置方法</p>
 <pre>
         <code class='language-js'>
               //1.offset( ) 设置或获取元素偏移
@@ -633,7 +638,7 @@
 </pre>
 
 
-<h3>2.11 带有动画的返回顶部</h3>
+<p style="color:blue;">2.11 带有动画的返回顶部</p>
 <pre>
         <code class='language-js'>
               1⃣️.核心原理：使用animate 动画返回顶部
@@ -648,6 +653,189 @@
               
         </code>
 </pre>
+
+<h2>3.jQuery实现电梯导航案例</h2>
+
+<p style="color:blue;">3.1 显示隐藏电梯导航</p>
+<p style="font-weight: 700;">当我们滚动到某指定模块时，就让电梯导航显示出来</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
+            $(function(){
+                var toolTop = $('.recomend').offset().top;
+                $(window).scroll(function(){
+                    if($(document).scrollTop()>=toolTop){
+                        $('.fixedtool').fadeIn();
+                    }else{
+                     $('.fixedtool').fadeOut();
+                    }
+                })
+            })
+        </code>
+    </pre>
+</div>
+
+<p style="color:blue;">3.2 点击滚动目标位置</p>
+<p style="font-weight: 700;">点击电梯导航页面可以滚动到相应内容区域</p>
+<p>核心算法：导航和内容一一对应</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
+            $(function(){
+               $('.fixedtool li').click(function(){
+                   console.log($(this).index());
+                   //当我们每次点击小li 就需要计算出页面要去往的位置
+                   //选出对应索引号的内容区的盒子，计算它的.offset().top
+                   var current = $('.floor .w').eq($(this).index()).offset().top;
+                   //页面动画滚动效果
+                   $("body,html").stop().animate({
+                       scrollTop:current;
+                   }
+               })
+            })
+        </code>
+    </pre>
+</div>
+
+<p style="color:blue;">3.3 点击当前li添加current类</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
+            $(function(){
+                var toolTop = $('.recomend').offset().top;
+                toggleTool()
+
+                //封装显示隐藏的函数
+                function toggleTool(){
+                    if($(document).scrollTop()>=toolTop){
+                        $('.fixedtool').fadeIn();
+                    }else{
+                     $('.fixedtool').fadeOut();
+                    }
+                }
+
+                $(window).scroll(function(){
+                    toggleTool()
+                })
+               $('.fixedtool li').click(function(){
+                   console.log($(this).index());
+                   //当我们每次点击小li 就需要计算出页面要去往的位置
+                   //选出对应索引号的内容区的盒子，计算它的.offset().top
+                   var current = $('.floor .w').eq($(this).index()).offset().top;
+                   //页面动画滚动效果
+                   $("body,html").stop().animate({
+                       scrollTop:current;
+                   });
+                   //点击之后，让当前的小li 添加current 类名，姐妹移除current 类名，姐妹移除current
+                   $(this).addClass('current').siblings().removeClass()
+               })
+            })
+        </code>
+    </pre>
+</div>
+<p style="color:blue;">3.4 滑动页面电梯导航自动添加current类</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
+            $(function(){
+                var toolTop = $('.recomend').offset().top;
+                toggleTool()
+
+                //封装显示隐藏的函数
+                function toggleTool(){
+                    if($(document).scrollTop()>=toolTop){
+                        $('.fixedtool').fadeIn();
+                    }else{
+                     $('.fixedtool').fadeOut();
+                    }
+                }
+
+                $(window).scroll(function(){
+                    toggleTool();
+                    //当页面滚动到某个内容区域，左侧电梯导航小li 相应添加和删除 current类名
+                    $('.floor .w').each(function(i,ele){
+                        if($(document).scrollTop()>=$(ele).offset().top){
+                            console.log(i)
+                            $('.fixedtool li').eq(i).addClass("current").siblings().removeClass("current");
+                        }
+                    })
+                })
+               $('.fixedtool li').click(function(){
+                   console.log($(this).index());
+                   //当我们每次点击小li 就需要计算出页面要去往的位置
+                   //选出对应索引号的内容区的盒子，计算它的.offset().top
+                   var current = $('.floor .w').eq($(this).index()).offset().top;
+                   //页面动画滚动效果
+                   $("body,html").stop().animate({
+                       scrollTop:current;
+                   });
+                   //点击之后，让当前的小li 添加current 类名，姐妹移除current 类名，姐妹移除current
+                   $(this).addClass('current').siblings().removeClass()
+               })
+            })
+        </code>
+    </pre>
+</div>
+<p style="color:blue;">3.5 节流阀（互斥锁）（修复）</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
+            $(function(){
+                //当我们点击了小 li 此时不需要执行页面滚动事件里面的li 的背景选择 添加current
+                //节流阀 互斥锁
+                var flag =true;
+                //1.显示隐藏电梯导航
+                var toolTop = $('.recomend').offset().top;
+                toggleTool()
+
+                //封装显示隐藏的函数
+                function toggleTool(){
+                    if($(document).scrollTop()>=toolTop){
+                        $('.fixedtool').fadeIn();
+                    }else{
+                     $('.fixedtool').fadeOut();
+                    }
+                }
+
+                $(window).scroll(function(){
+                    toggleTool();
+                    //3.当页面滚动到某个内容区域，左侧电梯导航小li 相应添加和删除 current类名
+                    if(flag){
+                        $('.floor .w').each(function(i,ele){
+                            if($(document).scrollTop()>=$(ele).offset().top){
+                                console.log(i)
+                                $('.fixedtool li').eq(i).addClass("current").siblings().removeClass("current");
+                            }
+                        })
+                    }
+                })
+
+                //2.当我们每次点击小li 就需要计算出页面要去往的位置
+               $('.fixedtool li').click(function(){
+                   flag=false;
+                   console.log($(this).index());
+                   
+                   //选出对应索引号的内容区的盒子，计算它的.offset().top
+                   var current = $('.floor .w').eq($(this).index()).offset().top;
+                   //页面动画滚动效果
+                   $("body,html").stop().animate({
+                       scrollTop:current;
+                   },function(){
+                       flag=true;
+                   });
+                   //点击之后，让当前的小li 添加current 类名，姐妹移除current 类名，姐妹移除current
+                   $(this).addClass('current').siblings().removeClass()
+               })
+            })
+        </code>
+    </pre>
+</div>
+
+<h2>4.jQuery事件绑定和解绑</h2>
+<h2>5.jQuery事件插件的使用</h2>
+<h2>6.jQuery实现todolist案例</h2>
+
+
       <div class="date">发布时间：2019-11-09</div>
       <div id="gitalk-container"></div>
     </div>
