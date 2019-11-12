@@ -717,6 +717,126 @@ bannerImg: /images/bg-banner.jpg
 </div>
 
 <h2>4.jQuery事件绑定和解绑</h2>
-<h2>5.jQuery事件插件的使用</h2>
-<h2>6.jQuery实现todolist案例</h2>
+<p style="color:blue;">4.1 事件处理on() 绑定事件</p>
+优势：a . on() 方法在匹配元素上绑定一个或多个事件的事件处理函数
+<pre>
+    <code class="language-js">
+        $('div').on({
+            mouseenter:function(){
+                $(this).css('background','skyblue');
+            },
+            click:function(){
+                $(this).css('background','pink');
+            }
+        })
+
+        $('div').on('mouseenter,mouseleave',function(){
+            $(this).toggleClass('current');
+        })
+
+    </code>
+</pre>
+优势：b . on() 方法可以事件委派操作，事件委派的定义就是，把原来加给子元素身上的事件绑定在父元素身上，就是把事件委托给父元素；
+<pre>
+        <code class="language-js">
+        $('ul').on('click','li',function(){
+            alert('tangtang')
+        })
+    
+        </code>
+</pre>
+优势：c . 动态创建的元素，click() 没有办法绑定事件，on()可以给动态生存的元素绑定事件；
+<pre>
+        <code class="language-js">
+        $('ul').on('click','li',function(){
+            alert('tangtang')
+        })
+        var li = $('&ltli&gt我是后来创建的&lt/li&gt');
+    
+        </code>
+</pre>
+<p style="color:blue;">4.2 事件处理off() 解绑事件</p>
+off()方法可以移除通过 on()方法添加的事件处理程序
+<pre>
+    <code class="language-js">
+        $('p').off()// 解绑p 元素所有事件处理程序；
+        $('p').off('click')// 解绑p 元素上面的点击事件 后面的foo 是侦听函数名；
+        $('ul').off('click','li')//解绑事件委托
+
+    </code>
+</pre>
+如果有的事件只想触发一次，可以使用one()来绑定事件；
+<pre>
+    <code class="language-js">
+        $('p').one('click',function(){
+            alert(11)
+        })
+
+    </code>
+</pre>
+
+<p style="color:blue;">4.3 自动触发事件 trigger()</p>
+1.元素.事件（）
+<pre>
+    <code class="language-js">
+        $('p').click();
+
+    </code>
+</pre>
+2.元素.trigger（'事件'）
+<pre>
+    <code class="language-js">
+        $('div').trigger('click');
+
+    </code>
+</pre>
+3.元素.triggerHandler（'事件'）,不会触发元素的默认行为
+<pre>
+    <code class="language-js">
+        $('div').triggerHandler('click');
+
+    </code>
+</pre>
+<h2>5.jQuery对象拷贝</h2>
+<p style="font-weight: 700;">$.extend([deep],target,object1,[objectN])</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <ul>
+        <li>1.deep: 如果设为true 为深拷贝，默认false 浅拷贝</li>
+        <li>2.target: 要拷贝的目标对象</li>
+        <li>3.object1:待拷贝到第一个对象的对象</li>
+        <li>4.浅拷贝</li>
+        <pre>
+            <code class="language-js">
+               $.extend(target,obj);
+               //浅拷贝把原来对象里面的复杂数据类型地址拷贝给目标对象，会覆盖原来的
+            </code>
+        </pre>
+        <li>5.深拷贝</li>
+        <pre>
+            <code class="language-js">
+               $.extend(true,target,obj);
+               //深拷贝把里面的数据完全复制一份给目标对象，如果里面有不冲突的属性，会合并到一起
+            </code>
+        </pre>
+
+    </ul>
+    
+</div>
+<h2>5.jQuery多库共存</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <ul>
+        <li>1.如果$ 符号冲突 我们使用 jQuery</li>
+        <li>2.让jquery 释放对$ 控制权， 让用户自己决定</li>
+       
+        <pre>
+            <code class="language-js">
+                var suibian = jQuery.noConflict();
+            </code>
+        </pre>
+
+    </ul>
+    
+</div>
+<h2>6.jQuery事件插件的使用</h2>
+<h2>7.jQuery实现todolist案例</h2>
 
