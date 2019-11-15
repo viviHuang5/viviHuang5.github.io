@@ -1,6 +1,15 @@
 [
   
     {
+      "title": "jQuery 实现对话效果",
+      "category": "",
+      "description": "页面加载定时显示对象，点击任意地方让对话继续下去",
+      "tags": "jQuery",
+      "url": "/2019/11/15/jQuery%E5%AE%9E%E7%8E%B0%E5%AF%B9%E8%AF%9D%E6%95%88%E6%9E%9C.html",
+      "date": "2019-11-15"
+    } ,
+  
+    {
       "title": "jQuery 学习文档",
       "category": "",
       "description": "让开发变得更简单！",
