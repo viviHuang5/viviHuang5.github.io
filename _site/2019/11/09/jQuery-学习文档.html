@@ -123,10 +123,6 @@
   <div class="container">
     <div class="main">
       <!--more-->
-<h2>a .jQuery介绍及常用API导读</h2>
-<h2>b .jQuery选择器及案例</h2>
-<h2>c .jQuery链式编程及样式操作</h2>
-
 
 <h2>1.jQuery动画</h2>
 <p style="color:blue;">1.1 jQuery显示与隐藏效果</p>
@@ -939,7 +935,7 @@ off()方法可以移除通过 on()方法添加的事件处理程序
     </ul>
     
 </div>
-<h2>5.jQuery多库共存</h2>
+<h2>6.jQuery多库共存</h2>
 <div style="background: #eee; padding:10px;border-radius: 5px;">
     <ul>
         <li>1.如果$ 符号冲突 我们使用 jQuery</li>
@@ -954,7 +950,34 @@ off()方法可以移除通过 on()方法添加的事件处理程序
     </ul>
     
 </div>
-<h2>6.jQuery事件插件的使用</h2>
+<h2>7.Dom对象与jQuery对象的互转</h2>
+<p style="font-weight: 700;">a.Dom对象转换为jQuery对象</p>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>1⃣️直接获取视频，得到就是jQuery对象</p>
+    <pre>
+        <code class="language-js">
+            $('video');
+        </code>
+    </pre>
+    <p>2⃣️我们已经使用原生js,获取过来 Dom对象</p>
+    <pre>
+        <code class="language-js">
+            var myvide = document.querySelector('video');
+            $(myvideo);
+        </code>
+    </pre>
+    
+</div>
+<p style="font-weight: 700;">b.jQuery对象转换为Dom对象(两种方法）</p>
+<pre>
+    <code class="language-js">
+        $('div')[index] //index 是索引号
+        $('div').get(index) //index 是索引号
+        $('video')[0].play();
+        $('video').get(0).play();
+    </code>
+</pre>
+<h2>8.jQuery事件插件的使用</h2>
 <div style="background: #eee; padding:10px;border-radius: 5px;">
     <ul>
         <li>1.瀑布流</li>
@@ -967,7 +990,7 @@ off()方法可以移除通过 on()方法添加的事件处理程序
     </ul>
     
 </div>
-<h2>7.jQuery实现todolist案例</h2>
+<h2>9.jQuery实现todolist案例</h2>
 
 
       <div class="date">发布时间：2019-11-09</div>
