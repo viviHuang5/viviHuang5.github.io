@@ -114,7 +114,7 @@
       <div class="post-date">2019-11-19</div>
       <div class="tags">
         
-        <a class="tag" href="/tags/#JS" title="JS">JS</a>
+        <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
         
       </div>
     </div>
@@ -482,6 +482,67 @@
         &lt/html&gt
     </code>
 </pre>
+</div>
+
+<h2>7.CSS给ul下的li标签内元素添加显示隐藏效果</h2>
+<img src="/images/hover.jpg" alt="" style="width: 200px">
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>当鼠标划过li标签，给当前li标签添加显示删除按钮</p>
+    <pre>
+        <code class="language-html">
+            &ltdiv&gt
+                &ltul class="uu"&gt
+                    &ltli&gt
+                        &ltimg src="./delete.png" class="delImg"&gt
+                        &ltimg src="./38068523.jpeg"&gt
+                    &lt/li&gt
+                    &ltli&gt
+                        &ltimg src="./delete.png" class="delImg"&gt
+                        &ltimg src="./38068523.jpeg"&gt
+                    &lt/li&gt
+                    &ltli&gt
+                        &ltimg src="./delete.png" class="delImg"&gt
+                        &ltimg src="./38068523.jpeg"&gt
+                    &lt/li&gt
+                    &ltli&gt
+                        &ltimg src="./delete.png" class="delImg"&gt
+                        &ltimg src="./38068523.jpeg"&gt
+                    &lt/li&gt
+                    &ltli&gt
+                        &ltimg src="./delete.png" class="delImg"&gt
+                        &ltimg src="./38068523.jpeg"&gt
+                    &lt/li&gt
+                &lt/ul&gt
+            &lt/div&gt
+        </code>
+    </pre>
+    <pre>
+            <code class="language-css">
+                &ltstyle&gt
+                    .uu{
+                        width: 1200px;
+                        height: 300px;
+                        display: flex;
+                        overflow: hidden;
+                        
+                    }
+                    li{
+                        list-style: none;
+                        position: relative;
+                    }
+                    .delImg{
+                        position: absolute;
+                        right: 0;
+                        display: none;
+                    }
+                    .uu li:hover .delImg{
+                        position: absolute;
+                        right: 0;
+                        display: block;
+                    }
+                &lt/style&gt
+            </code>
+    </pre>
 </div>
 
 
