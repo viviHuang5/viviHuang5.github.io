@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
   <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
-  <title>jQuery 实现留言板留言及删除功能 - ヾviviHuang`博客【Web前端开发】</title>
+  <title>JS Project problem set - ヾviviHuang`博客【Web前端开发】</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
   <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
   <link rel="stylesheet" href="/css/prism.css">
@@ -109,12 +109,12 @@
 </script>
 
     <div class="content">
-      <h1 class="post-title">jQuery 实现留言板留言及删除功能</h1>
-      <div class="post-description">用live()方法让后面动态添加的元素也绑定之前对应类绑定的方法</div>
-      <div class="post-date">2019-10-22</div>
+      <h1 class="post-title">JS Project problem set</h1>
+      <div class="post-description">积累，累积，复用</div>
+      <div class="post-date">2019-11-19</div>
       <div class="tags">
         
-        <a class="tag" href="/tags/#jQuery" title="jQuery">jQuery</a>
+        <a class="tag" href="/tags/#JS" title="JS">JS</a>
         
       </div>
     </div>
@@ -122,9 +122,262 @@
 
   <div class="container">
     <div class="main">
-      <h3>jQuery 实现留言板留言及删除功能</h3>
-<p>用live()方法让后面动态添加的元素也绑定之前对应类绑定的方法</p>
-<!--more-->
+      <!--more-->
+<h2>1.获取url传过来的数据的值</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>1⃣️实际项目运用</p>
+    <pre>
+        <code class="language-js">
+            var index = window.location.search.indexOf('data=');
+            if(index>=0){
+                var str = window.location.search.slice(index+5);
+                $('.release_demand_nav li').removeClass('on');
+                $('.w'+str).addClass('on');
+                $('.release_demand_box .release_demand_list') .hide();
+                $('.release_demand_box .release_demand_list') .eq(+str).show();
+            }
+        </code>
+    </pre>
+    <p>2⃣️拓展</p>
+    <pre>
+        <code class="language-js">
+            // 如果有url参数返回一个json，url参数key对应key，value对应value，没有参数返回false
+            function getQuery() {
+                var url = decodeURI(location.href);
+                // 等于-1证明没有参数
+                var index = url.indexOf('?');
+                if (index === -1) return false;
+                var query = url.substring(index + 1);
+                var arr = query.split('&');
+                var obj = {};
+                 for (var i = 0;i &lt arr.length;i++) {
+                 var pair = arr[i].split('=');
+                obj[pair[0]] = pair[1];
+             }
+                // var obj = arr.reduce(function(initObj, v) {
+                // var pair = v.split('=');
+                // initObj[pair[0]] = pair[1];
+                // return initObj;
+                // }, {});
+                return obj;
+                }
+                console.log(getQuery());
+                console.log(getQuery().name)
+                console.log(getQuery().data)
+        </code>
+    </pre>
+   
+</div>
+
+<h2>2.jQuery实现对话效果</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>页面加载定时显示对象，点击任意地方让对话继续下去</p>
+<pre>
+    <code class="language-js">
+        const arr =['小爱同学','在呢','帮我点一份外卖','好的'];
+        let index=0;
+        setTimeout(()=>{
+          console.log('auto',`这句话要渲染到第${index % 2} 个p元素上`,arr[index]);    
+          $('.p1').text(arr[index])
+          document.addEventListener('click',bindClick);
+        },1000);
+        
+        function bindClick(){
+          if(index>=arr.length) return 
+          index ++;
+          if(index ===arr.length){
+            return
+          }
+          if(index %2===0){
+            $('.p1').text(arr[index])
+          }else{
+            $('.p2').text(arr[index])
+          }      
+          console.log('click',`这句话要渲染到第${index % 2}个 p元素上`,arr[index]);
+        }
+    </code>
+</pre>
+   
+   
+</div>
+
+<h2>3.jQuery实现导航过多出现更多点击显示更多</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>用定位的方式，添加背景色</p>
+<pre>
+    <code class="language-js">
+&lt!DOCTYPE html&gt
+&lthtml lang="en"&gt
+
+&lthead&gt
+    &ltmeta charset="UTF-8"&gt
+    &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+    &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+    &lttitle&gt3.jquery实现导航过多出现更多点击显示更多&lt/title&gt
+&lt/head&gt
+&ltstyle&gt
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    div {
+        width: 80%;
+        height: 300px;
+        margin: 100px auto;
+    }
+
+    .uu {
+        overflow: hidden;
+        height: 88px;
+        position: relative;
+    }
+
+    .uu li {
+        list-style: none;
+        float: left;
+        margin-left: 30px;
+        margin-bottom: 20px;
+    }
+
+    .more {
+        position: absolute;
+        bottom: 5px;
+        right: 48px;
+        display: inline-block;
+        width: 71px;
+        background: #fff;
+
+    }
+&lt/style&gt
+
+&ltbody&gt
+    &ltdiv&gt
+        &ltul class="uu"&gt
+            &ltli&gt骑上我心爱的小摩托&lt/li&gt
+            &ltli&gt不在&lt/li&gt
+            &ltli&gt那女孩对我说&lt/li&gt
+            &ltli&gt夜半&lt/li&gt
+            &ltli&gt和你一样&lt/li&gt
+            &ltli&gt嗜好&lt/li&gt
+            &ltli&gt骑上我心爱的小摩托&lt/li&gt
+            &ltli&gt不在&lt/li&gt
+            &ltli&gt那女孩对我说&lt/li&gt
+            &ltli&gt夜半&lt/li&gt
+            &ltli&gt和你一样&lt/li&gt
+            &ltli&gt嗜好&lt/li&gt
+            &ltli&gt骑上我心爱的小摩托&lt/li&gt
+            &ltli&gt不在&lt/li&gt
+            &ltli&gt那女孩对我说&lt/li&gt
+            &ltli&gt夜半&lt/li&gt
+            &ltli&gt和你一样&lt/li&gt
+            &ltli&gt嗜好&lt/li&gt
+            &ltli&gt骑上我心爱的小摩托&lt/li&gt
+            &ltli&gt不在&lt/li&gt
+            &ltli&gt那女孩对我说&lt/li&gt
+            &ltli&gt夜半&lt/li&gt
+            &ltli&gt和你一样&lt/li&gt
+            &ltli&gt嗜好&lt/li&gt
+            &ltli style="color:green;" class="more"&gt更多 &gt&gt&lt/li&gt
+        &lt/ul&gt
+    &lt/div&gt
+    &ltscript src="jquery.min.js"&gt&lt/script&gt
+    &ltscript&gt
+      $('.more').click(function(){
+          $(this).hide();
+          $('.uu').css('height','auto');
+      })
+
+    &lt/script&gt
+&lt/body&gt
+
+&lt/html&gt
+    </code>
+</pre>
+</div>
+
+<h2>4.jQuery判断内核</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>判断用户是通过pc,还是安卓还是ios,还是微信客户端访问</p>
+<pre>
+    <code class="language-js">
+        var log = {
+            versions:function(){
+                var u = navigator.userAgent, app = navigator.appVersion;
+                    return {
+                        trident: u.indexOf('Trident') > -1, //IE内核
+                        presto: u.indexOf('Presto') > -1, //opera内核
+                        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
+                        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                        //android终端或者uc浏览器
+                        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, 
+                        iPhone: u.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器
+                        iPad: u.indexOf('iPad') > -1, //是否iPad
+                        webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+                        weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+                        qq: u.match(/\sQQ/i) == " qq" //是否QQ
+                        };
+                    }(),
+                    
+        }
+        console.log(log)
+        if(log.versions.weixin==true){ 
+            $('.wxImg').hide()
+           $('.qqImg').css('margin','0 auto');
+    }
+    </code>
+</pre>
+</div>
+
+<h2>5.jQuery实现点击显示再点击隐藏效果</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>用toggle()方法实现效果</p>
+<pre>
+    <code class="language-js">
+        &lt!DOCTYPE html&gt
+        &lthtml lang="en"&gt
+        &lthead&gt
+            &ltmeta charset="UTF-8"&gt
+            &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+            &ltmeta http-equiv="X-UA-Compatible" content="ie=edge"&gt
+            &lttitle&gtjquery实现点击显示再点击消失&lt/title&gt
+        &lt/head&gt
+        &ltstyle&gt
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .instructions{
+                display: none;
+            }
+        &lt/style&gt
+        &ltbody&gt
+            &ltdiv class="box"&gt
+                &ltp class="title"&gt糖糖？&lt/p&gt
+                &ltp class="instructions"&gt2019年糖糖开始戒了糖&lt/p&gt
+            &lt/div&gt
+            &ltscript src="jquery.min.js"&gt&lt/script&gt
+            &ltscript&gt
+                $('.title').toggle(function(){
+                   
+                    $('.instructions').css('display','block')
+                },
+                function(){
+                    $('.instructions').css('display','none')
+                    }
+                )
+            &lt/script&gt
+        &lt/body&gt
+        &lt/html&gt
+    </code>
+</pre>
+</div>
+
+<h2>6.jQuery实现留言板留言及删除功能</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>用live()方法让后面动态添加的元素也绑定之前对应类绑定的方法</p>
 <pre>
     <code class="language-js">
         &lt!doctype html&gt
@@ -229,7 +482,10 @@
         &lt/html&gt
     </code>
 </pre>
-      <div class="date">发布时间：2019-10-22</div>
+</div>
+
+
+      <div class="date">发布时间：2019-11-19</div>
       <div id="gitalk-container"></div>
     </div>
     <div class="nav-container">
