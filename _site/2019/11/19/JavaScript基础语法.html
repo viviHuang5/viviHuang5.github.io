@@ -133,6 +133,167 @@
 <h3>8.作用域及预解析</h3>
 <h3>9.对象</h3>
 <h3>10.内置对象</h3>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <p>JavaScript 中的对象分为3种：自定义对象，内置对象，浏览器对象</p>
+    <p>前面两种是 JS基础内容，属于ECMAScript；第三个浏览器对象属于我们JS独有的</p>
+    <p><span style="color:orange;">内置对象</span>就是指JS 语言自带的一些对象，这些对象供开发者使用，并提供了一些常用的或是最基本而必要的功能（属性和方法）</p>
+    <p style="font-weight: 700;"><span style="color:red;">* Math 数学对象</span>不是一个构造函数，所以我们不需要new 来调用，而是直接使用里面的属性和方法</p>
+    <pre>
+        <code class="language-js">
+            console.log(Math.PI);//一个属性 圆周率
+
+            console.log(Math.max(1,99,8));//99
+            console.log(Mact.max(1,99,'pink'));//NAN
+            console.log(Math.max());//-Infinity
+
+            console.log(Math.abs());//绝对值
+            console.log(Math.abs(1));//1
+            console.log(Math.abs(-1));//1
+            console.log(Math.abs('-1'));//隐式转换 会把字符串型 -1 转换为数字型
+            console.log(Math.abs('pink'));//NAN
+
+            console.log(Math.floor());//向下取整
+            console.log(Math.floor(1.1));//1
+            console.log(Math.floor(1.9));//1
+
+            console.log(Math.ceil());//向上取整
+            console.log(Math.ceil(1.1));//2
+            console.log(Math.ceil(1.9));//2
+
+            console.log(Math.round());//四舍五入版 就近取整 注意 -3 5 结果是-3
+            console.log(Math.round(1.1));//1
+            console.log(Math.round(1.5));//2
+            console.log(Math.round(1.9));//2
+            console.log(Math.round(-1.1));//-1
+            console.log(Math.round(-1.5));//-1
+
+        </code>
+    </pre>
+    <h3 style="color:green;">案例：利用对象封装自己的数学对象 里面有PI 最大值和最小值</h3>
+    <pre>
+        <code class="language-js">
+           var myMath = {
+               PI:3.141592653,
+               max:function(){
+                   var max = arguments[0];
+                   for(var i = 1;i&ltarguments.length;i++){
+                       if(arguments[i]>max){
+                          max=arguments[i];
+                       }
+                   }
+                   return max;
+               },
+               min:function(){
+                   var min = arguments[0];
+                   for(var i = 1;i&ltarguments.length;i++){
+                    if(arguments[i]&lt min){
+                        min=arguments[i];
+                     }
+                   }
+                   return min;
+               }
+           }
+           console.log(myMath.PI);//3.141592653
+           console.log(myMath.max(1,5,99));//99
+           console.log(myMath.min(1,5,99));//1
+        </code>
+    </pre>
+
+    <p style="font-weight: 700;"><span style="color:red;">* random()随机数方法</span>返回一个随机的小数[0,1)能取到0，不能取到1，这个方法里面不跟参数</p>
+    <h3 style="color:green;">案例：得到两个数之间的随机整数，并且包含这2个整数</h3>
+    <pre>
+        <code class="language-js">
+            //Math.floor(Math.random()*(max-min+1))+min;
+            function getRandom(min,max){
+                return Math.floor(Math.random()*(max-min+1))+min;
+            }
+            console.log(getRandom(1,10));
+        </code>
+    </pre>
+    <h3 style="color:green;">案例：随机点名</h3>
+    <pre>
+        <code class="language-js">
+            function getRandom(min,max){
+                return Math.floor(Math.random()*(max-min+1))+min;
+            }
+            var arr  = ['张三','卡利斯','lil','tantang','mumu'];
+            console.log(arr[getRandom(0, arr.length-1)]);
+        </code>
+    </pre>
+    <h3 style="color:green;">案例：猜数字游戏</h3>
+    <pre>
+        <code class="language-js">
+           //随机生成一个1-10之间的数字，并让用户输入一个数字
+           //1.如果大于该数字，就提示，数字大了，继续猜
+           //2.如果小于该数字，就提示数字小了，继续猜
+           //3.如果等于该数字，就提示猜对了，结束程序
+
+
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        var random = getRandom(1, 10);
+        var cc = 0
+        while (cc<3) {
+            cc++;
+            var num = prompt('你来猜？输入1-10之间的一个数字');      
+            if (num > random) {
+                alert('你猜大了');
+            } else if (num &ltrandom) {
+                alert('你猜小了');
+
+            } else if(cc===3){
+                alert('不好意思，3次你都猜错了哦');
+            } else {
+                alert('你好帅哦，猜对了');
+                break;//退出整个循环结束程序
+            }
+        }
+
+        </code>
+    </pre>
+    <p style="font-weight: 700;"><span style="color:red;">* Date() 日期对象</span>是一个构造函数 必须使用new 来调用创建我们的日期对象</p>
+    <pre>
+        <code class="language-js">
+            //Date() 日期对象 是一个构造函数 必须使用new 来调用创建我们的日期对象
+             var arr = new Array();//创建一个数组对象
+             var obj = new Object();//创建了一个对象实例
+            
+            //1.使用Date
+            var date = new Date();//没有参数，返回当前系统的日期
+
+            //2.参数常用写法 数字型 2019，10，01 或者是 字符串类型 ‘2019-10-1 8:9:0’
+            var date = new Date(2019，11，21);//返回的是12月，不是11月
+            var date = new Date('2019-11-21');//没有参数，返回当前系统的日期
+
+        </code>
+    </pre>
+
+    <h3 style="color:green;">案例：格式化日期 年 月 日</h3>
+    <pre>
+        <code class="language-js">
+            var date = new Date();
+            console.log(date.getFullYear());//返回当前日期的年 2019
+            console.log(date.getMonth()+1);//月份，返回的月份小1个月，记得月份+1 哟
+            console.log(date.getDate());//返回的是 几号
+            console.log(date.getDay());//3 周一返回的是1 周六返回的是6 但是周日返回的是 0
+
+            //写一个 2019年5月1日 星期三
+            var year = date.getFullYear();
+            var month = date.getMonth()+1;
+            var dates = date.getDate();
+            var arr = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+            var day = date.getDay();
+            console.log('今天是:'+year+'年'+month+'月'+dates+'日'+arr[day]);
+        </code>
+    </pre>
+</div>
+
+
+
+
+
 <h3>11.简单类型和复杂类型</h3>
 <div style="background: #eee; padding:10px;border-radius: 5px;">
     <p style="color:red;">11.1.基本包装类型</p>
