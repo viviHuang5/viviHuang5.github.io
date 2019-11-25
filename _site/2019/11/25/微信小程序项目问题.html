@@ -5,20 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="keywords" content="vivi, viviHuang, vivihuang, Vivi, Vivi Huang, Vivi huang, ヾヾviviHuang`博客">
-  <meta name="description" content="ヾ屋顶上的小猫的个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
-  <title>ヾviviHuang【Web前端开发】</title>
+  <meta name="keywords" content="ヾviviHuang,糖糖戒了糖,vivi,vivihuang,ViviHuang">
+  <meta name="description" content="ヾviviHuang`个人博客，分享日常生活、学习笔记和踩过的那些坑~" />
+  <title>微信小程序 项目中遇到的问题 - ヾviviHuang`博客【Web前端开发】</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <link rel="stylesheet" href="/css/prism.css">
   <link rel="stylesheet" href="/css/base.css">
-  
-  <link rel="stylesheet" href="/css/index.css">
-  
+  <link rel="stylesheet" href="/css/post.css">
   <script src="/js/util.js"></script>
 </head>
 
 <body>
-  <div id="header">
-  <div class="wrap">
+  <div id="header" style="background-image: url(/images/bg-banner.jpg)">
     <div class="top">
   <div class="title" style="margin-top: 10px;">
     <img src="/images/001.jpg" alt="" style="width: 40px;height: 40px; border-radius: 50%; ">
@@ -109,62 +108,25 @@
   })(document, window);
 </script>
 
-    <div class="banner">
-      <div class="center">
-        <div class="text">记录学习笔记、日常生活。</div>
-        <div class="search-box">
-          <input type="text" placeholder="搜索文章" id="search-input">
-          <div class="icon">
-            <i class="iconfont">&#xe601;</i>
-          </div>
-          <div id="results-container"></div>
-        </div>
+    <div class="content">
+      <h1 class="post-title">微信小程序 项目中遇到的问题</h1>
+      <div class="post-description">嗯嗯嗯丷</div>
+      <div class="post-date">2019-11-25</div>
+      <div class="tags">
+        
+        <a class="tag" href="/tags/#微信小程序" title="微信小程序">微信小程序</a>
+        
       </div>
     </div>
   </div>
-</div>
-
-<script src="/js/simple-jekyll-search.min.js"></script>
-
-<script>
-  (function (d, w) {
-    var $searchInput = d.getElementById('search-input');
-    var $resultsContainer = d.getElementById('results-container');
-
-    SimpleJekyllSearch({
-      searchInput: $searchInput,
-      resultsContainer: $resultsContainer,
-      json: '/search.json',
-      searchResultTemplate:
-        '<li class="search-results-item">' +
-        '<a href="{url}" title="{title}">' +
-        '<div class="title">' +
-        '<h4>{title}</h4><span>{date}</span>' +
-        '</div>' +
-        '<p class="description">{description}</p>' +
-        '<p class="search-tags">{tags}</p>' +
-        '</a>' +
-        '</li>',
-      noResultsText: '<div class="not-data">哎呀，没有找到！</div>',
-      limit: 20,
-      fuzzy: false
-    })
-  })(document, window);
-</script>
-
 
   <div class="container">
-  <ul class="posts">
-    
-    <li class="post">
-      <a href="/2019/11/25/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98.html">
-        <h2 class="title">微信小程序 项目中遇到的问题</h2>
-        <div class="excerpt">嗯嗯嗯丷</div>
-        <div class="excerpt">
-1.轮播图
-
-    
-        
+    <div class="main">
+      <!-- more -->
+<h2>1.轮播图</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
         &ltview class="banner"&gt
         &ltswiper indicator-dots="" autoplay="" interval="" duration="" circular="" style="height: 240rpx;"&gt
             &ltblock wx:for="" wx:key=""&gt
@@ -175,11 +137,11 @@
         &lt/swiper&gt
         &lt/view&gt
 
-        
-    
+        </code>
+    </pre>
 
-    
-            
+    <pre>
+            <code class="language-js">
             image.slide-image {
                 width: 690rpx !important;
                 height: 240rpx !important;
@@ -198,11 +160,11 @@
                 border-radius: 12rpx 12rpx 12rpx 12rpx;
             }
 
-            
-        
+            </code>
+        </pre>
 
-        
-                
+        <pre>
+                <code class="language-js">
                 data: {
                     imgUrls: [
                         'https://yay.zjl9.com/static/images/banner1.jpg',
@@ -216,13 +178,13 @@
                     duration: 1000,      // 滑动动画时长
                     }
                 })
-                
-            
-
-2.弹窗蒙层
-
-    
-        
+                </code>
+            </pre>
+</div>
+<h2>2.弹窗蒙层</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
     // 弹窗 
     &ltview class="popup" hidden="{ {hiddenmask} }"&gt 
             &ltimage src="https://xxx.zjl9.com/static/images/cc.png" style="width:520rpx;height:444rpx;"&gt&lt/image&gt
@@ -236,11 +198,11 @@
     &ltview class="mask" hidden="{ {hiddenmask} }" catchtouchmove="preventTouchMove"&gt
     &lt/view&gt
 
-        
-    
+        </code>
+    </pre>
 
-    
-            
+    <pre>
+            <code class="language-js">
                     Page({
                         data: {
                           hiddenmask:true
@@ -276,14 +238,14 @@
                  
                       })
     
-            
-        
+            </code>
+        </pre>
+</div>
 
-
-3.tab栏
-
-    
-        
+<h2>3.tab栏</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
     &ltview class='container'&gt
     &ltview class='section hot_type'&gt
     &ltscroll-view class='nav-view { {hot_menuFixedTop?"hot_menu_fixed":"None"} }' scroll-left="{ {scrollLeft} }" scroll-with-animation="true" scroll-x="true" style="white-space: nowrap"&gt
@@ -305,11 +267,11 @@
     &lt/view&gt
 &lt/view&gt
 
-        
-    
+        </code>
+    </pre>
 
-    
-            
+    <pre>
+            <code class="language-js">
             .container {
                 padding-top: 35rpx;
             }
@@ -373,10 +335,10 @@
                 border: none;
             }
                       
-            
-        
-        
-                
+            </code>
+        </pre>
+        <pre>
+                <code class="language-js">
                         Page({
                             data: {
                               currentTab: 0,
@@ -411,265 +373,18 @@
                           });
                           
         
-                
-            
+                </code>
+            </pre>
 </div>
-        <div class="time">2019-11-25 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/11/20/JavaScript%E9%AB%98%E7%BA%A7.html">
-        <h2 class="title">JavaScript高级</h2>
-        <div class="excerpt">learning丷</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-11-20 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/11/19/projectProblemSet.html">
-        <h2 class="title">JS Project problem set</h2>
-        <div class="excerpt">积累，累积，复用</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-11-19 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/11/19/JavaScript%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95.html">
-        <h2 class="title">JavaScript基础语法</h2>
-        <div class="excerpt">learning丷</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-11-19 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/11/16/WebAPI%E7%BC%96%E7%A8%8B.html">
-        <h2 class="title">WebAPI</h2>
-        <div class="excerpt">learning丷</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-11-16 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/11/09/jQuery.html">
-        <h2 class="title">jQuery 学习文档</h2>
-        <div class="excerpt">让开发变得更简单！</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-11-09 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/11/02/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F.html">
-        <h2 class="title">微信小程序 学习文档</h2>
-        <div class="excerpt">learning丷</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-11-02 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/11/01/%E7%BB%88%E6%9C%89%E4%B8%80%E5%A4%A9%E4%BD%A0%E4%BC%9A%E6%87%82.html">
-        <h2 class="title">这些年你看的那些书</h2>
-        <div class="excerpt">世界很大，不要动不动就困住自己；任何你引以为傲的东西，都可能是束缚你前行的枷锁。</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-11-01 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/10/23/%E9%9D%A2%E8%AF%95%E9%A2%98(1).html">
-        <h2 class="title">2019 面试题</h2>
-        <div class="excerpt">Hey, you have to work hard</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-10-23 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/10/12/WebAPI.html">
-        <h2 class="title">WebAPI 编程</h2>
-        <div class="excerpt">DOM and BOM</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-10-12 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/10/09/banner%E8%BD%AE%E6%92%AD%E5%9B%BE.html">
-        <h2 class="title">Demo banner轮播图</h2>
-        <div class="excerpt">结合</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-10-09 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/10/07/Vue-03.%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E6%A1%88%E4%BE%8B.html">
-        <h2 class="title">Vue 03 图书管理案例</h2>
-        <div class="excerpt">Vue:渐进式JavaScript框架，声明式渲染->组件系统->客户端路由->集中式状态管理->项目构建,易用，灵活，高效（20kb运行大小，超快虚拟DOM）</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-10-07 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/10/06/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F03.%E6%AD%A3%E5%88%99%E9%AA%8C%E8%AF%81%E6%89%8B%E6%9C%BA%E5%8F%B7.html">
-        <h2 class="title">微信小程序 03 正则验证手机号</h2>
-        <div class="excerpt">为下一次开发做准备哈丷</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-10-06 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/10/06/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F02.%E7%99%BB%E5%BD%95%E6%8E%88%E6%9D%83%E5%B0%81%E8%A3%85%E5%8F%8A%E5%BA%94%E7%94%A8.html">
-        <h2 class="title">微信小程序 02 登录授权封装及使用</h2>
-        <div class="excerpt">为下一次开发做准备哈丷</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-10-06 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/10/04/Vue-02.%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7.html">
-        <h2 class="title">Vue 02 常用特性</h2>
-        <div class="excerpt">Vue:渐进式JavaScript框架，声明式渲染->组件系统->客户端路由->集中式状态管理->项目构建,易用，灵活，高效（20kb运行大小，超快虚拟DOM）</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-10-04 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/10/01/Vue-01.%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html">
-        <h2 class="title">Vue 01 常用指令</h2>
-        <div class="excerpt">Vue:渐进式JavaScript框架，声明式渲染->组件系统->客户端路由->集中式状态管理->项目构建,易用，灵活，高效（20kb运行大小，超快虚拟DOM）</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-10-01 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/09/29/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F01.%E5%90%8E%E5%8F%B0%E8%AF%B7%E6%B1%82%E6%8E%A5%E5%8F%A3%E5%B0%81%E8%A3%85.html">
-        <h2 class="title">微信小程序 01 后台请求接口封装</h2>
-        <div class="excerpt">为下一次开发做准备哈丷</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-09-29 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/09/28/JS-%E9%80%BB%E8%BE%91%E4%B8%AD%E6%96%AD%E9%80%BB%E8%BE%91%E4%B8%8E.html">
-        <h2 class="title">JS 逻辑中断逻辑与</h2>
-        <div class="excerpt">逻辑与短路运算</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-09-28 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/09/24/Node-01.fs%E6%A8%A1%E5%9D%97.html">
-        <h2 class="title">Node 01.fs模块的基本使用</h2>
-        <div class="excerpt">fs模块是一个与文件系统进行交互的一个node模块</div>
-        <div class="excerpt">fs模块(系统内置模块 主要用来操作文件)
-注意: 基本上所有方法都有异步和同步,基本上同步的方法 都是在异步方法后面加上 Sync
-</div>
-        <div class="time">2019-09-24 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/09/20/%E5%BF%AB%E6%8D%B7%E9%94%AE.html">
-        <h2 class="title">快捷键</h2>
-        <div class="excerpt">让操作更快更简洁</div>
-        <div class="excerpt"></div>
-        <div class="time">2019-09-20 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/09/10/JS%E9%AB%98%E7%BA%A7-%E5%AD%A6%E4%B9%A0(1).html">
-        <h2 class="title">JS高级 学习(1)--类和对象</h2>
-        <div class="excerpt">面向对象编程介绍</div>
-        <div class="excerpt">目标:
-什么是面向对象
-类和对象的关系
-使用class创建自定义类
-</div>
-        <div class="time">2019-09-10 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/09/08/jQuery%E5%86%99%E7%AE%80%E5%8D%95%E6%A8%A1%E6%80%81%E6%A1%86.html">
-        <h2 class="title">JQ 写简单模态框</h2>
-        <div class="excerpt">如何使用 JQ 实现简单的弹窗提示框</div>
-        <div class="excerpt">JQ 写简单模态框
-如何使用 JQ 实现简单的弹窗提示框
-</div>
-        <div class="time">2019-09-08 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/05/30/JS-%E5%AE%9E%E7%8E%B0%E5%A4%8D%E5%88%B6%E4%B8%8E%E7%B2%98%E8%B4%B4.html">
-        <h2 class="title">JS 实现复制与粘贴</h2>
-        <div class="excerpt">如何使用 JS 获取剪贴板的内容与添加内容到剪贴板</div>
-        <div class="excerpt">复制
-拦截复制
-应用场景：拦截用户复制事件，或者改变用户复制的内容。
-</div>
-        <div class="time">2019-05-30 </div>
-      </a>
-    </li>
-    
-    <li class="post">
-      <a href="/2019/04/27/CSS-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91.html">
-        <h2 class="title">CSS 在线编辑</h2>
-        <div class="excerpt">使用 Contenteditable 属性实现 CSS 在线编辑</div>
-        <div class="excerpt">前言
-先了解一下 Contenteditable 属性的作用：规定元素内容是否可编辑。
-案例
-给页面加上 style 标签，设置 style 属性为 display: block，contenteditable 属性为 true。
-</div>
-        <div class="time">2019-04-27 </div>
-      </a>
-    </li>
-    
-  </ul>
-  <div class="tags">
-    <h3 class="title">All TAGS</h3>
-    <div class="box">
-      
-      <a class="tag" href="/tags/#CSS">CSS</a>
-      
-      <a class="tag" href="/tags/#JavaScript">JavaScript</a>
-      
-      <a class="tag" href="/tags/#jQuery">jQuery</a>
-      
-      <a class="tag" href="/tags/#快捷键">快捷键</a>
-      
-      <a class="tag" href="/tags/#Node">Node</a>
-      
-      <a class="tag" href="/tags/#微信小程序">微信小程序</a>
-      
-      <a class="tag" href="/tags/#Vue">Vue</a>
-      
-      <a class="tag" href="/tags/#Demo">Demo</a>
-      
-      <a class="tag" href="/tags/#面试题">面试题</a>
-      
-      <a class="tag" href="/tags/#Reading">Reading</a>
-      
+      <div class="date">发布时间：2019-11-25</div>
+      <div id="gitalk-container"></div>
+    </div>
+    <div class="nav-container">
+      <div class="main-nav">
+        <div class="title">目录</div>
+      </div>
     </div>
   </div>
-</div>
-
-
   <footer id="footer">
   <a href="https://github.com/viviHuang5">
     <i class="iconfont">&#xe600;</i>
@@ -684,7 +399,6 @@
     <i class="iconfont">&#xe635;</i>
   </a>
 </footer>
-
 
   <div class="back-top">
   <i class="iconfont">&#xe6d9;</i>
@@ -728,6 +442,66 @@
   })(document, window);
 </script>
 
+  <script src="/js/prism.js"></script>
+  <script>
+    (function (w, d) {
+      var $nav = document.querySelector('.main-nav');
+      var $main = document.querySelector('.main');
+      var titleNodeNames = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+      var contentItems = [];
+      var navItems = [];
+      for (var i = 0; i < $main.children.length; i++) {
+        var element = $main.children[i];
+        if (titleNodeNames.includes(element.nodeName)) {
+          var link = document.createElement('a');
+          link.href = '#' + element.innerText;
+          link.innerText = element.innerText;
+
+          $nav.appendChild(link);
+          navItems.push(link);
+          element.id = element.innerText;
+          contentItems.push(element);
+        }
+      }
+
+      function bindEvent() {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        if (scrollTop >= $nav.parentNode.offsetTop) {
+          addClass($nav, 'active');
+        } else {
+          removeClass($nav, 'active');
+        }
+        for (var i = 0; i < navItems.length; i++) {
+          removeClass(navItems[i], 'active');
+        }
+        for (var i = contentItems.length - 1; i >= 0; i--) {
+          if (scrollTop >= getElementTop(contentItems[i])) {
+            addClass(navItems[i], 'active');
+            return;
+          }
+        }
+        addClass(navItems[0], 'active');
+      }
+      w.addEventListener('scroll', bindEvent);
+      w.addEventListener('load', bindEvent);
+    })(window, document)
+  </script>
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/md5.min.js"></script>
+  <!-- <script>
+    const gitalk = new Gitalk({
+      clientID: '0b153d2e389989779003',
+      clientSecret: 'e5f2c768454a6e3aeafbc5d88f109059d7b5a60a',
+      repo: 'viviHuang5.github.io',
+      owner: 'viviHuang5',
+      admin: ['viviHuang5'],
+      id: md5(location.pathname),
+      distractionFreeMode: false,
+      createIssueManually: true
+    })
+
+    gitalk.render('gitalk-container')
+  </script> -->
 </body>
 
 </html>

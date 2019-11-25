@@ -74,7 +74,7 @@ li {
   display: flex;
 
   .main {
-    width: 85%;
+    width: calc(100% - 190px);
     margin-top: 24px;
 
     h1,

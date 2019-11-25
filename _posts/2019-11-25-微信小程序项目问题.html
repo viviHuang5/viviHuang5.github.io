@@ -1,0 +1,261 @@
+---
+layout: post
+title: 微信小程序 项目中遇到的问题
+description: 嗯嗯嗯丷
+tags: 微信小程序
+bannerImg: /images/bg-banner.jpg
+---
+<!-- more -->
+<h2>1.轮播图</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
+        &ltview class="banner"&gt
+        &ltswiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style="height: 240rpx;"&gt
+            &ltblock wx:for="{{imgUrls}}" wx:key="{{index}}"&gt
+            &ltswiper-item&gt
+                &ltimage src="{{item}}" class="slide-image" /&gt
+            &lt/swiper-item&gt
+            &lt/block&gt
+        &lt/swiper&gt
+        &lt/view&gt
+
+        </code>
+    </pre>
+
+    <pre>
+            <code class="language-js">
+            image.slide-image {
+                width: 690rpx !important;
+                height: 240rpx !important;
+            }
+            
+            .banner {
+                width: 690rpx;
+                height: 240rpx;
+                border-radius: 12rpx 12rpx 12rpx 12rpx;
+                margin: 0 auto;
+            }
+            
+            .banner image {
+                width: 100%;
+                height: 100%;
+                border-radius: 12rpx 12rpx 12rpx 12rpx;
+            }
+
+            </code>
+        </pre>
+
+        <pre>
+                <code class="language-js">
+                data: {
+                    imgUrls: [
+                        'https://yay.zjl9.com/static/images/banner1.jpg',
+                        'https://yay.zjl9.com/static/images/banner2.jpg',
+                        'https://yay.zjl9.com/static/images/banner3.jpg'
+                    ],
+                    indicatorDots: true, // 是否显示面板指示点
+                    autoplay: true,      // 是否自动切换
+                    circular: true,      // 是否采用衔接滑动
+                    interval: 3000,      // 自动切换时间间隔
+                    duration: 1000,      // 滑动动画时长
+                    }
+                })
+                </code>
+            </pre>
+</div>
+<h2>2.弹窗蒙层</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
+    // 弹窗 
+    &ltview class="popup" hidden="{ {hiddenmask} }"&gt 
+            &ltimage src="https://xxx.zjl9.com/static/images/cc.png" style="width:520rpx;height:444rpx;"&gt&lt/image&gt
+            &ltview class="goods"&gt
+            &lttext&gt收货成功&lt/text&gt
+            &ltbutton class="btn33" bindtap="look"&gt查看订单&lt/button&gt
+            &lt/view&gt
+    &lt/view&gt
+
+    //mask 
+    &ltview class="mask" hidden="{ {hiddenmask} }" catchtouchmove="preventTouchMove"&gt
+    &lt/view&gt
+
+        </code>
+    </pre>
+
+    <pre>
+            <code class="language-js">
+                    Page({
+                        data: {
+                          hiddenmask:true
+                        },
+                        //点击按钮，如果页面有滚动条，会回滚到顶部
+                        confirm(){
+                          if (wx.pageScrollTo) {
+                            wx.pageScrollTo({
+                              scrollTop: 0
+                            })
+                          } else {
+                            wx.showModal({
+                              title: '提示',
+                              content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+                            })
+                          }
+                       
+                          this.setData({
+                            hiddenmask: false
+                          })
+                           
+                        },
+                        //给蒙层添加catchtouchmove="preventTouchMove"，内容即使有滚动条，蒙层出现也能上下滑动
+                         preventTouchMove: function (e) {
+                      
+                        },
+                        //查看订单
+                        look(){
+                           wx.navigateTo({
+                             url: '/mall/pages/orderDetailsComplete/orderDetailsComplete'
+                           })
+                        },
+                 
+                      })
+    
+            </code>
+        </pre>
+</div>
+
+<h2>3.tab栏</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
+    &ltview class='container'&gt
+    &ltview class='section hot_type'&gt
+    &ltscroll-view class='nav-view { {hot_menuFixedTop?"hot_menu_fixed":"None"} }' scroll-left="{ {scrollLeft} }" scroll-with-animation="true" scroll-x="true" style="white-space: nowrap"&gt
+        &ltbutton wx:for="{ {category} }" wx:key="{ {index} }" class=' { {currentTab==index?"on":" "} } category_item swiper-tab-list' data-current="{ {index} }" data-catgoryid="{ {item.id} }" bindtap="swichNav"&gt{ {item.category_name} } &lt/button&gt
+    &lt/scroll-view&gt
+    &lt!-- 商品列表 --&gt
+    &ltscroll-view class="list-view" scroll-y bindscrolltolower="lower" wx:if="{ {currentTab===0} }" &gt
+    全部订单
+    &lt/scroll-view&gt
+    &ltscroll-view class="list-view" scroll-y bindscrolltolower="lower" wx:if="{ {currentTab===1} }" &gt
+    已完成
+    &lt/scroll-view&gt
+    &ltscroll-view class="list-view" scroll-y bindscrolltolower="lower" wx:if="{ {currentTab===2} }"&gt
+    待施工
+    &lt/scroll-view&gt
+    &ltscroll-view class="list-view" scroll-y bindscrolltolower="lower" wx:if="{ {currentTab===3} }" &gt
+    待支付
+    &lt/scroll-view&gt
+    &lt/view&gt
+&lt/view&gt
+
+        </code>
+    </pre>
+
+    <pre>
+            <code class="language-js">
+            .container {
+                padding-top: 35rpx;
+            }
+            
+            button {
+                height: 48rpx;
+                color: #fff;
+                line-height: 48rpx;
+                font-size: 28rpx;
+                border-radius: 0 !important;
+                padding: 0;
+                margin-right: 75rpx !important;
+                background: transparent;
+            }
+            
+            .hot_menu_fixed {
+                position: fixed;
+                top: 0;
+                left: 28rpx;
+                z-index: 10;
+                background: #fff;
+                width: 93%;
+            }
+            
+            /* Swiper */
+            
+            swiper-item {
+                height: auto;
+            }
+            
+            .swiper-tab {
+                width: 100%;
+                border-bottom: 1rpx solid #efefef;
+                line-height: 60rpx;
+                background: #fff;
+            }
+            
+            .swiper-tab-list {
+                font-size: 28rpx;
+                display: inline-block;
+                border-bottom: 4rpx solid transparent;
+                color: #666;
+                padding-bottom: 20rpx;
+            }
+            
+            .on {
+                font-weight: bold;
+                color: #f08417 !important;
+                border-bottom: 4rpx solid #f08417 !important;
+                border-radius: 2px;
+            }
+            
+            .swiper-box {
+                display: block;
+                width: 100%;
+                overflow: hidden;
+                padding-left: 30rpx !important;
+            }
+            
+            button::after {
+                border: none;
+            }
+                      
+            </code>
+        </pre>
+        <pre>
+                <code class="language-js">
+                        Page({
+                            data: {
+                              currentTab: 0,
+                              category:[
+                                {
+                                  category_name: "全部订单"
+                                },
+                                {
+                                  category_name: "已完成"
+                                },
+                                {
+                                  category_name: "待施工"
+                                },
+                                {
+                                  category_name: "待支付"
+                                }
+                              ]
+                            },
+                          
+                            //点击tab切换 
+                            swichNav: function (e) {
+                              console.log(e.target.dataset.current)
+                              let that = this;
+                              if (that.data.currentTab === e.target.dataset.current) {
+                                return false;
+                              } else {
+                                that.setData({
+                                  currentTab: e.target.dataset.current,
+                                })
+                              }
+                            }                
+                          });
+                          
+        
+                </code>
+            </pre>
+</div>
