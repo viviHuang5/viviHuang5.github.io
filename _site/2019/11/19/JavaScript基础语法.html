@@ -135,7 +135,60 @@
         </code>
     </pre>
 </div>
+
 <h3>2.数据类型</h3>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <ul>
+        JS把数据类型分为两类:
+        <li>
+            简单数据类型（Number,String,Boolean,undefined,Null)
+        </li>
+        <li>
+            复杂数据类型（Object)
+        </li>
+    </ul>
+    <p style="color:red;font-weight: 700;">数字型 Number</p>
+    <p style="color:#999;">1.八进制 0～7 我们程序里面数字前面加0 表示八进制</p>
+    <pre>
+        <code class="language-js">
+    var num = 010;
+    console.log(num);//010 八进制 转换为 10进制 就是 8
+        </code>
+    </pre>
+
+    <p style="color:#999;">2.十六进制 0～9 a~f #ffffff  数字的前面加 0x 表示十六进制</p>
+    <pre>
+            <code class="language-js">
+    var num = 0x9;
+    console.log(num);//0x9 十六进制 转换为 10进制 就是 9
+
+    var num1 = 0xa;
+    console.log(num1);//0xa 十六进制 转换为 10进制 就是 10
+            </code>
+    </pre>
+    <p style="color:#999;">3.数字型的最大值</p>
+    <pre>
+            <code class="language-js">
+    console.log(Number.MAX_VALUE);
+            </code>
+    </pre>
+
+    <p style="color:#999;">4.数字型的最小值</p>
+    <pre>
+            <code class="language-js">
+    console.log(Number.MIN_VALUE);
+            </code>
+    </pre>
+
+    <p style="color:#999;">5.isNaN()这个方法用来判断非数字，并且返回一个值，是数字返回false，反之true</p>
+    <pre>
+            <code class="language-js">
+    console.log(isNaN(12));//false
+            </code>
+    </pre>
+
+    <p style="color:red;font-weight: 700;">字符串型 String</p>
+</div>
 <h3>3.操作符</h3>
 <h3>4.流程控制</h3>
 <h3>5.循环</h3>

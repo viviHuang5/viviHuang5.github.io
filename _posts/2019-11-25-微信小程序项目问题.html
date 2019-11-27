@@ -259,3 +259,515 @@ bannerImg: /images/bg-banner.jpg
                 </code>
             </pre>
 </div>
+
+<h2>4.+vant实现省市区/日期选择器</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
+
+  &ltview class="container"&gt
+  &ltview class="user-info"&gt
+    &ltview class="info-box"&gt
+      &lttext class="uu"&gt&lttext style="color:red;"&gt*&lt/text&gt姓名&lt/text&gt
+      &ltinput type="text" value="" class="ipt" &gt
+      &lt/input&gt
+    &lt/view&gt
+
+    &ltview class="info-box"&gt
+      &lttext class="uu"&gt&lttext style="color:red;"&gt*&lt/text&gt性别&lt/text&gt
+      &ltinput type="text" value="" class="ipt"&gt
+      &lt/input&gt
+    &lt/view&gt
+
+    &ltview class="info-box"&gt
+      &lttext class="uu"&gt&lttext style="color:red;"&gt*&lt/text&gt号码&lt/text&gt
+      &ltinput type="text" value="" class="ipt" style="border-bottom:none;"&gt
+      &lt/input&gt
+    &lt/view&gt
+  &lt/view&gt
+
+  &ltview class="user-info" style="border-bottom:none;"&gt
+    &ltview class="info-box"&gt
+      &lttext class="uu"&gt品牌&lt/text&gt
+      &ltinput type="button" value="{{car}}" class="ipt" bindtap="chooseCar"  disabled="disabled"&gt
+      &lt/input&gt
+      &ltimage src="https://yay.zjl9.com/static/images/down2.png" style="width:40rpx;height:40rpx;"&gt&lt/image&gt
+    &lt/view&gt
+  &lt/view&gt
+
+  &ltview class="user-info" style="border-bottom:none;"&gt
+    &ltview class="info-box"&gt
+      &lttext class="uu"&gt购买日期&lt/text&gt
+      &ltinput type="button" value="{{date}}" class="ipt" bindtap="chooseDate" disabled="disabled"&gt
+      &lt/input&gt
+      &ltimage src="https://yay.zjl9.com/static/images/down2.png" style="width:40rpx;height:40rpx;"&gt&lt/image&gt
+    &lt/view&gt
+  &lt/view&gt
+
+    &ltview class="user-info" style="border-bottom:none;"&gt
+    &ltview class="info-box"&gt
+      &lttext class="uu"&gt车架号&lt/text&gt
+      &ltinput type="text" value="" class="ipt" &gt
+      &lt/input&gt
+    &lt/view&gt
+  &lt/view&gt
+
+  &ltview class="user-info" style="border-bottom:none;"&gt
+    &ltview class="info-box"&gt
+      &lttext class="uu"&gt&lttext style="color:red;"&gt*&lt/text&gt车牌号&lt/text&gt
+      &ltinput type="text" value="" class="ipt" &gt
+      &lt/input&gt
+    &lt/view&gt
+  &lt/view&gt
+
+&ltview class="user-info" style="border-bottom:none;"&gt
+    &ltview class="info-box"&gt
+      &lttext class="uu"&gt&lttext style="color:red;"&gt*&lt/text&gt省市区&lt/text&gt
+      &ltinput type="button" value="{{val2}}" class="ipt" bindtap="chooseAddress" disabled="disabled"&gt
+      &lt/input&gt
+      &ltimage src="https://yay.zjl9.com/static/images/down2.png" style="width:40rpx;height:40rpx;"&gt&lt/image&gt
+    &lt/view&gt
+  &lt/view&gt
+
+&ltview class="user-info" style="border-bottom:none;"&gt
+    &ltview class="info-box"&gt
+    &lttext class="uu"&gt&lttext style="color:red;"&gt*&lt/text&gt选择门店&lt/text&gt
+      &ltinput type="button" value="{{val3}}" class="ipt"  bindtap="chooseAddress2" disabled="disabled"&gt
+      &lt/input&gt
+      &ltimage src="https://yay.zjl9.com/static/images/down2.png" style="width:40rpx;height:40rpx;"&gt&lt/image&gt
+    &lt/view&gt
+  &lt/view&gt
+
+&ltview class="user-info" style="border-bottom:none;"&gt
+    &ltview class="info-box" style="display:flex;"&gt
+    &lttext class="uu"&gt&lttext style="color:red;"&gt*&lt/text&gt施工时间&lt/text&gt
+      &ltinput type="button" value="{{date3}}" class="ipt" bindtap="chooseDate3" disabled="disabled" style="width:280rpx;padding-left:280rpx;"&gt
+      &lt/input&gt
+    
+        &ltinput type="button" style="width:150rpx;display:inline-block;padding-left:30rpx;" value="{{date2}}" class="ipt" bindtap="chooseDate2" disabled="disabled"&gt
+      &lt/input&gt
+      &ltimage src="https://yay.zjl9.com/static/images/down2.png" style="width:40rpx;height:40rpx;display:inline-block;" class="img1"&gt&lt/image&gt
+
+    
+      &ltimage src="https://yay.zjl9.com/static/images/down2.png" class="img2" style="width:40rpx;height:40rpx;"&gt&lt/image&gt
+    &lt/view&gt
+  &lt/view&gt
+
+
+&ltview class="user-info" style="border-bottom:none;"&gt
+    &ltview class="info-box"&gt
+    &lttext class="uu"&gt&lttext style="color:red;"&gt*&lt/text&gt服务类型&lt/text&gt
+      &ltinput type="button" value="{{val4}}" class="ipt" bindtap="chooseClass" disabled="disabled"&gt
+      &lt/input&gt
+      &ltimage src="https://yay.zjl9.com/static/images/down2.png" style="width:40rpx;height:40rpx;"&gt&lt/image&gt
+    &lt/view&gt
+  &lt/view&gt
+
+&ltview style="display:flex;" class="beizhu"&gt
+    &ltview style="margin-top:10rpx;"&gt备注&lt/view&gt
+    &ltview&gt
+    &ltview class="page-section"&gt
+    &ltview class="textarea-wrp"&gt
+      &lttextarea auto-focus="true" style="height: 200rpx;" /&gt
+    &lt/view&gt
+  &lt/view&gt
+    &lt/view&gt
+&lt/view&gt
+  &ltbutton class="btn"&gt确定&lt/button&gt
+
+&lt/view&gt
+// 汽车品牌 
+&ltvan-action-sheet show="{{ show }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" /&gt
+// 门店地址 
+&ltvan-action-sheet show="{{ show0 }}" actions="{{ actions2 }}" bind:close="onClose" bind:select="onSelect2" /&gt
+// 服务类型 
+&ltvan-action-sheet show="{{ show3 }}" actions="{{ actions3 }}" bind:close="onClose" bind:select="onSelect3" /&gt
+// 购买日期 
+&ltvan-popup show="{{ show1 }}" bind:close="onClose" position="bottom"&gt
+  &ltvan-datetime-picker type="date" value="{{ currentDate }}" bind:input="onInput" min-date="{{ minDate }}" formatter="{{ formatter }}" bind:cancel="cancel" bind:confirm="confirm" /&gt
+&lt/van-popup&gt
+
+// 施工时间年月日 
+&ltvan-popup show="{{ show5 }}" bind:close="onClose" position="bottom"&gt
+&ltvan-datetime-picker type="date" value="{{ currentDate }}" bind:input="onInput5" min-date="{{ minDate }}" formatter="{{ formatter }}" bind:cancel="cancel" bind:confirm="confirm5" /&gt
+&lt/van-popup&gt
+// 施工时间 
+&ltvan-popup show="{{ show4 }}" bind:close="onClose" position="bottom"&gt
+&ltvan-datetime-picker
+  type="time"
+  value="{{ currentDate2 }}"
+  min-date="{{ minDate }}"
+  max-date="{{ maxDate }}"
+  bind:input="onInput2" bind:cancel="cancel" bind:confirm="confirm3"
+/&gt
+&lt/van-popup&gt
+// 省市区 
+&ltvan-popup show="{{ show2 }}" bind:close="onClose" position="bottom"&gt
+  &ltvan-area area-list="{{ areaList }}" value="110101" bind:confirm="confirm2" bind:cancel="cancel"/&gt
+&lt/van-popup&gt    
+
+        </code>
+    </pre>
+
+    <pre>
+            <code class="language-js">
+  .container{
+    padding-bottom: 30rpx;
+  }
+  .user-info {
+    margin-top: 20rpx;
+    padding: 0rpx 30rpx;
+    border-bottom: 14rpx solid #f1f1f1;
+  }
+  
+  .info-box {
+    position: relative;
+  }
+  .img1{
+    position: absolute;
+    right: 100rpx;
+    top: 18rpx;
+  }
+  .img2{
+    position: absolute;
+    right: 200rpx!important;
+    top: 18rpx!important;
+  }
+  .info-box image {
+    position: absolute;
+    right: 0;
+    top: 18rpx;
+  }
+  
+  .user-info .ipt {
+    border-bottom: 2rpx solid #eaeaea;
+    height: 80rpx;
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: 700;
+    color: #a39f9f;
+    padding-left: 165rpx;
+    line-height: 80rpx;
+  }
+  
+  .user-info .uu {
+    position: absolute;
+    top: 21rpx;
+    left: 30;
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: rgba(51, 51, 51, 1);
+  }
+  
+  /* 文本域 */
+  
+  textarea {
+    width: 600rpx;
+    height: 200rpx;
+    /* padding: 25rpx 0; */
+    background: #a39f9f;
+    margin-left: 25rpx;
+    color: #fff;
+  }
+  
+  .beizhu {
+    margin-top: 30rpx;
+    padding: 0 30rpx;
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: rgba(51, 51, 51, 1);
+    margin-bottom: 36rpx;
+  }
+  
+  .btn {
+    width: 691rpx;
+    height: 62rpx;
+    background: linear-gradient(90deg, rgba(98, 173, 226, 1) 0%, rgba(36, 110, 173, 1) 100%);
+    border-radius: 30rpx;
+    margin: 0 auto;
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    line-height: 62rpx;
+    margin-bottom: 30rpx;
+  }
+              
+                      
+            </code>
+        </pre>
+        <pre>
+                <code class="language-js">
+  const time = require('../../utils/util.js')
+  import province_list from '../../utils/area.js'
+  data: {
+    val2: '上海市上海市宝山区',
+    val3:'沪太路4361号宝山店',
+    val4: '整车贴膜',
+    show0: false,
+    show: false,
+    show1: false,
+    show2: false,
+    show3: false,
+    show4: false,
+    show5: false,
+    flag: false,
+    stamp: '',
+    stamp2: '',
+    stamp5:'',
+    car: '点击选择汽车品牌',
+    date: '点击选择日期',
+    date3: '',
+    date2: '09:00',
+
+    actions: [
+      {
+        name: '奥迪'
+      },
+      {
+        name: '奔驰'
+      },
+      {
+        name: '宝马'
+      }
+    ],
+    actions2: [
+      {
+        name: '沪太路4361号宝山店'
+      },
+      {
+        name: '闵行区4361号闵行店'
+      },
+      {
+        name: '徐汇区4361号徐汇店'
+      }
+    ],
+    actions3: [
+      {
+        name: '整车贴膜'
+      },
+      {
+        name: '整车贴膜2'
+      },
+      {
+        name: '整车贴膜3'
+      }
+    ],
+    
+    currentDate: new Date().getTime(),
+    minDate: new Date().getTime(),
+    formatter(type, value) {
+      if (type === 'year') {
+        return `${value}年`;
+      } else if (type === 'month') {
+        return `${value}月`;
+      }
+      return value;
+    },
+  
+  },
+  // 取消关闭
+  onClose() {
+    console.log(222)
+    this.setData({
+      show0: false,
+      show: false
+    });
+  },
+  // 选择汽车品牌
+  chooseCar() {
+    this.setData({
+      show: true
+    })
+  },
+  // 汽车品牌选择
+  onSelect(event) {
+    this.setData({
+      car: event.detail.name,
+      show: false
+    })
+  },
+  // 购买日期输入框值
+  onInput(event) {
+    var stamp = event.detail
+    this.setData({
+      stamp
+    })
+  },
+  //购买日期弹窗显示
+  chooseDate() {
+    this.setData({
+      show1: true
+    })
+  },
+
+//日期 / 地区弹窗的取消
+  cancel() {
+    console.log(222)
+    this.setData({ show1: false, show2: false, show4: false, show5: false });
+  },
+  confirm(val) {
+    console.log(val)
+    var date = this.data.stamp
+      date= time.formatTimeTwo(date, 'Y-M-D')
+    this.setData({
+      show1: false,
+      show2: false,
+      flag: true,
+      date: date
+    });
+    
+  
+  },
+
+  // 省市区
+  chooseAddress(){
+    this.setData({
+      show2: true,
+      areaList: province_list
+    
+    });
+  },
+  // 确认选择的省市区
+  confirm2(val2) {
+    console.log(val2)
+    let test2 = `${val2.detail.values[0].name}${val2.detail.values[1].name}${val2.detail.values[2].name}`
+    let province2 = val2.detail.values[0].name
+    let city2 = val2.detail.values[1].name
+    let county2 = val2.detail.values[2].name
+    console.log(test2)
+    this.setData({
+      show2: false,
+      val2: test2
+    });
+  },
+  // 门店地址
+  chooseAddress2() {
+    this.setData({
+      show0: true
+    })
+  },
+  // 选中的门店地址
+  onSelect2(event){
+    console.log(event.detail);
+    this.setData({
+      val3: event.detail.name,
+      show0: false
+    })
+  },
+
+
+  // 选择服务类型
+  chooseClass(){
+    this.setData({
+      show3: true
+    })
+  },
+  // 选中服务类型
+  onSelect3(event){
+    console.log(event.detail);
+    this.setData({
+      val4: event.detail.name,
+      show3: false
+    })
+  },
+
+  // 施工时间-年月日
+  chooseDate3(){
+    this.setData({
+      show5: true
+    })
+  },
+  onInput5(event) {
+    var stamp5 = event.detail
+    this.setData({
+      stamp5
+    })
+  },
+  confirm5(val5) {
+    let date5 = this.data.stamp5
+    date5 = time.formatTimeTwo(date5, 'Y-M-D')
+    this.setData({
+      show5: false,
+      date3: date5
+    });
+  },
+  // 施工时间-时间
+  chooseDate2() {
+    this.setData({
+      show4: true
+    })
+  },
+  onInput2(event) {
+    var stamp2 = event.detail;
+    this.setData({
+      stamp2
+    })
+  },
+  confirm3(val3){
+    var date2 = this.data.stamp2;
+    this.setData({
+      show4: false,
+      date2: date2
+    });
+  },
+  /**
+    * 生命周期函数--监听页面加载
+    */
+  onLoad: function (options) {
+    var date3 = new Date().getTime() 
+    date3 = time.formatTimeTwo(date3, 'Y-M-D')
+    this.setData({
+      date3
+    })
+  }
+})             
+        
+                </code>
+            </pre>
+            
+            <p>格式化日期</p>
+            <pre>
+              <code class="language-js">
+    const formatTime = date => {
+      const year = date.getFullYear()
+      const month = date.getMonth() + 1
+      const day = date.getDate()
+      const hour = date.getHours()
+      const minute = date.getMinutes()
+      const second = date.getSeconds()
+      return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+    }
+    
+    const formatNumber = n => {
+      n = n.toString()
+      return n[1] ? n : '0' + n
+    }
+    
+    function formatTimeTwo(number, format) {
+      var formateArr = ['Y', 'M', 'D', 'h', 'm', 's'];
+      var returnArr = [];
+      // var date = new Date(number * 1000);//时间戳为10位
+      var date = new Date(number);//时间戳为13位
+      returnArr.push(date.getFullYear());
+      returnArr.push(formatNumber(date.getMonth() + 1));
+      returnArr.push(formatNumber(date.getDate()));
+    
+      returnArr.push(formatNumber(date.getHours()));
+      returnArr.push(formatNumber(date.getMinutes()));
+      returnArr.push(formatNumber(date.getSeconds()));
+    
+      for (var i in returnArr) {
+        format = format.replace(formateArr[i], returnArr[i]);
+      }
+      return format;
+    }
+    module.exports = {
+      formatTime: formatTime,
+      formatTimeTwo: formatTimeTwo
+    }
+              </code>
+            </pre>
+</div>
