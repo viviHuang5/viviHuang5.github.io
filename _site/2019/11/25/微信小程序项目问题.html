@@ -888,6 +888,23 @@
               </code>
             </pre>
 </div>
+
+<h2>5.文字超出两行显示省略号</h2>
+<div style="background: #eee; padding:10px;border-radius: 5px;">
+    <pre>
+        <code class="language-js">
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+            white-space: normal !important;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+
+        </code>
+    </pre>
+
+</div>
       <div class="date">发布时间：2019-11-25</div>
       <div id="gitalk-container"></div>
     </div>

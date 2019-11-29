@@ -187,7 +187,96 @@
             </code>
     </pre>
 
-    <p style="color:red;font-weight: 700;">字符串型 String</p>
+    <p style="color:red;font-weight: 700;">数据类型转换</p>
+    <ul>
+        <p style="font-weight:700;color:blueviolet;">**转换为字符串</p>
+        <li>
+            toString():
+            <pre>
+                <code class="language-js">
+                    var num = 1;
+                    console.log(num.toString());
+                </code>
+            </pre>
+        </li>
+        <li>
+            String()强制转换
+            <pre>
+                <code class="language-js">
+                    var num = 1;
+                    console.log(String(num));
+                </code>
+            </pre>
+        </li>
+        <li>
+            加号拼接字符串（和字符串拼接的结果都是字符串）
+            <pre>
+                <code class="language-js">
+                    var num = 1;
+                    console.log(num+'我是字符串');
+                </code>
+            </pre>
+        </li>
+    </ul>
+    <ul>
+        <p style="font-weight:700;color:blueviolet;">**转换为数字型（重点）</p>
+            
+            <li>
+                parseInt(string)函数:
+                <pre>
+                    <code class="language-js">
+                        //将string类型转成整数数值型
+                        parseInt('78');
+                    </code>
+                </pre>
+            </li>
+            <li>
+                parseFloat(string)函数:
+                <pre>
+                    <code class="language-js">
+                        //将string类型转成浮点数数值型
+                        parseFloat('78.21');
+                    </code>
+                </pre>
+            </li>
+            <li>
+                Number()强制转换函数
+                <pre>
+                    <code class="language-js">
+                        Number('12')
+                    </code>
+                </pre>
+            </li>
+            <li>
+                js隐式转换（- * /）
+                <pre>
+                    <code class="language-js">
+                        //利用算术运算隐式转换为数值型
+                        ‘12’-0
+                    </code>
+                </pre>
+            </li>
+    </ul>
+
+    <ul>
+            <p style="font-weight:700;color:blueviolet;">**转换为布尔型</p>
+                
+                <li>
+                    Boolean()函数:
+                    <pre>
+                        <code class="language-js">
+                            //其他类型转成布尔值
+                            Boolean('true')
+                        </code>
+                    </pre>
+                </li>
+                <li>
+                    代表<span style="color:red;">空，否定的值</span>会被转换为false，如'',0,NaN,null,undefined
+                </li>
+                <li>
+                    其余值都会被转为true
+                </li>
+        </ul>
 </div>
 <h3>3.操作符</h3>
 <h3>4.流程控制</h3>
